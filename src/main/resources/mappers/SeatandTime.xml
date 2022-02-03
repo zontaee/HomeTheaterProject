@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper	namespace="SeatandTime">
+
+		<select id="It_SeatSelFindDate" parameterType="int" resultType="SeatandTime" >
+
+			SELECT
+				DISTINCT se_date
+			FROM seatandtime where mo_number = #{mo_number} order by se_date
+
+
+		</select>
+		<select id="It_SeatSelFindTime" parameterType="int" resultType="SeatandTime" >
+
+			SELECT
+				DISTINCT se_time
+			FROM seatandtime where mo_number = #{mo_number} order by se_time
+
+
+		</select>
+	<select id="It_SeatSelFindSeat" parameterType="SeatandTime" resultType="SeatandTime" >
+
+		SELECT
+			*
+		FROM seatandtime
+		where mo_number = #{mo_number} and se_date = #{se_date} and se_time = #{se_time}
+		order by se_number
+
+
+	</select>
+
+
+</mapper>

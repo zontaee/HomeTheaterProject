@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CH_Dao">
+	<select id="CH_SearchMovieList" parameterType="Movie" resultType="Movie">
+		select * from movie where mo_title like '%${mo_title}%'
+	</select>
+	<select id="CH_SearchBbsList" parameterType="Bbs" resultType="Bbs">
+		select * from bbs where bbs_title like '%${bbs_title}%'
+	</select>
+
+</mapper>

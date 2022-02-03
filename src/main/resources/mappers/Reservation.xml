@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper	namespace="Reservation">
+
+<insert id="It_ReservationSave" parameterType="SeatandTime">
+    INSERT INTO "RESERVATION"
+        (re_number, SE_TIME, SE_NUMBER, SE_DATE, RE_DATE ,SE_IDENTIFY, M_ID, MO_NUMBER)
+        VALUES (RESERVATION_SEQ.NextVAL, #{se_time}, #{se_number}, #{se_date}, Sysdate,#{se_identify}, 'test1',#{mo_number})
+
+</insert>
+
+</mapper>

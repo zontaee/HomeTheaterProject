@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias alias="Movie"  type="com.oracle.HomeTheater.model.Movie"/>
+		<typeAlias alias="Reservation"  type="com.oracle.HomeTheater.model.Reservation"/>
+		<typeAlias alias="SeatandTime"  type="com.oracle.HomeTheater.model.SeatandTime"/>
+
+	</typeAliases>
+
+</configuration>
