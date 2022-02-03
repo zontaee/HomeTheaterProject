@@ -1,5 +1,6 @@
 package com.oracle.HomeTheater.dao;
 
+import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Movie;
 import com.oracle.HomeTheater.model.SeatandTime;
 import lombok.extern.slf4j.Slf4j;
@@ -79,5 +80,18 @@ public class IT_DaoImpl implements IT_Dao {
         }
 
         return result;
+    }
+
+    @Override
+    public Member memberInfo(String m_id) {
+        Member memberInfo = null;
+        log.info("memberInfo(DAO) start");
+        try {
+            memberInfo = session.selectOne("It_memberInfo",m_id);
+        }catch (Exception e) {
+            log.info("memberInfo(DAO) start -> " + e.getMessage());
+        }
+
+        return memberInfo;
     }
 }

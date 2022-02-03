@@ -4,11 +4,17 @@
 
 <mapper	namespace="Reservation">
 
-<insert id="It_ReservationSave" parameterType="SeatandTime">
-    INSERT INTO "RESERVATION"
-        (re_number, SE_TIME, SE_NUMBER, SE_DATE, RE_DATE ,SE_IDENTIFY, M_ID, MO_NUMBER)
-        VALUES (RESERVATION_SEQ.NextVAL, #{se_time}, #{se_number}, #{se_date}, Sysdate,#{se_identify}, 'test1',#{mo_number})
+    <insert id="It_ReservationSave" parameterType="SeatandTime">
+        INSERT INTO "RESERVATION"
+            (re_number, SE_TIME, SE_NUMBER, SE_DATE, RE_DATE ,SE_IDENTIFY, M_ID, MO_NUMBER)
+            VALUES (RESERVATION_SEQ.NextVAL, #{se_time}, #{se_number}, #{se_date}, Sysdate,#{se_identify}, #{m_id},#{mo_number})
 
-</insert>
+    </insert>
+
+    <select id="It_memberInfo" parameterType="String" resultType="Member">
+        select *
+        from Member
+        where m_id = #{m_id}
+    </select>
 
 </mapper>

@@ -1,6 +1,7 @@
 package com.oracle.HomeTheater.service;
 
 import com.oracle.HomeTheater.dao.IT_Dao;
+import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Movie;
 import com.oracle.HomeTheater.model.SeatandTime;
 import lombok.AllArgsConstructor;
@@ -52,5 +53,12 @@ public class IT_ServiceImpl implements IT_Service {
         log.info("reservationSave(service) start");
         int result = ITDao.reservationSave(seatandTime);
         return result;
+    }
+
+    @Override
+    public Member memberInfo(String m_id) {
+        log.info("memberInfo(service) start");
+        Member memberInfo = ITDao.memberInfo(m_id);
+        return memberInfo;
     }
 }

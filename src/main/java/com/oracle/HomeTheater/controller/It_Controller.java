@@ -1,5 +1,6 @@
 package com.oracle.HomeTheater.controller;
 
+import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Movie;
 import com.oracle.HomeTheater.model.Reservation;
 import com.oracle.HomeTheater.model.SeatandTime;
@@ -53,20 +54,23 @@ public class It_Controller {
         return"reservation/reservationseat";
     }
     @PostMapping("/reservationpayment")
-    public String reservationPayment(SeatandTime seatandTime , HttpServletRequest request){
-       /* log.info("mo_number -> " +seatandTime.getMo_number());
-        log.info("Date -> " +seatandTime.getSe_date());
-        log.info("Time -> " +seatandTime.getSe_time());
-        log.info("se_identify -> " + seatandTime.getSe_identify());
-        log.info("Se_number -> " +seatandTime.getSe_number());*/
-        log.info("SeatandTime ->" + seatandTime.toString());
+    public String reservationPayment(SeatandTime seatandTime , HttpServletRequest request ,Model model){
         //log.info("m_number -> " + member.getM_number()); <-- sesstion 으로 받을예정
         //좌석 정보 reservation 정보 삽입
+        String m_id = "test1";
+        seatandTime.setM_id(m_id);
+        log.info("SeatandTime ->" + seatandTime.toString());
         log.info("reservationSave(controller) start");
-        int result = ITService.reservationSave(seatandTime);
-        if(result == 1){
+        int resultSave = ITService.reservationSave(seatandTime);
+        if(resultSave == 1){
             log.info("reservation insert 성공");
+        }else{
+            log.info("insert 실패");
         }
+        log.info("find memberinfo(controller) start");
+        Member memberInfo = ITService.memberInfo(m_id);
+        log.info("Member ->" + memberInfo.toString());
+        model.addAttribute("memberInfo",memberInfo);
         return "CH_view/CH_Payment";
     }
 }

@@ -1,5 +1,6 @@
 package com.oracle.HomeTheater.dao;
 
+import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Movie;
 import com.oracle.HomeTheater.model.SeatandTime;
 
@@ -16,4 +17,6 @@ public interface IT_Dao {
     List<SeatandTime> findSeatData(SeatandTime seatandTime);
 
     int reservationSave(SeatandTime seatandTime);
+
+    Member memberInfo(String m_id);
 }

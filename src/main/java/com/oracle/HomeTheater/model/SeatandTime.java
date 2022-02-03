@@ -11,6 +11,8 @@ public class SeatandTime {
     private int mo_number;
     private String se_identify;
 
+    private String m_id; // dto 저장용용
+
     @Override
     public String toString() {
         return "SeatandTime{" +
@@ -19,6 +21,7 @@ public class SeatandTime {
                 ", se_date='" + se_date + '\'' +
                 ", mo_number=" + mo_number +
                 ", se_identify='" + se_identify + '\'' +
+                ", m_id='" + m_id + '\'' +
                 '}';
     }
 }

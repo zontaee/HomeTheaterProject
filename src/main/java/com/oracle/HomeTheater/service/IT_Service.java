@@ -1,5 +1,6 @@
 package com.oracle.HomeTheater.service;
 
+import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Movie;
 import com.oracle.HomeTheater.model.SeatandTime;
 
@@ -17,4 +18,6 @@ public interface IT_Service {
     List<SeatandTime> findSeatData(SeatandTime seatandTime);
 
     int  reservationSave(SeatandTime seatandTime);
+
+    Member memberInfo(String m_id);
 }

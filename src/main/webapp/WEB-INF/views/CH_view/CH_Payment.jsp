@@ -112,12 +112,12 @@ td{
 	  	<details>
 	  		<summary>최종결제수단</summary>
 	  		<div class="finalPayment">
-		  		<label id="finalPayment"><input type="radio" name="payMethod" checked>신용카드</label>&emsp;&emsp;
-		  		<label id="finalPayment"><input type="radio" name="payMethod">휴대폰 결제</label>&emsp;&emsp;
-		  		<label id="finalPayment"><input type="radio" name="payMethod">계좌이체</label>&emsp;&emsp;
-		  		<label id="finalPayment"><input type="radio" name="payMethod">간편결제</label>&emsp;&emsp;
-		  		<label id="finalPayment"><input type="radio" name="payMethod">내통장결제</label>&emsp;&emsp;
-		  		<label id="finalPayment"><input type="radio" name="payMethod">토스</label>&emsp;&emsp;
+		  		<label id="finalPayment"><input type="radio" name="pay_how" checked>신용카드</label>&emsp;&emsp;
+		  		<label id="finalPayment"><input type="radio" name="pay_how">휴대폰 결제</label>&emsp;&emsp;
+		  		<label id="finalPayment"><input type="radio" name="pay_how">계좌이체</label>&emsp;&emsp;
+		  		<label id="finalPayment"><input type="radio" name="pay_how">간편결제</label>&emsp;&emsp;
+		  		<label id="finalPayment"><input type="radio" name="pay_how">내통장결제</label>&emsp;&emsp;
+		  		<label id="finalPayment"><input type="radio" name="pay_how">토스</label>&emsp;&emsp;
 	  		</div>
 	  	</details>
 	  	</div>
