@@ -84,7 +84,7 @@ td{
 <div class="container">
  <div class="content">
   <%@ include file="../header.jsp" %>
-  <form action="Payment">
+
   <div class="pay">
 	  
 	  <br><br><br>
@@ -93,7 +93,8 @@ td{
 	  		<summary>할인쿠폰</summary>
 	  		<div class="finalPayment">
 	  			<h4>쿠폰번호를 입력하세요.</h4>
-	  			<input type="text" placeholder="xxxx-xxxx-xxxx"><br>
+	  			<input type="text" id="coupon" placeholder="xxxx-xxxx-xxxx"><br>
+				<input type="button" value="사용하기" onclick="coupon()">
 	  		</div>
 	  	</details>
 	  	<b class="stepBar">STEP 2.</b>
@@ -101,23 +102,26 @@ td{
 	  		<summary>포인트 사용</summary>
 	  		<div class="finalPayment">
 	  			<h4>보유 포인트</h4>
-	  			<input type="text" value="" readonly>&emsp;원
+	  			<input type="text" id="userpoint" value="${memberInfo.m_point}" readonly>&emsp;원
 	  			<!--  <input type="button" value="조회" onclick="location.href='Payment';">-->
 	  			<h4>사용할 포인트</h4>
-	  			<input type="text">&emsp;원<br>
-	  			<br><label><input type="checkbox">모두사용</label>
+	  			<input type="text" id="usepoint">&emsp;원<br>
+				<input type="button" value="사용하기" onclick="usepoint()">
 	  		</div>
+
 	  	</details>
+	  <form action="Payment" id="form" method="post">
+		  <input type="hidden" name="m_id" value="${memberInfo.m_id}">
 	  	<b class="stepBar">STEP 3.</b>
 	  	<details>
 	  		<summary>최종결제수단</summary>
 	  		<div class="finalPayment">
-		  		<label id="finalPayment"><input type="radio" name="pay_how" checked>신용카드</label>&emsp;&emsp;
-		  		<label id="finalPayment"><input type="radio" name="pay_how">휴대폰 결제</label>&emsp;&emsp;
-		  		<label id="finalPayment"><input type="radio" name="pay_how">계좌이체</label>&emsp;&emsp;
-		  		<label id="finalPayment"><input type="radio" name="pay_how">간편결제</label>&emsp;&emsp;
-		  		<label id="finalPayment"><input type="radio" name="pay_how">내통장결제</label>&emsp;&emsp;
-		  		<label id="finalPayment"><input type="radio" name="pay_how">토스</label>&emsp;&emsp;
+		  		<label id="finalPayment"><input type="radio" name="pay_how" checked onclick="payhow()">신용카드</label>&emsp;&emsp;
+		  		<label id="finalPayment"><input type="radio" name="pay_how" onclick="payhow()">휴대폰 결제</label>&emsp;&emsp;
+		  		<label id="finalPayment"><input type="radio" name="pay_how" onclick="payhow()">계좌이체</label>&emsp;&emsp;
+		  		<label id="finalPayment"><input type="radio" name="pay_how" onclick="payhow()">간편결제</label>&emsp;&emsp;
+		  		<label id="finalPayment"><input type="radio" name="pay_how" onclick="payhow()">내통장결제</label>&emsp;&emsp;
+		  		<label id="finalPayment"><input type="radio" name="pay_how" onclick="payhow()">토스</label>&emsp;&emsp;
 	  		</div>
 	  	</details>
 	  	</div>
@@ -131,7 +135,7 @@ td{
 	   			</thead>
 	   			<tbody>
 	   			<tr>
-	   				<td>($결제하실 금액)</td>
+	   				<td id="nowamount">13000</td>
 	   			</tr>
 	   			</tbody>
 	  		</table>
@@ -143,10 +147,10 @@ td{
 	   				<td>총 할인금액</td>
 	   			</tr>
 	   			<tr>
-	   				<td>($총 할인금액)</td>
+	   				<td id="dicountamount">0</td>
 	   			</tr>
 	  		</table>
-	  		<table class="menuBar">
+	  		<%--<table class="menuBar">
 	  			<tr>
 		   			<td>결제내역</td>
 	   			</tr>
@@ -159,14 +163,14 @@ td{
 	   			<tr>
 	   				<td>($남은 결제금액)</td>
 	   			</tr>
-	  		</table>
-	  		<input type="button" value="결제하기" onclick="iamport();">
+	  		</table>--%>
+	  		<input type="submit" value="결제하기"> <%--onclick="iamport();--%>
 	  	</div>
 	  	
 	  <%@ include file="../footer.jsp"%> 
   </form>
  </div>
 </div>
-
+<script type="text/javascript" src="js/payment.js"></script>
 </body>
 </html>

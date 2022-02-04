@@ -14,7 +14,7 @@
 }
     alert("당신이 선택한 좌석은 ->" + se_number + "입니다.");
     count = count +1;
-    /*document.getElementById(se_number).style.backgroundColor ="green";*/
+
     //예매할 좌석을 클릭했을때 색상변화를 주기위한 코드
     let senumber = document.getElementById(se_number);
     senumber.setAttribute("class","reservationingdseat");

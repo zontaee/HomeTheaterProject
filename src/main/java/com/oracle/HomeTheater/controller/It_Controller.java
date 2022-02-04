@@ -71,6 +71,7 @@ public class It_Controller {
         Member memberInfo = ITService.memberInfo(m_id);
         log.info("Member ->" + memberInfo.toString());
         model.addAttribute("memberInfo",memberInfo);
+        //reservation 정보 반환해줘야겠다.
         return "CH_view/CH_Payment";
     }
 }

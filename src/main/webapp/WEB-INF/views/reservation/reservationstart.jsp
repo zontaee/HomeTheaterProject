@@ -45,7 +45,7 @@
         <%@ include file="../header.jsp"%>
 
 
-        <div  align="left" >
+
         <img class="movie_img" src="${findMovie.mo_fileName }" alt=""><br>
 
                 <a class="fontsize"> ${findMovie.mo_title }</a><br>
@@ -53,7 +53,7 @@
                 <a class="fontsize"> 배우:${findMovie.mo_actor }</a><br>
                 <a class="fontsize"> 관람등급:${findMovie.mo_age }</a><br>
                 <a class="fontsize"> 장르:${findMovie.mo_genre }</a><br>
-        </div>
+
         <form action="reservationtimedata" method="post">
             <input type="hidden" name="mo_number" value="${findMovie.mo_number}">
             <input type="hidden" name="mo_fileName" value="${findMovie.mo_fileName }">
