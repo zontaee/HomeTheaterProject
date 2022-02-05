@@ -20,4 +20,6 @@ public interface IT_Service {
     int  reservationSave(SeatandTime seatandTime);
 
     Member memberInfo(String m_id);
+
+    int SeatandTimeUpdate(SeatandTime seatandTime);
 }

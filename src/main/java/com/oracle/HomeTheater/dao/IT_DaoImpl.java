@@ -22,8 +22,8 @@ public class IT_DaoImpl implements IT_Dao {
         Movie findMovie = null;
         log.info("resvervation(Dao) findMovie start mo_number -> " + mo_number);
         try {
-            findMovie = session.selectOne("It_MoviSelFind",mo_number);
-        }catch (Exception e) {
+            findMovie = session.selectOne("It_MoviSelFind", mo_number);
+        } catch (Exception e) {
             log.info("resvervation(Dao) Exception -> " + e.getMessage());
         }
         log.info("resvervation(Dao) findMovie End findMovie-> " + findMovie);
@@ -35,8 +35,8 @@ public class IT_DaoImpl implements IT_Dao {
         List<SeatandTime> findDate = null;
         log.info("resvervation(Dao) findDate start mo_number -> " + mo_number);
         try {
-            findDate = session.selectList("It_SeatSelFindDate",mo_number);
-        }catch (Exception e) {
+            findDate = session.selectList("It_SeatSelFindDate", mo_number);
+        } catch (Exception e) {
             log.info("resvervation(Dao) Exception -> " + e.getMessage());
         }
         log.info("resvervation(Dao) findMovie End findDate size-> " + findDate.size());
@@ -48,8 +48,8 @@ public class IT_DaoImpl implements IT_Dao {
         List<SeatandTime> findTime = null;
         log.info("resvervation(Dao) findTime start mo_number -> " + mo_number);
         try {
-            findTime = session.selectList("It_SeatSelFindTime",mo_number);
-        }catch (Exception e) {
+            findTime = session.selectList("It_SeatSelFindTime", mo_number);
+        } catch (Exception e) {
             log.info("resvervation(Dao) Exception -> " + e.getMessage());
         }
         log.info("resvervation(Dao) findMovie End findTime size-> " + findTime.size());
@@ -61,8 +61,8 @@ public class IT_DaoImpl implements IT_Dao {
         List<SeatandTime> seatInfo = null;
         log.info("findSeatData(Dao)start");
         try {
-            seatInfo = session.selectList("It_SeatSelFindSeat",seatandTime);
-        }catch (Exception e) {
+            seatInfo = session.selectList("It_SeatSelFindSeat", seatandTime);
+        } catch (Exception e) {
             log.info("findSeatData(Dao) Exception -> " + e.getMessage());
         }
         log.info("findSeatData(Dao) seat size-> " + seatInfo.size());
@@ -73,12 +73,7 @@ public class IT_DaoImpl implements IT_Dao {
     public int reservationSave(SeatandTime seatandTime) {
         int result = 0;
         log.info("reservationSave(DAO) start");
-        try {
-            result = session.insert("It_ReservationSave",seatandTime);
-        }catch (Exception e) {
-            log.info("resvervation(Dao) Exception -> " + e.getMessage());
-        }
-
+        result = session.insert("It_ReservationSave", seatandTime);
         return result;
     }
 
@@ -87,11 +82,19 @@ public class IT_DaoImpl implements IT_Dao {
         Member memberInfo = null;
         log.info("memberInfo(DAO) start");
         try {
-            memberInfo = session.selectOne("It_memberInfo",m_id);
-        }catch (Exception e) {
+            memberInfo = session.selectOne("It_memberInfo", m_id);
+        } catch (Exception e) {
             log.info("memberInfo(DAO) start -> " + e.getMessage());
         }
 
         return memberInfo;
+    }
+
+    @Override
+    public int SeatandTimeUpdate(SeatandTime seatandTime) {
+        int resultUpdate = 0;
+        log.info("SeatandTimeUpdate(DAO) start");
+        resultUpdate = session.update("It_SeatInfoUpdate", seatandTime);
+        return resultUpdate;
     }
 }

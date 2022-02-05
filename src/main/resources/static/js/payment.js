@@ -28,29 +28,32 @@ const coupon = () => {
 }
 //유저 포인트 사용 함수
 const usepoint =() =>{
-    let userpoint       = parseInt(document.getElementById("userpoint").value);
-    let usepoint        = parseInt(document.getElementById("usepoint").value);
-    let remainpoint     = userpoint - usepoint;
-    //포인트 사용한 할인 반영 금액
-    if(usepoint>userpoint){
-        alert("사용 포인트를 올바르게 적어주세요")
+
+    if(!document.getElementById("usepoint").value){
+        alert("사용 포인트를 올바르게 적어주세요");
     }else {
-        alert("포인트 사용 완료")
-        nowamount -= usepoint;
-        document.getElementById("nowamount").innerText = nowamount;
-        //총 할인 금액
-        discountsum += usepoint;
-        document.getElementById("dicountamount").innerText = discountsum;
-        newp.innerHTML = "<input type='hidden' name = 'pay_totalprice' value='"+nowamount+"'>";
-        newp2.innerText = "히든태그 잘되는지 확인하는 문구입니다."
-        newp3.innerHTML = "<input type='hidden' name = 'm_point' value='"+remainpoint+"'>";
-        addhidden.appendChild(newp);
-        addhidden.appendChild(newp2);
-        addhidden.appendChild(newp3);
+        let userpoint = parseInt(document.getElementById("userpoint").value);
+        let usepoint = parseInt(document.getElementById("usepoint").value);
+        let remainpoint = userpoint - usepoint;
+        //포인트 사용한 할인 반영 금액
+        if (usepoint > userpoint) {
+            alert("사용 포인트를 올바르게 적어주세요");
+        } else {
 
+            nowamount -= usepoint;
+            document.getElementById("nowamount").innerText = nowamount;
+            //총 할인 금액
+            discountsum += usepoint;
+            document.getElementById("dicountamount").innerText = discountsum;
+            newp.innerHTML = "<input type='hidden' name = 'pay_totalprice' value='" + nowamount + "'>";
+            newp2.innerText = "히든태그 잘되는지 확인하는 문구입니다."
+            newp3.innerHTML = "<input type='hidden' name = 'm_point' value='" + remainpoint + "'>";
+            addhidden.appendChild(newp);
+            addhidden.appendChild(newp2);
+            addhidden.appendChild(newp3);
+            alert("포인트 사용 완료")
+
+        }
     }
-
 }
-const payhow = () =>{
 
-}

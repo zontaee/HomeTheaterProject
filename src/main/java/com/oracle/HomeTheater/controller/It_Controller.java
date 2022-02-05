@@ -61,12 +61,17 @@ public class It_Controller {
         seatandTime.setM_id(m_id);
         log.info("SeatandTime ->" + seatandTime.toString());
         log.info("reservationSave(controller) start");
-        int resultSave = ITService.reservationSave(seatandTime);
+        //예약정보 삽입
+       /* int resultSave = ITService.reservationSave(seatandTime);
         if(resultSave == 1){
             log.info("reservation insert 성공");
         }else{
             log.info("insert 실패");
-        }
+        }*/
+        log.info("SeatandTimeUpdate(controller) start");
+        //좌석 정보 업데이트
+        int resultUpdate = ITService.SeatandTimeUpdate(seatandTime);
+        log.info("updatenumber" + resultUpdate);
         log.info("find memberinfo(controller) start");
         Member memberInfo = ITService.memberInfo(m_id);
         log.info("Member ->" + memberInfo.toString());

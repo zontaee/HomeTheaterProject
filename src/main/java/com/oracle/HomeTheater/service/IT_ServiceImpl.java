@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Id;
 import java.util.List;
 
 @Slf4j
@@ -60,5 +61,12 @@ public class IT_ServiceImpl implements IT_Service {
         log.info("memberInfo(service) start");
         Member memberInfo = ITDao.memberInfo(m_id);
         return memberInfo;
+    }
+
+    @Override
+    public int SeatandTimeUpdate(SeatandTime seatandTime) {
+        log.info("SeatandTimeUpdate(service) start");
+        int resultUpdate = ITDao.SeatandTimeUpdate(seatandTime);
+        return resultUpdate;
     }
 }

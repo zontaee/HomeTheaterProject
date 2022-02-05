@@ -20,16 +20,25 @@
 
 
 		</select>
-	<select id="It_SeatSelFindSeat" parameterType="SeatandTime" resultType="SeatandTime" >
+		<select id="It_SeatSelFindSeat" parameterType="SeatandTime" resultType="SeatandTime" >
 
-		SELECT
-			*
-		FROM seatandtime
-		where mo_number = #{mo_number} and se_date = #{se_date} and se_time = #{se_time}
-		order by se_number
+			SELECT
+				*
+			FROM seatandtime
+			where
+			      mo_number = #{mo_number} and se_date = #{se_date} and se_time = #{se_time}
+			order by se_number
 
 
-	</select>
+		</select>
+	<update id="It_SeatInfoUpdate" parameterType="SeatandTime">
+		UPDATE seatandtime
+		SET
+			se_identify = #{se_identify}
+		where
+		      se_number = #{se_number} and se_date = #{se_date} and se_time = #{se_time} and mo_number =#{mo_number}
+
+	</update>
 
 
 </mapper>

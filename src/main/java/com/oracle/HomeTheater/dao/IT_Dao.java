@@ -19,4 +19,6 @@ public interface IT_Dao {
     int reservationSave(SeatandTime seatandTime);
 
     Member memberInfo(String m_id);
+
+    int SeatandTimeUpdate(SeatandTime seatandTime);
 }
