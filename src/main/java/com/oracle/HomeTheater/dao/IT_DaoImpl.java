@@ -93,8 +93,26 @@ public class IT_DaoImpl implements IT_Dao {
     @Override
     public int SeatandTimeUpdate(SeatandTime seatandTime) {
         int resultUpdate = 0;
-        log.info("SeatandTimeUpdate(DAO) start");
-        resultUpdate = session.update("It_SeatInfoUpdate", seatandTime);
+        try {
+            log.info("SeatandTimeUpdate(DAO) start");
+            resultUpdate = session.update("It_SeatInfoUpdate", seatandTime);
+        } catch (Exception e) {
+            log.info("SeatandTimeUpdate(DAO) start -> " + e.getMessage());
+        }
         return resultUpdate;
     }
+
+    @Override
+    public int memberPointUpdate(SeatandTime seatandTime) {
+        int resultUpdate = 0;
+        try {
+            log.info("memberPointUpdate(DAO) start");
+            resultUpdate = session.update("It_MemberPointUpdate", seatandTime);
+        } catch (Exception e) {
+            log.info("memberPointUpdate(DAO) start -> " + e.getMessage());
+        }
+        return resultUpdate;
+    }
+
+
 }

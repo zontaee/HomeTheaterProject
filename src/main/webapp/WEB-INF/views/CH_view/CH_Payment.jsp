@@ -112,16 +112,21 @@ td{
 	  	</details>
 	  <form action="Payment" id="form" method="post">
 		  <input type="hidden" name="m_id" value="${memberInfo.m_id}">
+		  <input type="hidden" name="se_identify" value="${seatandTime.se_identify}">
+		  <input type="hidden" name="se_time" value="${seatandTime.se_time}">
+		  <input type="hidden" name="se_date" value="${seatandTime.se_date}">
+		  <input type="hidden" name="se_number" value="${seatandTime.se_number}">
+		  <input type="hidden" name="mo_number" value="${seatandTime.mo_number}">
 	  	<b class="stepBar">STEP 3.</b>
 	  	<details>
 	  		<summary>최종결제수단</summary>
 	  		<div class="finalPayment">
-		  		<label id="finalPayment"><input type="radio" name="pay_how" checked onclick="payhow()">신용카드</label>&emsp;&emsp;
-		  		<label id="finalPayment"><input type="radio" name="pay_how" onclick="payhow()">휴대폰 결제</label>&emsp;&emsp;
-		  		<label id="finalPayment"><input type="radio" name="pay_how" onclick="payhow()">계좌이체</label>&emsp;&emsp;
-		  		<label id="finalPayment"><input type="radio" name="pay_how" onclick="payhow()">간편결제</label>&emsp;&emsp;
-		  		<label id="finalPayment"><input type="radio" name="pay_how" onclick="payhow()">내통장결제</label>&emsp;&emsp;
-		  		<label id="finalPayment"><input type="radio" name="pay_how" onclick="payhow()">토스</label>&emsp;&emsp;
+		  		<label id="finalPayment"><input type="radio" name="pay_how" value="신용카드" checked onclick="payhow()">신용카드</label>&emsp;&emsp;
+		  		<label id="finalPayment"><input type="radio" name="pay_how" value="휴대폰결제" onclick="payhow()">휴대폰 결제</label>&emsp;&emsp;
+		  		<label id="finalPayment"><input type="radio" name="pay_how" value="계좌이체" onclick="payhow()">계좌이체</label>&emsp;&emsp;
+		  		<label id="finalPayment"><input type="radio" name="pay_how" value="간편결제" onclick="payhow()">간편결제</label>&emsp;&emsp;
+		  		<label id="finalPayment"><input type="radio" name="pay_how" value="내통장결제" onclick="payhow()">내통장결제</label>&emsp;&emsp;
+		  		<label id="finalPayment"><input type="radio" name="pay_how" value="토스" onclick="payhow()">토스</label>&emsp;&emsp;
 	  		</div>
 	  	</details>
 	  	</div>

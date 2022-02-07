@@ -21,4 +21,8 @@ public interface IT_Dao {
     Member memberInfo(String m_id);
 
     int SeatandTimeUpdate(SeatandTime seatandTime);
+
+    int memberPointUpdate(SeatandTime seatandTime);
+
+
 }

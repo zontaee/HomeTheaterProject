@@ -5,6 +5,7 @@ import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Movie;
 import com.oracle.HomeTheater.model.SeatandTime;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,9 +15,9 @@ import java.util.List;
 
 @Slf4j
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class IT_ServiceImpl implements IT_Service {
-    @Autowired
+
     private final IT_Dao ITDao;
 
 
@@ -69,4 +70,13 @@ public class IT_ServiceImpl implements IT_Service {
         int resultUpdate = ITDao.SeatandTimeUpdate(seatandTime);
         return resultUpdate;
     }
+
+    @Override
+    public int memberPointUpdate(SeatandTime seatandTime) {
+        log.info("memberPointUpdate(service) start");
+        int resultUpdate = ITDao.memberPointUpdate(seatandTime);
+        return resultUpdate;
+    }
+
+
 }

@@ -22,4 +22,8 @@ public interface IT_Service {
     Member memberInfo(String m_id);
 
     int SeatandTimeUpdate(SeatandTime seatandTime);
+
+    int memberPointUpdate(SeatandTime seatandTime);
+
+
 }

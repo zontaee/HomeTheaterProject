@@ -3,15 +3,20 @@ package com.oracle.HomeTheater.model;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter@Setter
+@Getter @Setter
 public class SeatandTime {
     private String se_number;
     private String se_time;
     private String se_date ;
     private int mo_number;
     private String se_identify;
+    // dto 저장용용
+    private String m_id;
+    private String pay_how;
+    private String pay_totalprice;
+    private String m_point;
+    private String re_number;
 
-    private String m_id; // dto 저장용용
 
     @Override
     public String toString() {
@@ -22,6 +27,9 @@ public class SeatandTime {
                 ", mo_number=" + mo_number +
                 ", se_identify='" + se_identify + '\'' +
                 ", m_id='" + m_id + '\'' +
+                ", pay_how='" + pay_how + '\'' +
+                ", pay_totalprice='" + pay_totalprice + '\'' +
+                ", m_point='" + m_point + '\'' +
                 '}';
     }
 }
