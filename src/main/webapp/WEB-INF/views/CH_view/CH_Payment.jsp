@@ -117,6 +117,8 @@ td{
 		  <input type="hidden" name="se_date" value="${seatandTime.se_date}">
 		  <input type="hidden" name="se_number" value="${seatandTime.se_number}">
 		  <input type="hidden" name="mo_number" value="${seatandTime.mo_number}">
+		  <input type="hidden" id="pay_totalprice" name="pay_totalprice" value="13000">
+		  <input type="hidden" id="m_point"        name="m_point" value="${memberInfo.m_point}">
 	  	<b class="stepBar">STEP 3.</b>
 	  	<details>
 	  		<summary>최종결제수단</summary>

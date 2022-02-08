@@ -6,9 +6,13 @@ let discountratio=1;
 let discountsum =0;   //할인 총합 계산
 let nowamount = document.getElementById("nowamount").innerText;
 let count = 0; //쿠폰은 하나만 등록
+let pay_totalprice = document.getElementById("pay_totalprice");
+let m_point = document.getElementById("m_point");
+
+
 //쿠폰 번호입력시 10프로 할인 함수
 const coupon = () => {
-
+     //쿠폰번호 검증 로직
     let couponNumber  = document.getElementById("coupon").value;
     if(couponNumber == "1111-1111-1111"){
         if(count == 0) {
@@ -18,6 +22,7 @@ const coupon = () => {
             document.getElementById("nowamount").innerText = nowamount; //할인 반영 금액
             document.getElementById("dicountamount").innerText = discountsum; // 총 할인 금액
             count = count + 1;
+            pay_totalprice.setAttribute("value",nowamount);
             alert("쿠폰 등록 완료")
         }else{
             alert("쿠폰은 하나만 등록 가능합니다.")
@@ -45,12 +50,9 @@ const usepoint =() =>{
             //총 할인 금액
             discountsum += usepoint;
             document.getElementById("dicountamount").innerText = discountsum;
-            newp.innerHTML = "<input type='hidden' name = 'pay_totalprice' value='" + nowamount + "'>";
-            newp2.innerText = "히든태그 잘되는지 확인하는 문구입니다."
-            newp3.innerHTML = "<input type='hidden' name = 'm_point' value='" + remainpoint + "'>";
-            addhidden.appendChild(newp);
-            addhidden.appendChild(newp2);
-            addhidden.appendChild(newp3);
+            pay_totalprice.setAttribute("value",nowamount);
+            m_point.setAttribute("value",remainpoint);
+
             alert("포인트 사용 완료")
 
         }

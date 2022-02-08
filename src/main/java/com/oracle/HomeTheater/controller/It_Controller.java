@@ -50,6 +50,7 @@ public class It_Controller {
         log.info("mo_title-> " + movie.getMo_title());
 
         log.info("reservationtimedata(controller) findseat start");
+        //좌성정보(좌석) 조회
         List<SeatandTime> seatInfo = ITService.findSeatData(seatandTime);
         model.addAttribute("seatandTime",seatandTime);
         model.addAttribute("seatInfo",seatInfo);
