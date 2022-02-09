@@ -25,4 +25,6 @@ public interface IT_Dao {
     int memberPointUpdate(SeatandTime seatandTime);
 
 
+    int deleteReservation(String re_number);
+
 }

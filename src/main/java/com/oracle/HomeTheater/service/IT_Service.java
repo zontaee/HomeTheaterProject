@@ -26,4 +26,5 @@ public interface IT_Service {
     int memberPointUpdate(SeatandTime seatandTime);
 
 
+    int deleteReservation(String re_number);
 }

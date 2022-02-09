@@ -114,5 +114,19 @@ public class IT_DaoImpl implements IT_Dao {
         return resultUpdate;
     }
 
+    @Override
+    public int deleteReservation(String re_number) {
+        int deleteReservation = 0;
+        try {
+            log.info("deleteReservation(Dao) start");
+            deleteReservation = session.delete("It_DeleteReservation", re_number);
+        } catch (Exception e) {
+            log.info("deleteReservation(DAO) start -> " + e.getMessage());
+        }
+        return deleteReservation;
+
+
+    }
+
 
 }

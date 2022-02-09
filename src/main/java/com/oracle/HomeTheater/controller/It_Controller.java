@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLDataException;
@@ -26,6 +27,7 @@ import java.util.UUID;
 public class It_Controller {
 
     private final IT_Service ITService;
+
     //예매 페이지 - 날짜 시간 선택
     @GetMapping("/reservation")
     public String reservation(int mo_number, Model model) {
@@ -35,78 +37,84 @@ public class It_Controller {
         List<SeatandTime> findDate = ITService.findDate(mo_number);
         log.info("resvervation(controller) findTime start mo_number -> " + mo_number);
         List<SeatandTime> findTime = ITService.findTime(mo_number);
-        model.addAttribute("findMovie",findMovie);
-        model.addAttribute("findDate",findDate);
-        model.addAttribute("findTime",findTime);
+        model.addAttribute("findMovie", findMovie);
+        model.addAttribute("findDate", findDate);
+        model.addAttribute("findTime", findTime);
         return "reservation/reservationstart";
     }//예매 페이지 - 좌석 선택
+
     @PostMapping("/reservationtimedata")
-    public String reservationTimeData(SeatandTime seatandTime,Movie movie , Model model){
-        log.info("mo_number -> " +seatandTime.getMo_number());
-        log.info("Date -> " +seatandTime.getSe_date());
-        log.info("Time -> " +seatandTime.getSe_time());
+    public String reservationTimeData(SeatandTime seatandTime, Movie movie, Model model) {
+        log.info("mo_number -> " + seatandTime.getMo_number());
+        log.info("Date -> " + seatandTime.getSe_date());
+        log.info("Time -> " + seatandTime.getSe_time());
         log.info("mo_number -> " + movie.getMo_number());
-        log.info("mo_filename -> " +movie.getMo_fileName());
+        log.info("mo_filename -> " + movie.getMo_fileName());
         log.info("mo_title-> " + movie.getMo_title());
 
         log.info("reservationtimedata(controller) findseat start");
         //좌성정보(좌석) 조회
         List<SeatandTime> seatInfo = ITService.findSeatData(seatandTime);
-        model.addAttribute("seatandTime",seatandTime);
-        model.addAttribute("seatInfo",seatInfo);
-        model.addAttribute("movie",movie);
-        return"reservation/reservationseat";
+        model.addAttribute("seatandTime", seatandTime);
+        model.addAttribute("seatInfo", seatInfo);
+        model.addAttribute("movie", movie);
+        return "reservation/reservationseat";
     }
+
     //예매 페이지 - 결제 페이지로 이동
     @PostMapping("/reservationpayment")
-    public String reservationPayment(SeatandTime seatandTime , HttpServletRequest request ,Model model) throws SQLDataException {
+    public String reservationPayment(SeatandTime seatandTime, HttpServletRequest request, Model model) throws SQLDataException {
         //log.info("m_number -> " + member.getM_number()); <-- sesstion 으로 받을예정
         //좌석 정보 reservation 정보 삽입
         String m_id = "test1";
         seatandTime.setM_id(m_id);
         log.info("SeatandTime ->" + seatandTime.toString());
 
-        //좌석 정보 업데이트
-        log.info("SeatandTimeUpdate(controller) start");
-        int resultUpdate = ITService.SeatandTimeUpdate(seatandTime);
-        log.info("updatenumber" + resultUpdate);
-
         //맴버포인트 정보 가져오기
         log.info("find memberinfo(controller) start");
         Member memberInfo = ITService.memberInfo(m_id);
         log.info("Member ->" + memberInfo.toString());
 
-        model.addAttribute("memberInfo",memberInfo);
-        model.addAttribute("seatandTime",seatandTime);
+        model.addAttribute("memberInfo", memberInfo);
+        model.addAttribute("seatandTime", seatandTime);
         return "CH_view/CH_Payment";
     }
+
     @PostMapping("Payment")
-    public String finalReservation(SeatandTime seatandTime,Model model){
+    public String finalReservation(SeatandTime seatandTime, Model model) {
         //예약번호를 uuid로 지정
-        String uuid =UUID.randomUUID().toString().substring(0,13);
+        String uuid = UUID.randomUUID().toString().substring(0, 13);
         seatandTime.setRe_number(uuid);
+
         log.info(seatandTime.getRe_number());
         log.info("seatandTable ->" + seatandTime.toString());
+
+        //좌석 정보 업데이트
+        log.info("SeatandTimeUpdate(controller) start");
+        int resultUpdateSeat = ITService.SeatandTimeUpdate(seatandTime);
+        log.info("updatenumber" + resultUpdateSeat);
+
         //예약정보 삽입
         log.info("reservationSave(controller) start");
-       int resultSave = ITService.reservationSave(seatandTime);
-        if(resultSave == 1){
+        int resultSave = ITService.reservationSave(seatandTime);
+        if (resultSave == 1) {
             log.info("reservation insert 성공");
-        }else{
+        } else {
             log.info("insert 실패");
         }
         //맴버 포인트 업데이트
         log.info("memberPointUpdate(controller) start");
-        int resultUpdate = ITService.memberPointUpdate(seatandTime);
+        int resultUpdatePoint = ITService.memberPointUpdate(seatandTime);
         //맴버 정보가져오기
         Member memberInfo = ITService.memberInfo(seatandTime.getM_id());
         log.info("memberInfo -> " + memberInfo);
         //영화정보가져오기
         Movie movieInfo = ITService.findMovie(seatandTime.getMo_number());
-        log.info("movieInfo ->" + movieInfo );
-        model.addAttribute("seatandTime",seatandTime);
-        model.addAttribute("memberInfo",memberInfo);
-        model.addAttribute("movieInfo",movieInfo);
+        log.info("movieInfo ->" + movieInfo);
+        model.addAttribute("seatandTime", seatandTime);
+        model.addAttribute("memberInfo", memberInfo);
+        model.addAttribute("movieInfo", movieInfo);
         return "reservation/reservationcomplete";
     }
+
 }

@@ -78,5 +78,12 @@ public class IT_ServiceImpl implements IT_Service {
         return resultUpdate;
     }
 
+    @Override
+    public int deleteReservation(String re_number) {
+        log.info("deleteReservation(service) start");
+        int deleteReservation = ITDao.deleteReservation(re_number);
+        return deleteReservation;
+    }
+
 
 }
