@@ -21,14 +21,14 @@ public class It_RestController {
 
     @PostMapping("Cancel")
     @ResponseBody
-    public String finalReservation(SeatandTime seatandTime){
+    public String finalReservation(SeatandTime seatandTime) {
         String result;
         String re_number = seatandTime.getRe_number();
         seatandTime.setSe_identify("F");
         //예약정보 삭제
         log.info("deleteReservation(controller) start");
         int deleteReservation = ITService.deleteReservation(re_number);
-        log.info("result deleteReservation =" +deleteReservation );
+        log.info("result deleteReservation =" + deleteReservation);
         log.info("find reservation");
         log.info("seatandTime = " + seatandTime);
         //좌석정보 업데이트
@@ -36,10 +36,10 @@ public class It_RestController {
         int resultUpdateSeat = ITService.SeatandTimeUpdate(seatandTime);
         log.info("updatenumber" + resultUpdateSeat);
         //좌석정보와 예약정보 둘다 성공시 result 반환
-        if(deleteReservation ==1 && resultUpdateSeat==1){
+        if (deleteReservation == 1 && resultUpdateSeat == 1) {
             result = "1";
             return result;
-        }else {
+        } else {
             result = "2";
             return result;
         }

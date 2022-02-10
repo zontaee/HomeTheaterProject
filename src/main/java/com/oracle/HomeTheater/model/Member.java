@@ -3,7 +3,8 @@ package com.oracle.HomeTheater.model;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 public class Member {
     private String m_id;
     private String password;

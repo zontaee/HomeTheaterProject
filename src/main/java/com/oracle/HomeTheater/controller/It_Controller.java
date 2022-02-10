@@ -2,19 +2,14 @@ package com.oracle.HomeTheater.controller;
 
 import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Movie;
-import com.oracle.HomeTheater.model.Reservation;
 import com.oracle.HomeTheater.model.SeatandTime;
 import com.oracle.HomeTheater.service.IT_Service;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLDataException;
@@ -40,7 +35,7 @@ public class It_Controller {
         model.addAttribute("findMovie", findMovie);
         model.addAttribute("findDate", findDate);
         model.addAttribute("findTime", findTime);
-        return "reservation/reservationstart";
+        return "reservation/TimeInfo";
     }//예매 페이지 - 좌석 선택
 
     @PostMapping("/reservationtimedata")
@@ -58,7 +53,7 @@ public class It_Controller {
         model.addAttribute("seatandTime", seatandTime);
         model.addAttribute("seatInfo", seatInfo);
         model.addAttribute("movie", movie);
-        return "reservation/reservationseat";
+        return "reservation/SeatInfo";
     }
 
     //예매 페이지 - 결제 페이지로 이동
@@ -77,7 +72,7 @@ public class It_Controller {
 
         model.addAttribute("memberInfo", memberInfo);
         model.addAttribute("seatandTime", seatandTime);
-        return "CH_view/CH_Payment";
+        return "reservation/PaymentInfo";
     }
 
     @PostMapping("Payment")
@@ -114,7 +109,7 @@ public class It_Controller {
         model.addAttribute("seatandTime", seatandTime);
         model.addAttribute("memberInfo", memberInfo);
         model.addAttribute("movieInfo", movieInfo);
-        return "reservation/reservationcomplete";
+        return "reservation/Complete";
     }
 
 }

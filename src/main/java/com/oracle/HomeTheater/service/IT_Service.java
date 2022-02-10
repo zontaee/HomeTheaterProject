@@ -17,7 +17,7 @@ public interface IT_Service {
 
     List<SeatandTime> findSeatData(SeatandTime seatandTime);
 
-    int  reservationSave(SeatandTime seatandTime);
+    int reservationSave(SeatandTime seatandTime);
 
     Member memberInfo(String m_id);
 

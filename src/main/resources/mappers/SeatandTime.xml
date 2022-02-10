@@ -1,44 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper	namespace="SeatandTime">
+<mapper namespace="SeatandTime">
 
-		<select id="It_SeatSelFindDate" parameterType="int" resultType="SeatandTime" >
+    <select id="It_SeatSelFindDate" parameterType="int" resultType="SeatandTime">
 
-			SELECT
-				DISTINCT se_date
-			FROM seatandtime where mo_number = #{mo_number} order by se_date
-
-
-		</select>
-		<select id="It_SeatSelFindTime" parameterType="int" resultType="SeatandTime" >
-
-			SELECT
-				DISTINCT se_time
-			FROM seatandtime where mo_number = #{mo_number} order by se_time
+        SELECT DISTINCT se_date
+        FROM seatandtime
+        where mo_number = #{mo_number}
+        order by se_date
 
 
-		</select>
-		<select id="It_SeatSelFindSeat" parameterType="SeatandTime" resultType="SeatandTime" >
+    </select>
+    <select id="It_SeatSelFindTime" parameterType="int" resultType="SeatandTime">
 
-			SELECT
-				*
-			FROM seatandtime
-			where
-			      mo_number = #{mo_number} and se_date = #{se_date} and se_time = #{se_time}
-			order by se_number
+        SELECT DISTINCT se_time
+        FROM seatandtime
+        where mo_number = #{mo_number}
+        order by se_time
 
 
-		</select>
-	<update id="It_SeatInfoUpdate" parameterType="SeatandTime">
-		UPDATE seatandtime
-		SET
-			se_identify = #{se_identify}
-		where
-		      se_number = #{se_number} and se_date = #{se_date} and se_time = #{se_time} and mo_number =#{mo_number}
+    </select>
+    <select id="It_SeatSelFindSeat" parameterType="SeatandTime" resultType="SeatandTime">
 
-	</update>
+        SELECT *
+        FROM seatandtime
+        where mo_number = #{mo_number}
+          and se_date = #{se_date}
+          and se_time = #{se_time}
+        order by se_number
+
+
+    </select>
+    <update id="It_SeatInfoUpdate" parameterType="SeatandTime">
+        UPDATE seatandtime
+        SET se_identify = #{se_identify}
+        where se_number = #{se_number}
+          and se_date = #{se_date}
+          and se_time = #{se_time}
+          and mo_number = #{mo_number}
+
+    </update>
 
 
 </mapper>

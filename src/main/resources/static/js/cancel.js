@@ -1,3 +1,4 @@
+//예매취소 js
 function cancel(re_number, se_date, se_number, se_time, mo_number) {
     let URL = "http://localhost:8500/Cancel";
     let options = {
@@ -11,8 +12,6 @@ function cancel(re_number, se_date, se_number, se_time, mo_number) {
             se_number: se_number,
             se_time: se_time,
             mo_number: mo_number
-
-
         })
     }
     if (!confirm("확인 또는 취소를 눌러주세요.")) {

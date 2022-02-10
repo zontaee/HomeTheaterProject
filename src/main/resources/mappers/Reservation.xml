@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper	namespace="Reservation">
+<mapper namespace="Reservation">
 
     <insert id="It_ReservationSave" parameterType="SeatandTime">
         INSERT INTO "RESERVATION"
-            (re_number, SE_TIME, SE_NUMBER, SE_DATE, RE_DATE ,SE_IDENTIFY, M_ID, MO_NUMBER,PAY_TOTALPRICE,PAY_HOW)
-            VALUES (#{re_number}, #{se_time}, #{se_number}, #{se_date}, Sysdate,#{se_identify}, #{m_id},#{mo_number},#{pay_totalprice},#{pay_how})
+        (re_number, SE_TIME, SE_NUMBER, SE_DATE, RE_DATE, SE_IDENTIFY, M_ID, MO_NUMBER, PAY_TOTALPRICE, PAY_HOW)
+        VALUES (#{re_number}, #{se_time}, #{se_number}, #{se_date}, Sysdate, #{se_identify}, #{m_id}, #{mo_number},
+                #{pay_totalprice}, #{pay_how})
 
     </insert>
 
@@ -19,14 +20,12 @@
 
     <update id="It_MemberPointUpdate" parameterType="SeatandTime">
         UPDATE Member
-        SET
-            m_point = #{m_point}
-        where
-            m_id = #{m_id}
+        SET m_point = #{m_point}
+        where m_id = #{m_id}
     </update>
     <delete id="It_DeleteReservation" parameterType="String">
         DELETE
-         FROM "RESERVATION"
+        FROM "RESERVATION"
         WHERE re_number = #{re_number}
     </delete>
 

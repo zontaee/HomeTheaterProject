@@ -3,11 +3,12 @@ package com.oracle.HomeTheater.model;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 public class SeatandTime {
     private String se_number;
     private String se_time;
-    private String se_date ;
+    private String se_date;
     private int mo_number;
     private String se_identify;
     // dto 저장용용

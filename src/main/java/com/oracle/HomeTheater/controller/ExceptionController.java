@@ -9,7 +9,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 @ControllerAdvice
 public class ExceptionController {
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
-    public String doubleBooking(){
+    public String doubleBooking() {
         return "reservation/doubleBooking";
     }
 }
