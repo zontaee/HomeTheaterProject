@@ -30,11 +30,10 @@ public class It_Controller {
         Movie findMovie = ITService.findMovie(mo_number);
         log.info("resvervation(controller) findDate start mo_number -> " + mo_number);
         List<SeatandTime> findDate = ITService.findDate(mo_number);
-        log.info("resvervation(controller) findTime start mo_number -> " + mo_number);
-        List<SeatandTime> findTime = ITService.findTime(mo_number);
+       /* log.info("resvervation(controller) findTime start mo_number -> " + mo_number);
+        List<SeatandTime> findTime = ITService.findTime(mo_number);*/
         model.addAttribute("findMovie", findMovie);
         model.addAttribute("findDate", findDate);
-        model.addAttribute("findTime", findTime);
         return "reservation/TimeInfo";
     }//예매 페이지 - 좌석 선택
 
@@ -58,12 +57,12 @@ public class It_Controller {
 
     //예매 페이지 - 결제 페이지로 이동
     @PostMapping("/reservationpayment")
-    public String reservationPayment(SeatandTime seatandTime, HttpServletRequest request, Model model) throws SQLDataException {
+    public String reservationPayment(SeatandTime seatandTime, HttpServletRequest request, Model model) {
         //log.info("m_number -> " + member.getM_number()); <-- sesstion 으로 받을예정
         //좌석 정보 reservation 정보 삽입
         String m_id = "test1";
         seatandTime.setM_id(m_id);
-        log.info("SeatandTime ->" + seatandTime.toString());
+        log.info("SeatandTime ->" + seatandTime);
 
         //맴버포인트 정보 가져오기
         log.info("find memberinfo(controller) start");
@@ -82,7 +81,7 @@ public class It_Controller {
         seatandTime.setRe_number(uuid);
 
         log.info(seatandTime.getRe_number());
-        log.info("seatandTable ->" + seatandTime.toString());
+        log.info("seatandTable ->" + seatandTime);
 
         //좌석 정보 업데이트
         log.info("SeatandTimeUpdate(controller) start");

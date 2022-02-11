@@ -85,5 +85,13 @@ public class IT_ServiceImpl implements IT_Service {
         return deleteReservation;
     }
 
+    @Override
+    public List<SeatandTime> serchTime(SeatandTime seatandTime) {
+        log.info("serchTime(service) start");
+        List<SeatandTime> findtime = ITDao.serchTime(seatandTime);
+            return findtime;
+
+    }
+
 
 }

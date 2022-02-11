@@ -2,9 +2,11 @@ package com.oracle.HomeTheater.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class Reservation {
     private int re_number;
     private String se_time;
@@ -20,20 +22,5 @@ public class Reservation {
 
     private String m_point; //저장용
 
-    @Override
-    public String toString() {
-        return "Reservation{" +
-                "re_number=" + re_number +
-                ", se_time='" + se_time + '\'' +
-                ", se_date='" + se_date + '\'' +
-                ", se_number='" + se_number + '\'' +
-                ", se_identify='" + se_identify + '\'' +
-                ", pay_how='" + pay_how + '\'' +
-                ", pay_totalprice='" + pay_totalprice + '\'' +
-                ", re_date='" + re_date + '\'' +
-                ", m_id='" + m_id + '\'' +
-                ", mo_number=" + mo_number +
-                ", m_point='" + m_point + '\'' +
-                '}';
-    }
+
 }

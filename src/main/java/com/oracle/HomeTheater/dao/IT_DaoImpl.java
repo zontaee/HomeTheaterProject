@@ -128,5 +128,18 @@ public class IT_DaoImpl implements IT_Dao {
 
     }
 
+    @Override
+    public List<SeatandTime> serchTime(SeatandTime seatandTime) {
+        List<SeatandTime> findTime = null;
+        log.info("serchTime(Dao)start");
+        try {
+            findTime = session.selectList("It_SeatFindTime", seatandTime);
+        } catch (Exception e) {
+            log.info("serchTime(Dao) Exception -> " + e.getMessage());
+        }
+        log.info("serchTime(Dao) seat size-> " + findTime.size());
+        return findTime;
+    }
+
 
 }

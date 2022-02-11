@@ -2,9 +2,11 @@ package com.oracle.HomeTheater.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class Bbs {
     private int bbs_no;
     private int bbs_category;

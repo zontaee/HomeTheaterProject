@@ -27,4 +27,6 @@ public interface IT_Service {
 
 
     int deleteReservation(String re_number);
+
+    List<SeatandTime> serchTime(SeatandTime seatandTime);
 }

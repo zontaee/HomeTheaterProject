@@ -2,9 +2,11 @@ package com.oracle.HomeTheater.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class SeatandTime {
     private String se_number;
     private String se_time;
@@ -19,18 +21,5 @@ public class SeatandTime {
     private String re_number;
 
 
-    @Override
-    public String toString() {
-        return "SeatandTime{" +
-                "se_number='" + se_number + '\'' +
-                ", se_time='" + se_time + '\'' +
-                ", se_date='" + se_date + '\'' +
-                ", mo_number=" + mo_number +
-                ", se_identify='" + se_identify + '\'' +
-                ", m_id='" + m_id + '\'' +
-                ", pay_how='" + pay_how + '\'' +
-                ", pay_totalprice='" + pay_totalprice + '\'' +
-                ", m_point='" + m_point + '\'' +
-                '}';
-    }
+
 }

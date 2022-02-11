@@ -42,6 +42,17 @@
           and mo_number = #{mo_number}
 
     </update>
+    <select id="It_SeatFindTime" parameterType="SeatandTime" resultType="SeatandTime">
+
+        SELECT DISTINCT se_time
+        FROM seatandtime
+        where mo_number = #{mo_number}
+          and se_date = #{se_date}
+        order by se_time
+
+
+    </select>
+
 
 
 </mapper>

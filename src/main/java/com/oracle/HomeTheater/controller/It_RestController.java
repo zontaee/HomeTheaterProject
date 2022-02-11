@@ -7,9 +7,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @RestController
@@ -20,7 +24,6 @@ public class It_RestController {
     private final IT_Service ITService;
 
     @PostMapping("Cancel")
-    @ResponseBody
     public String finalReservation(SeatandTime seatandTime) {
         String result;
         String re_number = seatandTime.getRe_number();
@@ -44,5 +47,14 @@ public class It_RestController {
             return result;
         }
 
+    }
+
+
+    @PostMapping("findTime")
+    public List<SeatandTime> findTime(SeatandTime seatandTime){
+        log.info("seatandTIme = " + seatandTime);
+        log.info("findTime(controller) start");
+        List<SeatandTime> findTime = ITService.serchTime(seatandTime);
+        return findTime;
     }
 }
