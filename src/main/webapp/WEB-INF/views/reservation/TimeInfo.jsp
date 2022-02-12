@@ -58,7 +58,7 @@
         <a class="fontsize"> 관람등급:${findMovie.mo_age }</a><br>
         <a class="fontsize"> 장르:${findMovie.mo_genre }</a><br>
 
-        <form action="reservationtimedata" method="post">
+        <form action="reservationtimedata" method="post" onsubmit="return check();">
             <input type="hidden" name="mo_number" value="${findMovie.mo_number}">
             <input type="hidden" name="mo_fileName" value="${findMovie.mo_fileName }">
             <input type="hidden" name="mo_title" value="${findMovie.mo_title }">
