@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SE_Dao">
+    <select id="SE_ListAllMovie" resultType="Movie">
+        select *
+        from Movie
+    </select>
+
+    <select id="SE_SelMember" parameterType="string" resultType="Member">
+        select *
+        from Member
+        where m_id = #{m_id}
+    </select>
+
+    <select id="SE_SelMovie" parameterType="int" resultType="Movie">
+        select *
+        from movie
+        where mo_number = #{mo_number}
+    </select>
+
+    <select id="SE_SelectMovieLike" parameterType="java.util.HashMap" resultType="int">
+        select count(*)
+        from movieLike
+        where mo_number = #{mo_number}
+          and m_id = #{m_id}
+    </select>
+
+
+    <insert id="SE_InsertMovieLike" parameterType="java.util.HashMap">
+        insert into movieLike
+        values (#{m_id}, #{mo_number})
+    </insert>
+
+    <update id="SE_UpdateLikeMovieLike" parameterType="java.util.HashMap">
+        update movie
+        set mo_recommendation = mo_recommendation + 1
+        where mo_number = #{mo_number}
+    </update>
+
+    <delete id="SE_DeleteMovieLike" parameterType="java.util.HashMap">
+        DELETE
+        FROM movieLike
+        WHERE mo_number = #{mo_number}
+          and m_id = #{m_id}
+    </delete>
+
+    <update id="SE_UpdateLikeCancelMovieLike" parameterType="java.util.HashMap">
+        update movie
+        set mo_recommendation = mo_recommendation - 1
+        where mo_number = #{mo_number}
+    </update>
+
+    <select id="SE_SelReCoMovie" resultType="Movie">
+        select *
+        from Movie
+        order by mo_recommendation DESC
+    </select>
+
+</mapper>

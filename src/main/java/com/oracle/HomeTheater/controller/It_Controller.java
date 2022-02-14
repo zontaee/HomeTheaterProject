@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.sql.SQLDataException;
 import java.util.List;
 import java.util.UUID;
@@ -57,10 +58,10 @@ public class It_Controller {
 
     //예매 페이지 - 결제 페이지로 이동
     @PostMapping("/reservationpayment")
-    public String reservationPayment(SeatandTime seatandTime, HttpServletRequest request, Model model) {
+    public String reservationPayment(SeatandTime seatandTime, HttpSession session, Model model) {
         //log.info("m_number -> " + member.getM_number()); <-- sesstion 으로 받을예정
         //좌석 정보 reservation 정보 삽입
-        String m_id = "test1";
+        String m_id = (String)session.getAttribute("sessionId");
         seatandTime.setM_id(m_id);
         log.info("SeatandTime ->" + seatandTime);
 

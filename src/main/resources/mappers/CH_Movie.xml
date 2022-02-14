@@ -12,5 +12,74 @@
         from bbs
         where bbs_title like '%${bbs_title}%'
     </select>
+    <select id="CH_SearchUserInfo" parameterType="String" resultType="Member">
+        select *
+        from member
+        where m_id = #{m_id}
+    </select>
+    <update id="CH_MemberUpdate" parameterType="Member">
+        update member
+        set m_name        = #{m_name},
+            m_phonenumber = #{m_phonenumber},
+            m_address     = #{m_address},
+            m_email       = #{m_email}
+        where m_id = #{m_id}
+    </update>
+    <delete id="CH_MemberDelete" parameterType="String">
+        delete
+        from member
+        where m_id = #{m_id}
+    </delete>
+    <select id="CH_IdCheck" parameterType="String" resultType="int">
+        select count(m_id)
+        from member
+        where m_id = #{m_id}
+    </select>
+    <select id="CH_CheckEmail_Pw" parameterType="String" resultType="String">
+        select m_email
+        from member
+        where m_id = #{m_id}
+    </select>
+    <update id="CH_TempPasswrodUpdate" parameterType="Member">
+        update member
+        set m_password = #{m_password}
+        where m_id = #{m_id}
+    </update>
+    <select id="CH_PhoneCheck" parameterType="String" resultType="int">
+        select count(m_phonenumber)
+        from member
+        where m_phonenumber = #{m_phonenumber}
+    </select>
+    <select id="CH_CheckEmail_Id" parameterType="String" resultType="String">
+        select m_email
+        from member
+        where m_phonenumber = #{m_phonenumber}
+    </select>
+    <select id="CH_FindName" parameterType="String" resultType="String">
+        select m_name
+        from member
+        where m_phonenumber = #{m_phonenumber}
+    </select>
+    <select id="CH_FindId" parameterType="String" resultType="String">
+        select m_id
+        from member
+        where m_phonenumber = #{m_phonenumber}
+    </select>
+    <update id="CH_MemberPwUpdate" parameterType="Member">
+        update member
+        set m_password = #{m_password}
+        where m_id = #{m_id}
+    </update>
+    <select id="CH_GetMoNumList" parameterType="ChoiceMovie" resultType="int">
+        select mo_number
+        from choiceMovie
+        where m_id = #{m_id}
+          and m_selected = 'T'
+    </select>
+    <select id="CH_InterestMovieList" parameterType="Movie" resultType="Movie">
+        select *
+        from movie
+        where mo_number = #{mo_number}
+    </select>
 
 </mapper>
