@@ -6,6 +6,7 @@ import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Bbs;
 import com.oracle.HomeTheater.model.ChoiceMovie;
 import com.oracle.HomeTheater.model.Movie;
+import com.oracle.HomeTheater.model.Reservation;
 
 
 public interface CH_Dao {
@@ -23,8 +24,9 @@ public interface CH_Dao {
 	String findName(String m_phonenumber);
 	String findId(String m_phonenumber);
 	int memberPwUpdate(Member member);
-	List<ChoiceMovie> GetMoNumList(ChoiceMovie choice);
+	List<ChoiceMovie> getMoNumList(ChoiceMovie choice);
 	List<Movie> InterestMovieList(Movie movie);
+	List<Reservation> checkReservationInfo(Reservation reservation);
 
 
 }

@@ -1,6 +1,7 @@
 package com.oracle.HomeTheater.controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -18,6 +19,7 @@ import com.oracle.HomeTheater.model.Bbs;
 import com.oracle.HomeTheater.model.ChoiceMovie;
 import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Movie;
+import com.oracle.HomeTheater.model.Reservation;
 import com.oracle.HomeTheater.service.CH_Service;
 
 
@@ -44,8 +46,6 @@ public class CH_Controller {
         System.out.println("CH_Contorller SearchTotalList Start list...");
         List<Movie> SearchMovieList = cs.SearchMovieList(movie);
         List<Bbs> SearchBbsList = cs.SearchBbsList(bbs);
-        System.out.println("CH_Contorller SearchMovieList.size()=>"+SearchMovieList.size());
-        System.out.println("CH_Contorller SearchBbsList.size()=>"+SearchBbsList.size());
         model.addAttribute("SearchMovieList",SearchMovieList);
         model.addAttribute("SearchBbsList",SearchBbsList);
 
@@ -56,7 +56,6 @@ public class CH_Controller {
     @RequestMapping(value = "modifyForm")
     public String modify(Member member, Model model, HttpSession session) {
         System.out.println("CH_Contorller modifyForm Start...");
-        System.out.println("현재 세션아이디="+session.getAttribute("sessionId"));
         String m_id = (String)session.getAttribute("sessionId");
         member = cs.searchUserInfo(m_id);
         model.addAttribute("member",member);
@@ -86,8 +85,6 @@ public class CH_Controller {
         model.addAttribute("userName",member.getM_name());
         return "forward:/myPage";
     }
-
-
 
     // 회원탈퇴
     @RequestMapping(value = "memberDelete")
@@ -164,32 +161,43 @@ public class CH_Controller {
         return "CH_view/CH_FindId";
     }
 
-    // 로그인 아이디에 맞는 관심영화 찾기
-    @GetMapping(value = "findInterstMovie")
+    // 관심영화
+    @GetMapping(value = "interestMovie")
     public String findInterstMovie(ChoiceMovie choice, Movie movie, Model model, HttpSession session) {
         System.out.println("CH_Contorller findInterstMovie Start...");
+        // session에서 id를 꺼내옴
         String m_id = (String)session.getAttribute("sessionId");
-        System.out.println("m_id="+m_id);
         // 현재 세션아이디로 m_id 설정
         choice.setM_id(m_id);
         // id에 찜한 영화 mo_number 가져오기
-        List<ChoiceMovie> GetMoNumList = cs.GetMoNumList(choice);
-        System.out.println("number="+GetMoNumList);
+        List<ChoiceMovie> GetMoNumList = cs.getMoNumList(choice);
+        // 반복문을 돌려 얻어낸 영화정보를 저장할 List(addAll을 사용하기위해 arrayList로 선언)
+        ArrayList<Movie> TotalList = new ArrayList<Movie>();
 
+        List<Movie> InterestMovieList = null;
+        // 반복문을 통해서 GetMoNumList값 추출후 TotalList로 옮겨주는 작업
         for(int i=0;i<GetMoNumList.size();i++) {
-            List<ChoiceMovie> mo_number = GetMoNumList;
-            System.out.println("number="+mo_number);
+            String moNumber = String.valueOf(GetMoNumList.get(i));
+            int mo_number = Integer.parseInt(moNumber);
+            movie.setMo_number(mo_number);
+            InterestMovieList = cs.InterestMovieList(movie);
+            TotalList.addAll(InterestMovieList);
         }
-        List<Movie> InterestMovieList = cs.InterestMovieList(movie);
-        System.out.println("영화목록="+InterestMovieList);
-
-
+        model.addAttribute("TotalList",TotalList);
         return "CH_view/CH_InterestMovie";
     }
-    // 관심영화 폼
-    @GetMapping(value = "interestForm")
-    public String interestForm() {
-        System.out.println("CH_Contorller findIdForm Start...");
-        return "CH_view/CH_InterstMovie";
+
+    // 예약정보
+    @GetMapping(value = "reservationInfo")
+    public String reservationInfoForm(Movie movie, Reservation reservation, Model model, HttpSession session) {
+        System.out.println("CH_Contorller reservationInfoForm Start...");
+        String m_id = (String)session.getAttribute("sessionId");
+        reservation.setM_id(m_id);
+        List<Reservation> checkReservationInfo = cs.checkReservationInfo(reservation);
+        model.addAttribute("checkReservationInfo",checkReservationInfo);
+        return "CH_view/CH_ReservationInfo";
     }
+
+
+
 }

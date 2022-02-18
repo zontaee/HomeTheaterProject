@@ -18,12 +18,12 @@ import com.oracle.HomeTheater.service.CH_MemberJpaService;
 @Controller
 public class CH_MemberJpaController {
 	private final CH_MemberJpaService memberJpaService;
-	
+
 	@Autowired
 	public CH_MemberJpaController(CH_MemberJpaService memberJpaService) {
 		this.memberJpaService = memberJpaService;
 	}
-	
+
 	// 이용약관 폼
 	@GetMapping(value = "terms")
 	public String terms() {
@@ -37,12 +37,12 @@ public class CH_MemberJpaController {
 		System.out.println("CH_MemberJpaController joinUserForm Start...");
 		return "CH_view/CH_JoinMember";
 	}
-	
+
 	// 회원가입
 	@RequestMapping(value = "joinMember/save")
 	public String joinUser(MemberJpa member,@RequestParam("phone1") String phone1, @RequestParam("phone2") String phone2, @RequestParam("phone3") String phone3,
-			@RequestParam("mail1") String mail1, @RequestParam("mail2") String mail2, @RequestParam("zipcode") String zipcode, @RequestParam("roadAddress") String roadAddress,
-			@RequestParam("jibunAddress") String jibunAddress, @RequestParam("detailAddress") String detailAddress, @RequestParam("extraAddress") String extraAddress, Model model) {
+						   @RequestParam("mail1") String mail1, @RequestParam("mail2") String mail2, @RequestParam("zipcode") String zipcode, @RequestParam("roadAddress") String roadAddress,
+						   @RequestParam("jibunAddress") String jibunAddress, @RequestParam("detailAddress") String detailAddress, @RequestParam("extraAddress") String extraAddress, Model model) {
 		System.out.println("CH_MemberJpaController joinMember/save Start...");
 		String m_phonenumber = phone1 + "-" + phone2 + "-" + phone3;
 		String m_email = mail1 + "@" + mail2;
@@ -53,7 +53,7 @@ public class CH_MemberJpaController {
 		memberJpaService.joinUser(member);
 		return "redirect:/loginForm";
 	}
-	
+
 	// 로그인 폼
 	@GetMapping(value="loginForm")
 	public String loginForm() {
@@ -66,7 +66,7 @@ public class CH_MemberJpaController {
 	public String login(MemberJpa member, Model model, HttpServletRequest request) {
 		System.out.println("member = "+ member);
 		MemberJpa memberVO = memberJpaService.loginUser(member.getM_id(), member.getM_password());
-		
+
 		if(memberVO == null) {
 			model.addAttribute("loginMessage","아이디 혹은 비밀번호가 틀립니다.");
 			return "CH_view/CH_Login";
@@ -74,7 +74,7 @@ public class CH_MemberJpaController {
 		// 로그인 성공 처리
 		// 세션이 있으면 있는 세션 반환, 없으면 신규 세션 생성
 		HttpSession session = request.getSession();
-		
+
 		// 로그인 세션 유지를 위해 header부분에 있는 userName으로 세션 저장
 		session.setAttribute("userName", memberVO.getM_name());
 		session.setAttribute("sessionId", memberVO.getM_id());
@@ -82,7 +82,7 @@ public class CH_MemberJpaController {
 		model.addAttribute("userName",memberVO.getM_name());
 		return "main";
 	}
-	
+
 	// 로그아웃
 	@RequestMapping(value = "logout")
 	public String logout(HttpServletRequest request) {
@@ -94,11 +94,15 @@ public class CH_MemberJpaController {
 
 	// 마이페이지 폼
 	@RequestMapping(value = "myPage")
-	public String myPage() {
+	public String myPage(HttpSession session) {
 		System.out.println("CH_MemberJpaController myPage Start...");
+		String m_id = (String)session.getAttribute("sessionId");
+		if(m_id == null) {
+			return "CH_view/CH_Login";
+		}
 		return "CH_view/CH_MyPage";
 	}
-	
-	
-	
+
+
+
 }

@@ -10,6 +10,7 @@ import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Bbs;
 import com.oracle.HomeTheater.model.ChoiceMovie;
 import com.oracle.HomeTheater.model.Movie;
+import com.oracle.HomeTheater.model.Reservation;
 
 @Repository
 public class CH_DaoImpl implements CH_Dao {
@@ -174,13 +175,13 @@ public class CH_DaoImpl implements CH_Dao {
 	}
 
 	@Override
-	public List<ChoiceMovie> GetMoNumList(ChoiceMovie choice) {
-		System.out.println("CH_DaoImpl GetMoNumList Start...");
+	public List<ChoiceMovie> getMoNumList(ChoiceMovie choice) {
+		System.out.println("CH_DaoImpl getMoNumList Start...");
 		List<ChoiceMovie> GetMoNumList = null;
 		try {
 			GetMoNumList = session.selectList("CH_GetMoNumList", choice);
 		} catch (Exception e) {
-			System.out.println("CH_DaoImpl GetMoNumList Excetption->"+e.getMessage());
+			System.out.println("CH_DaoImpl getMoNumList Excetption->"+e.getMessage());
 		}
 		return GetMoNumList;
 	}
@@ -197,16 +198,22 @@ public class CH_DaoImpl implements CH_Dao {
 		return InterestMovieList;
 	}
 
+	@Override
+	public List<Reservation> checkReservationInfo(Reservation reservation) {
+		System.out.println("CH_DaoImpl checkReservationInfo Start...");
+		List<Reservation> checkReservationInfo = null;
+		try {
+			checkReservationInfo = session.selectList("CH_CheckReservationInfo", reservation);
+		} catch (Exception e) {
+			System.out.println("CH_DaoImpl checkReservationInfo Excetption->"+e.getMessage());
+		}
+		return checkReservationInfo;
+	}
 
 
 
 
 
-	
-
-
-
-	
 
 
 
@@ -215,9 +222,15 @@ public class CH_DaoImpl implements CH_Dao {
 
 
 
-	
-	
 
 
-	
+
+
+
+
+
+
+
+
+
 }

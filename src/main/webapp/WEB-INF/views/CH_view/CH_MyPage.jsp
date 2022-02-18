@@ -44,8 +44,8 @@
 			<b>마이페이지</b>
 		</div>
 		<a id="icon" href="modifyForm"><i class="fas fa-user-alt" style="font-size: 80px; margin-top: 50px;"></i></a>
-		<a id="icon" href="InterstMovie"><i class="fas fa-calendar-alt" style="font-size: 80px; margin-top: 50px;"></i></a>
-		<a id="icon" href="#"><i class="fas fa-star" style="font-size: 80px; margin-top: 50px;"></i></a><br><br>
+		<a id="icon" href="interestMovie"><i class="fas fa-calendar-alt" style="font-size: 80px; margin-top: 50px;"></i></a>
+		<a id="icon" href="reservationInfo"><i class="fas fa-star" style="font-size: 80px; margin-top: 50px;"></i></a><br><br>
 		<b id="explain1">회원정보변경</b><b id="explain2">관심영화</b><b id="explain3">예약정보</b>
 		<br><br><br><br><br><br>
 		<%@ include file="../footer.jsp"%>

@@ -22,5 +22,9 @@ public class Reservation {
 
     private String m_point; //저장용
 
+    // 조회용
+    private String mo_title;
+    private String mo_fileName;
+
 
 }

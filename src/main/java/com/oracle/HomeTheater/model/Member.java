@@ -16,7 +16,7 @@ public class Member {
     private String m_email;
     private String m_point;
     private String m_delchk;
-    private String m_role;
+
 
 
 }

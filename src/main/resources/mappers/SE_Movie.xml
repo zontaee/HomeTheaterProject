@@ -4,59 +4,87 @@
 
 <mapper namespace="SE_Dao">
     <select id="SE_ListAllMovie" resultType="Movie">
-        select * from Movie
+        select *
+        from Movie
     </select>
 
     <select id="SE_SelMember" parameterType="string" resultType="Member">
-        select * from Member where m_id= #{m_id}
+        select *
+        from Member
+        where m_id = #{m_id}
     </select>
 
     <select id="SE_SelMovie" parameterType="int" resultType="Movie">
-        select * from movie where mo_number= #{mo_number}
+        select *
+        from movie
+        where mo_number = #{mo_number}
     </select>
 
     <select id="SE_SelectMovieLike" parameterType="java.util.HashMap" resultType="int">
-        select count(*) from movieLike where mo_number=#{mo_number} and m_id=#{m_id}
+        select count(*)
+        from movieLike
+        where mo_number = #{mo_number}
+          and m_id = #{m_id}
     </select>
 
 
     <insert id="SE_InsertMovieLike" parameterType="java.util.HashMap">
-        insert into movieLike values(#{m_id},#{mo_number})
+        insert into movieLike
+        values (#{m_id}, #{mo_number})
     </insert>
 
     <update id="SE_UpdateLikeMovieLike" parameterType="java.util.HashMap">
-        update movie set mo_recommendation = mo_recommendation+1 where mo_number=#{mo_number}
+        update movie
+        set mo_recommendation = mo_recommendation + 1
+        where mo_number = #{mo_number}
     </update>
 
     <delete id="SE_DeleteMovieLike" parameterType="java.util.HashMap">
-        DELETE FROM movieLike
-        WHERE mo_number=#{mo_number} and m_id=#{m_id}
+        DELETE
+        FROM movieLike
+        WHERE mo_number = #{mo_number}
+          and m_id = #{m_id}
     </delete>
 
     <update id="SE_UpdateLikeCancelMovieLike" parameterType="java.util.HashMap">
-        update movie set mo_recommendation = mo_recommendation-1 where mo_number=#{mo_number}
+        update movie
+        set mo_recommendation = mo_recommendation - 1
+        where mo_number = #{mo_number}
     </update>
 
     <select id="SE_SelReCoMovie" resultType="Movie">
-        select * from Movie order by mo_recommendation DESC
+        select *
+        from Movie
+        order by mo_recommendation DESC
     </select>
 
     <insert id="SE_InsMovie" parameterType="Movie" useGeneratedKeys="false">
 
-        insert into Movie(mo_number,mo_title,mo_director,mo_actor,mo_genre,mo_age,mo_playTime,mo_openDate,mo_recommendation,mo_fileName) values(movie_seq.nextval, #{mo_title}, #{mo_director},#{mo_actor},#{mo_genre},#{mo_age},#{mo_playTime},#{mo_openDate},#{mo_recommendation},#{mo_fileName} )
+        insert into Movie(mo_number, mo_title, mo_director, mo_actor, mo_genre, mo_age, mo_playTime, mo_openDate,
+                          mo_recommendation, mo_fileName)
+        values (movie_seq.nextval, #{mo_title}, #{mo_director}, #{mo_actor}, #{mo_genre}, #{mo_age}, #{mo_playTime},
+                #{mo_openDate}, #{mo_recommendation}, #{mo_fileName})
     </insert>
 
     <update id="SE_UpdMovie" parameterType="Movie">
-        update Movie set mo_title=#{mo_title}, mo_director=#{mo_director}, mo_actor=#{mo_actor},
-                         mo_genre=#{mo_genre},
-                         mo_age=#{mo_age}, mo_playTime=#{mo_playTime},
-                         mo_openDate=#{mo_openDate} ,mo_recommendation=#{mo_recommendation},mo_fileName=#{mo_fileName}
-        where mo_number=#{mo_number}
+        update Movie
+        set mo_title=#{mo_title},
+            mo_director=#{mo_director},
+            mo_actor=#{mo_actor},
+            mo_genre=#{mo_genre},
+            mo_age=#{mo_age},
+            mo_playTime=#{mo_playTime},
+            mo_openDate=#{mo_openDate},
+            mo_recommendation=#{mo_recommendation},
+            mo_fileName=#{mo_fileName}
+        where mo_number = #{mo_number}
 
     </update>
 
     <delete id="SE_delMovie" parameterType="int">
-        delete from Movie  where mo_number=#{mo_number}
+        delete
+        from Movie
+        where mo_number = #{mo_number}
 
     </delete>
 

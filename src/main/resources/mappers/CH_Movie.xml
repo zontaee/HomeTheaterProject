@@ -81,5 +81,27 @@
         from movie
         where mo_number = #{mo_number}
     </select>
-
+    <select id="CH_CheckReservationInfo" parameterType="Reservation" resultType="Reservation">
+        select m.mo_title,
+               m.mo_fileName,
+               r.m_id,
+               r.mo_number,
+               r.re_number,
+               r.se_time,
+               r.se_number,
+               r.se_date,
+               r.re_date,
+               r.pay_how,
+               r.pay_totalprice
+        from movie m,
+             reservation r
+        where m_id = #{m_id}
+          and m.mo_number(+) = r.mo_number
+    </select>
 </mapper>
+        <!-- 서브쿼리를 이용해서 조회하려했는데 실패함, 나중에 해봐야겠다.
+            <select id="CH_FindInterstMovie" parameterType="ChoiceMovie" resultType="ChoiceMovie">
+                select * from movie where mo_number in (select mo_number from choicemovie where m_id=#{m_id} and m_selected='T')
+             </select>
+        !-->
+	
