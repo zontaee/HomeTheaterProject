@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="YM_DaoImpl">
+	<select id="YM_TotalBbs" parameterType="Bbs" resultType="int">
+		<![CDATA[ 
+			SELECT Count(*) FROM  bbs WHERE bbs_category=#{bbs_category}
+		]]>
+	</select>
+	
+	<select id="YM_SelectListBbs" parameterType="Bbs"   resultType="Bbs">
+		SELECT *
+		FROM (
+		        SELECT rownum rn ,  a.*
+				FROM  		(SELECT * 
+		                     FROM   		BBS 
+		                     WHERE  		bbs_category=#{bbs_category} 
+		                     ORDER BY    bbs_no DESC
+		                     ) a
+		     )
+		WHERE rn between #{start} AND  #{end}	
+	</select>
+	
+	<select id="YM_ClickTitleBbs"  parameterType="Bbs" resultType="Bbs" >
+       select * From bbs Where bbs_no = #{bbs_no} and  bbs_category=#{bbs_category} 
+   	</select> 
+   	<!-- YM_ClickTitleBbs시 조회수 증가   -->
+   	<update id="YM_ClickTitleCntHitBbs" parameterType="Bbs">
+   		UPDATE bbs SET bbs_hit=bbs_hit+1 WHERE bbs_category=#{bbs_category} and bbs_no=#{bbs_no}
+   	</update>
+   	
+   	
+   	
+   	<!-- 시퀀스 조건 카테고리 =1로 고정  -->
+ 	<!--  <insert id="YM_InsertBbs" parameterType="Bbs">
+   		INSERT into bbs (bbs_no, 
+   		                           bbs_category,    bbs_title,    bbs_content,   bbs_date, m_id)
+					VALUES(	(SELECT MAX(bbs_no )+1 FROM bbs WHERE bbs_category = 1 ) , 
+					             1   ,#{bbs_title},#{bbs_content}, #{bbs_date}, 'admin')
+   	</insert>    -->
+   	
+   <insert id="YM_InsertBbs" parameterType="Bbs">
+   		INSERT into bbs (bbs_no, 
+   		                           bbs_category,    bbs_title,    bbs_content,   bbs_date , m_id )
+					VALUES(	(SELECT MAX(bbs_no )+1 FROM bbs WHERE bbs_category =  #{bbs_category} ) , 
+					             #{bbs_category}   ,#{bbs_title},#{bbs_content}, #{bbs_date}, 'admin')
+   	</insert>    
+   	
+   	<delete id="YM_DeleteBbs" parameterType="Bbs">
+   		delete from bbs where bbs_no=#{bbs_no} and bbs_category=#{bbs_category}
+   	</delete>
+   	
+   	<update id="YM_UpdateBbs" parameterType="Bbs">
+   		UPDATE bbs
+		  SET bbs_title = #{bbs_title}, bbs_content = #{bbs_content}
+		  where bbs_no=${bbs_no}  and  bbs_category=${bbs_category}  
+   	</update>
+   	
+  
+		 
+		
+</mapper>
+

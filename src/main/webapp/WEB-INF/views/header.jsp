@@ -89,24 +89,28 @@
 </style>
 </head>
 <body>
+<!-- 외장 톰켓 고유주소 -->
+<%
+	String context = request.getContextPath();
+%>
 <div class="logo">
-	<a href="main">
-		<img src="img/logo1.png" style="" width="250px" height="100">
+	<a href="<%=context%>/main">
+		<img src="<%=context%>/img/logo1.png" style="" width="250px" height="100">
 	</a>
 </div>
 
 <c:choose>
 	<c:when test="${empty userName}">
 		<div class="loginJoin">
-			<a href="loginForm">Login </a>&nbsp;|&nbsp;
-			<a href="terms">Join</a>
+			<a href="<%=context%>/loginForm">Login </a>&nbsp;|&nbsp;
+			<a href="<%=context%>/terms">Join</a>
 		</div>
 	</c:when>
 	<c:otherwise>
 		<div class="myPaygeLogout">
 			<i class="fas fa-user" style="font-size: 15px;"></i>
-			<a href="myPage">[${userName}님]</a>
-			<a href="logout">Logout</a>
+			<a href="<%=context%>/myPage">[${userName}님]</a>
+			<a href="<%=context%>/logout">Logout</a>
 		</div>
 	</c:otherwise>
 </c:choose>
@@ -115,9 +119,9 @@
 <nav class="top_menu">
 	<form name="searchInfo" action="SearchTotalList" method="get">
 		<ul>
-			<li><a class="menuLink" href="movieList">영화</a></li>
-			<li><a class="menuLink" href="movieRecommendList">추천영화</a></li>
-			<li><a class="menuLink" href="#">공지사항</a></li>
+			<li><a class="menuLink" href="<%=context%>/movieList">영화</a></li>
+			<li><a class="menuLink" href="<%=context%>/movieRecommendList">추천영화</a></li>
+			<li><a class="menuLink" href="<%=context%>/YM_views/mainNotice">공지사항</a></li>
 			<li><a class="menuLink" href="#">고객센터</a></li>
 			<li><i class="fas fa-search" style="font-size: 15px;"></i>&nbsp;
 				<input type="text" name="mo_title" id="mo_title" style="width: 100px;" placeholder="통합 검색"
