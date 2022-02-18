@@ -28,5 +28,11 @@ public interface SE_Service {
 
 	List<Movie> listRecommendMovie();
 
+	int adminMovieAdd(Movie movie);
+
+	int adminMovieUpdate(Movie movie);
+
+	int adminMovieDelete(int mo_number);
+
 
 }

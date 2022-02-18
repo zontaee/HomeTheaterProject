@@ -29,7 +29,7 @@ public class SE_DaoImpl implements SE_Dao {
 		return movieList;
 
 	}
-	
+
 	@Override
 	public Movie movieDetail(int mo_number) {
 		Movie movie = null;
@@ -55,8 +55,8 @@ public class SE_DaoImpl implements SE_Dao {
 		} catch (Exception e) {
 			System.out.println("SE_DaoImpl likeCheck Exception->" + e.getMessage());
 		}
-		
-		
+
+
 		return resultStr;
 	}
 
@@ -70,19 +70,19 @@ public class SE_DaoImpl implements SE_Dao {
 		} catch (Exception e) {
 			System.out.println("SE_DaoImpl insertLike Exception->" + e.getMessage());
 		}
-		
+
 		return result;
 	}
 
 	@Override
 	public void updateLike(int mo_number) {
 		try {
-			 session.update("SE_UpdateLikeMovieLike", mo_number);
+			session.update("SE_UpdateLikeMovieLike", mo_number);
 			System.out.println("SE_DaoImpl updateLike resultStr 성공->" );
 		} catch (Exception e) {
 			System.out.println("SE_DaoImpl updateLike Exception->" + e.getMessage());
 		}
-		
+
 	}
 
 	@Override
@@ -95,14 +95,14 @@ public class SE_DaoImpl implements SE_Dao {
 		} catch (Exception e) {
 			System.out.println("SE_DaoImpl deleteLike Exception->" + e.getMessage());
 		}
-		
+
 		return result;
 	}
 
 	@Override
 	public void updateLikeCancel(int mo_number) {
 		try {
-			 session.update("SE_UpdateLikeCancelMovieLike", mo_number);
+			session.update("SE_UpdateLikeCancelMovieLike", mo_number);
 			System.out.println("SE_DaoImpl updateLikeCancel resultStr 성공->" );
 		} catch (Exception e) {
 			System.out.println("SE_DaoImpl updateLikeCancel Exception->" + e.getMessage());
@@ -136,6 +136,41 @@ public class SE_DaoImpl implements SE_Dao {
 		return RecommendMovieList;
 	}
 
-	
+	@Override
+	public int adminMovieAdd(Movie movie) {
+		int result = 0;
+		System.out.println("SE_DaoImpl adminMovieAdd Start ..." );
+		try {
+			result = session.insert("SE_InsMovie",movie);
+			System.out.println("daoresult :"+result);
+		} catch (Exception e) {
+			System.out.println("SE_DaoImpl adminMovieAdd Exception->"+e.getMessage());
+		}
+		return result;
+	}
 
+	@Override
+	public int adminMovieUpdate(Movie movie) {
+		System.out.println("SE_DaoImpl adminMovieUpdate start..");
+		int result = 0;
+		try {
+			result  = session.update("SE_UpdMovie",movie);
+		} catch (Exception e) {
+			System.out.println("SE_DaoImpl adminMovieUpdate Exception->"+e.getMessage());
+		}
+		return result;
+
+	}
+
+	@Override
+	public int adminMovieDelete(int mo_number) {
+		System.out.println("SE_DaoImpl adminMovieDelete start..");
+		int result = 0;
+		try {
+			result  = session.update("SE_delMovie",mo_number);
+		} catch (Exception e) {
+			System.out.println("SE_DaoImpl adminMovieDelete Exception->"+e.getMessage());
+		}
+		return result;
+	}
 }

@@ -6,6 +6,7 @@ spring:
   # File Size
   servlet:
     multipart:
+      location: D:\\project\\HomeTheater\\src\\main\\resources\\static\\Img
       max-file-size: 20MB
       max-request-size: 20MB
 
