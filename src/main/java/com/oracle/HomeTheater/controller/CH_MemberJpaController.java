@@ -2,13 +2,16 @@ package com.oracle.HomeTheater.controller;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -62,26 +65,38 @@ public class CH_MemberJpaController {
 	}
 
 	// 로그인
-	@RequestMapping(value = "login")
-	public String login(MemberJpa member, Model model, HttpServletRequest request) {
-		System.out.println("member = "+ member);
+	@PostMapping(value = "login")
+	public String login(MemberJpa member, Model model, HttpServletRequest request, HttpSession session, HttpServletResponse response) {
+		System.out.println("member = " + member);
+		String sessionUrl = String.valueOf(session.getAttribute("sessionUrl")).substring(1);
+		System.out.println("sessionUrl =" + sessionUrl);
+		session.invalidate();
 		MemberJpa memberVO = memberJpaService.loginUser(member.getM_id(), member.getM_password());
 
-		if(memberVO == null) {
-			model.addAttribute("loginMessage","아이디 혹은 비밀번호가 틀립니다.");
+		if (memberVO == null) {
+			model.addAttribute("loginMessage", "아이디 혹은 비밀번호가 틀립니다.");
 			return "CH_view/CH_Login";
 		}
 		// 로그인 성공 처리
 		// 세션이 있으면 있는 세션 반환, 없으면 신규 세션 생성
-		HttpSession session = request.getSession();
+		session = request.getSession();
 
 		// 로그인 세션 유지를 위해 header부분에 있는 userName으로 세션 저장
 		session.setAttribute("userName", memberVO.getM_name());
 		session.setAttribute("sessionId", memberVO.getM_id());
-		model.addAttribute("sessionId",memberVO.getM_id());
-		model.addAttribute("userName",memberVO.getM_name());
-		return "main";
+		model.addAttribute("sessionId", memberVO.getM_id());
+		model.addAttribute("userName", memberVO.getM_name());
+		if (sessionUrl.equals("ull")) {
+
+			return "main";
+		}else {
+			System.out.println("forward");
+			model.addAttribute("sessionUrl",sessionUrl);
+			return "redirectpage";
+		}
 	}
+	//인터셉터 후 로그인 페이지
+
 
 	// 로그아웃
 	@RequestMapping(value = "logout")

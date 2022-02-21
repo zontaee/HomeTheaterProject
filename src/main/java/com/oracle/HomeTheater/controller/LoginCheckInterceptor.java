@@ -12,13 +12,19 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse
             response, Object handler) throws Exception {
         String requestURI = request.getRequestURI();
+        String queryString = request.getQueryString();
         log.info("로그인 확인 인터셉터 URL = {}", requestURI);
+        log.info("로그인 확인 인터셉터 Query = {}", queryString);
+        String URL =requestURI + "?" + queryString;
+        log.info("리다이렉트 URL = {}", URL);
         HttpSession session = request.getSession(false);
         if (session == null ||session.getAttribute("sessionId")
                 == null) {
             log.info("허가 되지 않은 사용자");
             //로그인으로 redirect
-            response.sendRedirect("/login?redirectURL=" + requestURI);
+            HttpSession sessionUrl = request.getSession();
+            sessionUrl.setAttribute("sessionUrl",URL);
+            response.sendRedirect("loginForm");
             return false;
         }
         return true;

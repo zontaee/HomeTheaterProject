@@ -36,8 +36,8 @@ public class It_Controller {
         model.addAttribute("findMovie", findMovie);
         model.addAttribute("findDate", findDate);
         return "reservation/TimeInfo";
-    }//예매 페이지 - 좌석 선택
-
+    }
+    //예매 페이지 - 좌석 선택
     @PostMapping("/reservationtimedata")
     public String reservationTimeData(SeatandTime seatandTime, Movie movie, Model model) {
         log.info("mo_number -> " + seatandTime.getMo_number());
