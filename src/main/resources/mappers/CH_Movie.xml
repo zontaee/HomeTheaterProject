@@ -96,7 +96,74 @@
         from movie m,
              reservation r
         where m_id = #{m_id}
-          and m.mo_number(+) = r.mo_number
+          and m.mo_number = r.mo_number(+)
+    </select>
+    <select id="CH_SearchSeatInfo" parameterType="SeatandTime" resultType="SeatandTime">
+        select r.re_number, s.se_date, s.se_number, s.se_time, r.mo_number
+        from seatandtime s,
+             reservation r
+        where r.mo_number = s.mo_number(+)
+          and m_id = #{m_id}
+    </select>
+    <select id="CH_MemberList" parameterType="Member" resultType="Member">
+        select *
+        from member
+        where m_id not in ('admin')
+    </select>
+    <update id="CH_AdminUpdateMember" parameterType="Member">
+        update member
+        set m_id          = #{m_id},
+            m_name        = #{m_name},
+            m_phonenumber = #{m_phonenumber},
+            m_address     = #{m_address},
+            m_email       = #{m_email},
+            m_point       = #{m_point}
+        where m_id = #{m_id}
+    </update>
+    <select id="CH_ReservationList" parameterType="Reservation" resultType="Reservation">
+        select m_id, mo_number, re_number, se_number, se_date, se_time
+        from reservation
+        order by m_id
+    </select>
+    <update id="CH_AdminUpdateReservation" parameterType="Reservation">
+        update reservation
+        set m_id      = #{m_id},
+            mo_number = #{mo_number},
+            re_number = #{re_number},
+            se_number = #{se_number},
+            se_date   = #{se_date},
+            se_time   = #{se_time}
+        where m_id = #{m_id}
+    </update>
+    <select id="CH_MainBbsList" parameterType="bbs" resultType="bbs">
+        select bbs_title, bbs_category, bbs_no, bbs_date
+        from bbs
+        where bbs_category = '1'
+        order by bbs_date desc
+    </select>
+    <select id="CH_BbsSearchTotal" parameterType="bbs" resultType="bbs">
+        select *
+        from bbs
+        where bbs_category = #{bbs_category}
+          and (bbs_title like '%${bbs_title}%' or bbs_content like '%${bbs_content}%' or m_id like '%${m_id}%')
+    </select>
+    <select id="CH_BbsSearchTitle" parameterType="bbs" resultType="bbs">
+        select *
+        from bbs
+        where bbs_category = #{bbs_category}
+          and bbs_title like '%${bbs_title}%'
+    </select>
+    <select id="CH_BbsSearchContent" parameterType="bbs" resultType="bbs">
+        select *
+        from bbs
+        where bbs_category = #{bbs_category}
+          and bbs_content like '%${bbs_content}%'
+    </select>
+    <select id="CH_BbsSearchId" parameterType="bbs" resultType="bbs">
+        select *
+        from bbs
+        where bbs_category = #{bbs_category}
+          and m_id like '%${m_id}%'
     </select>
 </mapper>
         <!-- 서브쿼리를 이용해서 조회하려했는데 실패함, 나중에 해봐야겠다.

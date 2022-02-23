@@ -1,9 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>글작성 페이지야~</title>
+<title>공지사항 글 내용 페이지야~</title>
 <style type="text/css">
 /* MainContent Box ------------------------------------------ */
 	#YM_MainContentsBox>div{
@@ -51,12 +52,15 @@
 
 		<div id="YM_Mainfooter">
 			<div>
-				<button value="수정" onclick="location.href='contentsUpdateForm?bbs_no=${bbsContents.bbs_no}&bbs_category=${bbsContents.bbs_category}'">수정</button>
-				<button value="삭제" onclick="location.href='contentsDelete?bbs_no=${bbsContents.bbs_no}&bbs_category=${bbsContents.bbs_category}'">삭제</button>
 				<button onclick="location.href='mainNotice'" >목록</button>
+				<c:if test="${sessionScope.sessionId == 'admin'}">			<!-- 관리자로 로그인 했을때만 수정, 삭제 버튼 보여줌. -->
+					<button value="수정" onclick="location.href='contentsUpdateForm?bbs_no=${bbsContents.bbs_no}&bbs_category=${bbsContents.bbs_category}'">수정</button>
+					<button value="삭제" onclick="location.href='contentsDelete?bbs_no=${bbsContents.bbs_no}&bbs_category=${bbsContents.bbs_category}'">삭제</button>
+				</c:if>
 			</div>
 		</div>
 	</main>
+	
 </div>
 
 

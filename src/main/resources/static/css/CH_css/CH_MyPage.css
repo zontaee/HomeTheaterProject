@@ -1,0 +1,47 @@
+@CHARSET "UTF-8";
+.subject{
+	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+.subject b{
+	font-size: 25px;
+}
+#icon{
+	margin-left: 50px;
+	margin-right: 50px;
+	border: 2px solid black;
+	width: 200px;
+	height: 200px;
+	display: inline-block;
+}
+#explain1{
+	margin-left: 100px; 
+	margin-right: 130px;
+	font-size: 15px;
+}
+#explain2{
+	margin-left: 110px; 
+	margin-right: 120px;
+	font-size: 15px;
+}
+#explain3{
+	margin-left: 120px; 
+	margin-right: 120px;
+	font-size: 15px;
+}
+#explain4{
+	margin-left: 110px; 
+	margin-right: 120px;
+	font-size: 15px;
+}
+#explain5{
+	margin-left: 120px; 
+	margin-right: 120px;
+	font-size: 15px;
+}
+#explain6{
+	margin-left: 130px; 
+	margin-right: 120px;
+	font-size: 15px;
+}

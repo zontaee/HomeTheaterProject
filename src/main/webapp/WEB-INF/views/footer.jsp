@@ -7,6 +7,9 @@
 *{
 	font-size: 10px;
 }
+hr{
+	background-color: white;
+}
 </style>
 </head>
 <body>

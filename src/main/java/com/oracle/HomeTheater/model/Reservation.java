@@ -8,7 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class Reservation {
-    private int re_number;
+    private String re_number;
     private String se_time;
     private String se_date;
     private String se_number;

@@ -11,14 +11,14 @@ import com.oracle.HomeTheater.domain.MailDTO;
 public class CH_MailService {
 	@Autowired
 	private JavaMailSender mailSender;
-
+	
 	public void sendMail(MailDTO mail) {
 		System.out.println("CH_MailService sendMail Start...");
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setTo(mail.getAddress());
 		message.setSubject(mail.getTitle());
 		message.setText(mail.getMessage());
-
+		
 		mailSender.send(message);
 	}
 

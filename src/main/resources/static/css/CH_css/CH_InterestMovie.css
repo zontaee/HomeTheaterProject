@@ -1,0 +1,32 @@
+@CHARSET "UTF-8";
+.subject{
+	text-align: left;
+	margin-top: 50px;
+	margin-bottom: 30px;
+}
+#subject{
+	font-size: 25px;
+}
+.content td{
+	font-size: 13px;
+	text-align: left;
+}
+table{
+	text-align: left;
+    border-spacing: 100px;
+ 	border-collapse: separate;
+ 	width: 610px;
+ 	height: 100px;
+}
+td b{
+	font-size: 12px;
+}
+.btn{
+	border: 1px solid white;
+	width: 160px; 
+	height: 27px;
+}
+.btn:hover{
+	background: black;
+	color: white;
+}

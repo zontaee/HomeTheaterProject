@@ -171,13 +171,13 @@ td{
 	   				<td>($남은 결제금액)</td>
 	   			</tr>
 	  		</table>--%>
-	  		<input type="submit" value="결제하기"> <%--onclick="iamport();--%>
+	  		<input type="submit" class="btn btn-outline-secondary" value="결제하기"> <%--onclick="iamport();--%>
 	  	</div>
 	  	
 	  <%@ include file="../footer.jsp"%> 
   </form>
  </div>
 </div>
-<script type="text/javascript" src="js/payment.js"></script>
+<script type="text/javascript" src="js/reservation/payment.js"></script>
 </body>
 </html>

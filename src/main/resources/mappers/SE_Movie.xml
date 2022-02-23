@@ -87,5 +87,31 @@
         where mo_number = #{mo_number}
 
     </delete>
+    <select id="SE_selChoiceMovie" parameterType="java.util.HashMap" resultType="ChoiceMovie">
+        select *
+        from choiceMovie
+        where mo_number = #{mo_number}
+          and m_id = #{m_id}
+    </select>
+
+    <select id="SE_selCheckChoiceMovie" parameterType="java.util.HashMap" resultType="int">
+        select count(*)
+        from choiceMovie
+        where mo_number = #{mo_number}
+          and m_id = #{m_id}
+    </select>
+
+    <insert id="SE_insChoiceMovie" parameterType="java.util.HashMap">
+
+        insert into choiceMovie
+        values (#{m_id}, #{mo_number}, 'T')
+    </insert>
+
+    <delete id="SE_updChoiceMovie" parameterType="java.util.HashMap">
+        delete
+        from choiceMovie
+        where mo_number = #{mo_number}
+          and m_id = #{m_id}
+    </delete>
 
 </mapper>

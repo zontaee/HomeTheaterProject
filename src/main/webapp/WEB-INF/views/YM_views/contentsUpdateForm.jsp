@@ -1,9 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 글작성 페이지야~</title>
+<title>공지사항 글 수정 페이지야~</title>
 <script src="//code.jquery.com/jquery.min.js"></script>
 <style type="text/css">
 /* MainContent Box ------------------------------------------ */
@@ -11,7 +12,6 @@
 		width: 1000px;
 		border:1px solid;
 	}
-
 	#YM_boardTitle{
 		height: 30px;	
 	}
@@ -30,7 +30,6 @@
 <body>
 
 <!-- main header -->
-<div class="container">
 <div id="YM_noticeHeaderBox">
 	<%@ include file="../header.jsp"%>
 </div>
@@ -67,7 +66,7 @@
 					
 			</div>
 		</div>
-
+		
 	</main>
 </div>
 
@@ -78,6 +77,6 @@
 <div id="YM_noticeFooterBox">
 	<%@ include file="../footer.jsp"%>
 </div>
-</div>
+
 </body>
 </html>

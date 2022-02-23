@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+.subject{
+	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 30px;
+}
+#header{
+	font-size: 25px;
+}
+table{
+	margin-left: 200px;
+    border-spacing: 100px;
+ 	border-collapse: separate;
+ 	border: 2px solid black;
+ 	width: 600px;
+ 	height: 100px;
+}
+th{
+	background-color: #4C4C4C;
+	color: white;
+	font-size: 20px;
+	height: 70px;
+	text-align: center;
+}
+td{
+	padding-left: 50px;
+	padding-right: 100px;
+	text-align: left;
+}
+#image{
+	padding-left: 50px;
+}
+.btn{
+	color: black;
+	border: 1px solid white;
+	width: 100px; 
+	height: 25px;
+}
+.btn:hover{
+	background: black;
+	color: white;
+}

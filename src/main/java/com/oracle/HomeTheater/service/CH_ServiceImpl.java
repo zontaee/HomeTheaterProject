@@ -12,6 +12,7 @@ import com.oracle.HomeTheater.model.Bbs;
 import com.oracle.HomeTheater.model.ChoiceMovie;
 import com.oracle.HomeTheater.model.Movie;
 import com.oracle.HomeTheater.model.Reservation;
+import com.oracle.HomeTheater.model.SeatandTime;
 
 
 
@@ -19,7 +20,7 @@ import com.oracle.HomeTheater.model.Reservation;
 public class CH_ServiceImpl implements CH_Service {
 	@Autowired
 	private CH_Dao cd;
-
+	
 	@Override
 	public List<Movie> SearchMovieList(Movie movie) {
 		System.out.println("CH_ServiceImpl SearchMovieList Start...");
@@ -142,13 +143,97 @@ public class CH_ServiceImpl implements CH_Service {
 		return checkReservationInfo;
 	}
 
+	@Override
+	public List<SeatandTime> searchSeatInfo(SeatandTime seatTime) {
+		System.out.println("CH_ServiceImpl searchSeatInfo Start...");
+		List<SeatandTime> searchSeatInfo = null;
+		searchSeatInfo = cd.searchSeatInfo(seatTime);
+		return searchSeatInfo;
+	}
+
+	@Override
+	public List<Member> memberList(Member member) {
+		System.out.println("CH_ServiceImpl memberList Start...");
+		List<Member> memberList = null;
+		memberList = cd.memberList(member);
+		return memberList;
+	}
+
+	@Override
+	public int adminUpdateMember(Member member) {
+		int update = 0;
+		System.out.println("CH_ServiceImpl adminUpdateMember Start...");
+		update = cd.adminUpdateMember(member);
+		return update;
+	}
+
+	@Override
+	public List<Reservation> reservationList(Reservation reservation) {
+		System.out.println("CH_ServiceImpl reservationList Start...");
+		List<Reservation> reservationList = null;
+		reservationList = cd.reservationList(reservation);
+		return reservationList;
+	}
+
+	@Override
+	public int adminUpdateReservation(Reservation reservation) {
+		int update = 0;
+		System.out.println("CH_ServiceImpl adminUpdateReservation Start...");
+		update = cd.adminUpdateReservation(reservation);
+		return update;
+	}
+
+	@Override
+	public List<Bbs> mainBbsList(Bbs bbs) {
+		System.out.println("CH_ServiceImpl mainBbsList Start...");
+		List<Bbs> mainBbsList = null;
+		mainBbsList = cd.mainBbsList(bbs);
+		return mainBbsList;
+	}
+
+	@Override
+	public List<Bbs> bbsSearchTotal(Bbs bbs) {
+		System.out.println("CH_ServiceImpl bbsSearchTotal Start...");
+		List<Bbs> bbsSearchTotal = null;
+		bbsSearchTotal = cd.bbsSearchTotal(bbs);
+		return bbsSearchTotal;
+	}
+
+	@Override
+	public List<Bbs> bbsSearchTitle(Bbs bbs) {
+		System.out.println("CH_ServiceImpl bbsSearchTitle Start...");
+		List<Bbs> bbsSearchTitle = null;
+		bbsSearchTitle = cd.bbsSearchTitle(bbs);
+		return bbsSearchTitle;
+	}
+
+	@Override
+	public List<Bbs> bbsSearchContent(Bbs bbs) {
+		System.out.println("CH_ServiceImpl bbsSearchContent Start...");
+		List<Bbs> bbsSearchContent = null;
+		bbsSearchContent = cd.bbsSearchContent(bbs);
+		return bbsSearchContent;
+	}
+
+	@Override
+	public List<Bbs> bbsSearchId(Bbs bbs) {
+		System.out.println("CH_ServiceImpl bbsSearchId Start...");
+		List<Bbs> bbsSearchId = null;
+		bbsSearchId = cd.bbsSearchId(bbs);
+		return bbsSearchId;
+	}
 
 
+	
 
 
+	
+	
+	
 
-
-
-
+	
+	
+	
+	
 
 }

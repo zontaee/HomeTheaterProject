@@ -11,6 +11,7 @@ import com.oracle.HomeTheater.model.Bbs;
 import com.oracle.HomeTheater.model.ChoiceMovie;
 import com.oracle.HomeTheater.model.Movie;
 import com.oracle.HomeTheater.model.Reservation;
+import com.oracle.HomeTheater.model.SeatandTime;
 
 @Repository
 public class CH_DaoImpl implements CH_Dao {
@@ -210,6 +211,125 @@ public class CH_DaoImpl implements CH_Dao {
 		return checkReservationInfo;
 	}
 
+	@Override
+	public List<SeatandTime> searchSeatInfo(SeatandTime seatTime) {
+		System.out.println("CH_DaoImpl searchSeatInfo Start...");
+		List<SeatandTime> searchSeatInfo = null;
+		try {
+			searchSeatInfo = session.selectList("CH_SearchSeatInfo", seatTime);
+		} catch (Exception e) {
+			System.out.println("CH_DaoImpl searchSeatInfo Excetption->"+e.getMessage());
+		}
+		return searchSeatInfo;
+	}
+
+	@Override
+	public List<Member> memberList(Member member) {
+		System.out.println("CH_DaoImpl memberList Start...");
+		List<Member> memberList = null;
+		try {
+			memberList = session.selectList("CH_MemberList", member);
+		} catch (Exception e) {
+			System.out.println("CH_DaoImpl memberList Excetption->"+e.getMessage());
+		}
+		return memberList;
+	}
+
+	@Override
+	public int adminUpdateMember(Member member) {
+		int update = 0;
+		System.out.println("CH_DaoImpl adminUpdateMember Start...");
+		try {
+			update = session.update("CH_AdminUpdateMember", member);
+		} catch (Exception e) {
+			System.out.println("CH_DaoImpl adminUpdateMember Excetption->"+e.getMessage());
+		}
+		return update;
+	}
+
+	@Override
+	public List<Reservation> reservationList(Reservation reservation) {
+		System.out.println("CH_DaoImpl reservationList Start...");
+		List<Reservation> reservationList = null;
+		try {
+			reservationList = session.selectList("CH_ReservationList", reservation);
+		} catch (Exception e) {
+			System.out.println("CH_DaoImpl reservationList Excetption->"+e.getMessage());
+		}
+		return reservationList;
+	}
+
+	@Override
+	public int adminUpdateReservation(Reservation reservation) {
+		int update = 0;
+		System.out.println("CH_DaoImpl adminUpdateReservation Start...");
+		try {
+			update = session.update("CH_AdminUpdateReservation", reservation);
+		} catch (Exception e) {
+			System.out.println("CH_DaoImpl adminUpdateReservation Excetption->"+e.getMessage());
+		}
+		return update;
+	}
+
+	@Override
+	public List<Bbs> mainBbsList(Bbs bbs) {
+		System.out.println("CH_DaoImpl mainBbsList Start...");
+		List<Bbs> mainBbsList = null;
+		try {
+			mainBbsList = session.selectList("CH_MainBbsList", bbs);
+		} catch (Exception e) {
+			System.out.println("CH_DaoImpl mainBbsList Excetption->"+e.getMessage());
+		}
+		return mainBbsList;
+	}
+
+	@Override
+	public List<Bbs> bbsSearchTotal(Bbs bbs) {
+		System.out.println("CH_DaoImpl bbsSearchTotal Start...");
+		List<Bbs> bbsSearchTotal = null;
+		try {
+			bbsSearchTotal = session.selectList("CH_BbsSearchTotal", bbs);
+		} catch (Exception e) {
+			System.out.println("CH_DaoImpl bbsSearchTotal Excetption->"+e.getMessage());
+		}
+		return bbsSearchTotal;
+	}
+
+	@Override
+	public List<Bbs> bbsSearchTitle(Bbs bbs) {
+		System.out.println("CH_DaoImpl bbsSearchTitle Start...");
+		List<Bbs> bbsSearchTitle = null;
+		try {
+			bbsSearchTitle = session.selectList("CH_BbsSearchTitle", bbs);
+		} catch (Exception e) {
+			System.out.println("CH_DaoImpl bbsSearchTitle Excetption->"+e.getMessage());
+		}
+		return bbsSearchTitle;
+	}
+
+	@Override
+	public List<Bbs> bbsSearchContent(Bbs bbs) {
+		System.out.println("CH_DaoImpl bbsSearchContent Start...");
+		List<Bbs> bbsSearchContent = null;
+		try {
+			bbsSearchContent = session.selectList("CH_BbsSearchContent", bbs);
+		} catch (Exception e) {
+			System.out.println("CH_DaoImpl bbsSearchContent Excetption->"+e.getMessage());
+		}
+		return bbsSearchContent;
+	}
+
+	@Override
+	public List<Bbs> bbsSearchId(Bbs bbs) {
+		System.out.println("CH_DaoImpl bbsSearchId Start...");
+		List<Bbs> bbsSearchId = null;
+		try {
+			bbsSearchId = session.selectList("CH_BbsSearchId", bbs);
+		} catch (Exception e) {
+			System.out.println("CH_DaoImpl bbsSearchId Excetption->"+e.getMessage());
+		}
+		return bbsSearchId;
+	}
 
 
 
@@ -218,6 +338,11 @@ public class CH_DaoImpl implements CH_Dao {
 
 
 
+	
+
+
+
+	
 
 
 
@@ -226,11 +351,9 @@ public class CH_DaoImpl implements CH_Dao {
 
 
 
+	
+	
 
 
-
-
-
-
-
+	
 }

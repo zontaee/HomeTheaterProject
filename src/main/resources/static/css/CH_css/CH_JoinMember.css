@@ -1,0 +1,53 @@
+@CHARSET "UTF-8";
+.subject{
+	text-align: left;
+	margin-top: 50px;
+	margin-bottom: 30px;
+}
+#header{
+	font-size: 25px;
+}
+.loginForm{
+	text-align: center;	
+}
+label{
+	float: left;
+}
+#idCheck{
+	margin-left: -100px;
+}
+.id_available{
+	color: black; 
+	margin-left: -250px;
+}
+.id_already{
+	color: red; 
+	display: none;
+	margin-left: -250px;
+}
+.phone_already{
+	color: red; 
+	display: none;
+	margin-left: -220px;
+}
+.validation{
+	color: black; 
+	margin-left: -250px;
+}
+.col-sm-5{
+	text-align: left;
+	display: inline-block;
+}
+.col-sm-2{
+	text-align: left;
+	display: inline-block;
+}
+.btn{
+	border: 1px solid white;
+	width: 50px; 
+	height: 25px;
+}
+.btn:hover{
+	background: black;
+	color: white;
+}

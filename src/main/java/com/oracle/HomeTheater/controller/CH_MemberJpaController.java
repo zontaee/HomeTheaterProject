@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -21,12 +20,12 @@ import com.oracle.HomeTheater.service.CH_MemberJpaService;
 @Controller
 public class CH_MemberJpaController {
 	private final CH_MemberJpaService memberJpaService;
-
+	
 	@Autowired
 	public CH_MemberJpaController(CH_MemberJpaService memberJpaService) {
 		this.memberJpaService = memberJpaService;
 	}
-
+	
 	// 이용약관 폼
 	@GetMapping(value = "terms")
 	public String terms() {
@@ -40,12 +39,12 @@ public class CH_MemberJpaController {
 		System.out.println("CH_MemberJpaController joinUserForm Start...");
 		return "CH_view/CH_JoinMember";
 	}
-
+	
 	// 회원가입
 	@RequestMapping(value = "joinMember/save")
 	public String joinUser(MemberJpa member,@RequestParam("phone1") String phone1, @RequestParam("phone2") String phone2, @RequestParam("phone3") String phone3,
-						   @RequestParam("mail1") String mail1, @RequestParam("mail2") String mail2, @RequestParam("zipcode") String zipcode, @RequestParam("roadAddress") String roadAddress,
-						   @RequestParam("jibunAddress") String jibunAddress, @RequestParam("detailAddress") String detailAddress, @RequestParam("extraAddress") String extraAddress, Model model) {
+			@RequestParam("mail1") String mail1, @RequestParam("mail2") String mail2, @RequestParam("zipcode") String zipcode, @RequestParam("roadAddress") String roadAddress,
+			@RequestParam("jibunAddress") String jibunAddress, @RequestParam("detailAddress") String detailAddress, @RequestParam("extraAddress") String extraAddress, Model model) {
 		System.out.println("CH_MemberJpaController joinMember/save Start...");
 		String m_phonenumber = phone1 + "-" + phone2 + "-" + phone3;
 		String m_email = mail1 + "@" + mail2;
@@ -56,7 +55,7 @@ public class CH_MemberJpaController {
 		memberJpaService.joinUser(member);
 		return "redirect:/loginForm";
 	}
-
+	
 	// 로그인 폼
 	@GetMapping(value="loginForm")
 	public String loginForm() {
@@ -67,7 +66,6 @@ public class CH_MemberJpaController {
 	// 로그인
 	@PostMapping(value = "login")
 	public String login(MemberJpa member, Model model, HttpServletRequest request, HttpSession session, HttpServletResponse response) {
-		System.out.println("member = " + member);
 		String sessionUrl = String.valueOf(session.getAttribute("sessionUrl")).substring(1);
 		System.out.println("sessionUrl =" + sessionUrl);
 		session.invalidate();
@@ -87,17 +85,15 @@ public class CH_MemberJpaController {
 		model.addAttribute("sessionId", memberVO.getM_id());
 		model.addAttribute("userName", memberVO.getM_name());
 		if (sessionUrl.equals("ull")) {
-
-			return "main";
+			return "forward:/main";
 		}else {
+			//인터셉터 후 로그인 페이지
 			System.out.println("forward");
 			model.addAttribute("sessionUrl",sessionUrl);
 			return "redirectpage";
 		}
 	}
-	//인터셉터 후 로그인 페이지
-
-
+	
 	// 로그아웃
 	@RequestMapping(value = "logout")
 	public String logout(HttpServletRequest request) {
@@ -117,7 +113,7 @@ public class CH_MemberJpaController {
 		}
 		return "CH_view/CH_MyPage";
 	}
-
-
-
+	
+	
+	
 }

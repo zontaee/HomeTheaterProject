@@ -1,0 +1,39 @@
+@CHARSET "UTF-8";
+table{
+	text-align: left;
+    border-spacing: 100px;
+ 	border-collapse: separate;
+ 	width: 600px;
+ 	height: 100px;
+}
+.movieList td{
+	font-size: 15px;
+	text-align: left;
+}
+.bbsList td{
+	font-size: 15px;
+	text-align: center;
+	width: 150px;
+}
+.bbsList th{
+	font-size: 15px;
+	text-align: center;
+}
+.subject{
+	text-align: left;
+	margin-top: 50px;
+	margin-bottom: 30px;
+}
+#header{
+	font-size: 25px;
+}
+.movieList td b{
+	font-size: 15px;
+}
+.btn{
+	width: 100px;
+}
+.btn:hover{
+	background: black;
+	color: white;
+}

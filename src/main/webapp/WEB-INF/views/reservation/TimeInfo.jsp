@@ -2,7 +2,7 @@
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html><html><head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
 
 <meta charset="UTF-8">
 <title>메인페이지</title>
@@ -40,6 +40,12 @@
         width: 200px;
         height: 250px;
     }
+    .color{
+
+        margin-left: 300px;
+        margin-right: 300px;
+        background-color:#BDBDBD;
+    }
 
 </style>
 </head>
@@ -49,7 +55,7 @@
 
         <%@ include file="../header.jsp" %>
 
-
+        <div class="color" >
         <img class="movie_img" src="${findMovie.mo_fileName }" alt=""><br>
 
         <a class="fontsize"> ${findMovie.mo_title }</a><br>
@@ -70,20 +76,22 @@
                         <option value="${list.se_date}">${list.se_date }일</option>
                     </c:forEach>
                 </select>
-                <select name="se_time" id="se_time">
+                <select name="se_time" id="se_time" >
                     <a>상영시간</a>
                     <option value="">시간선택</option>
                     <%--  <c:forEach var="list" items="${findTime}">
                           <option value="${list.se_time}">${list.se_time}</option>
                       </c:forEach>--%>
                 </select>
-                <input type="submit" value="좌석선택">
+                <br>
+                <input type="submit" value="좌석선택" class="btn btn-outline-primary" >
             </div>
         </form>
+    </div>
         <%@ include file="../footer.jsp" %>
     </div>
 
 </div>
 </body>
-<script type="text/javascript" src="js/timeInfo.js"></script>
+<script type="text/javascript" src="js/reservation/timeInfo.js"></script>
 </html>

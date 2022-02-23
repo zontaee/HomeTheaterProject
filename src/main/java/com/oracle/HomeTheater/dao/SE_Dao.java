@@ -3,6 +3,7 @@ package com.oracle.HomeTheater.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.oracle.HomeTheater.model.ChoiceMovie;
 import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Movie;
 import com.oracle.HomeTheater.model.MovieLike;
@@ -33,6 +34,14 @@ public interface SE_Dao {
 	int adminMovieUpdate(Movie movie);
 
 	int adminMovieDelete(int mo_number);
+
+	ChoiceMovie findChoiceMovie(Map<String, Object> map);
+
+	int CheckChoiceMovie(Map<String, Object> map);
+
+	int insertChoiceMovie(Map<String, Object> map);
+
+	int updateChoiceMovieCancle(Map<String, Object> map);
 
 
 }

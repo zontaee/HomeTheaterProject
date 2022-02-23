@@ -4,6 +4,8 @@ const addSelect = document.getElementById("se_time");
 //날짜에 따른 동적 시간변화 함수(Fetch API사용)
 async function changetime(se_date, mo_number) {
 
+
+
     let URL = "http://localhost:8500/findTime";
     let options = {
         method: 'POST',
@@ -33,6 +35,7 @@ async function changetime(se_date, mo_number) {
         let option = document.createElement("option");
         option.value = seatandTime[i].se_time;
         option.innerText = seatandTime[i].se_time;
+
         addSelect.appendChild(option);
     }
 
@@ -40,11 +43,13 @@ async function changetime(se_date, mo_number) {
 }
 
 const check = () => {
+
     let seDateCheck = document.getElementById("se_date").value;
     let seTimeCheck = document.getElementById("se_time").value;
     console.log(seDateCheck);
     console.log(seTimeCheck);
    if(seTimeCheck ==="" || seDateCheck===""){
+
        alert("날짜 혹은 시간을 선택 해주세요.")
        return false;
    }else {

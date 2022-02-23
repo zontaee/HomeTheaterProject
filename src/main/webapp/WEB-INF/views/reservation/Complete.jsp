@@ -83,31 +83,42 @@
 <div class="container">
     <div class="content">
         <%@ include file="../header.jsp" %>
-        <h3>예매가 완료 되었습니다.</h3>
-        <div>
-            <div>
-                <img class="movie_img" src="${movieInfo.mo_fileName }" alt=""><br>
-                <a class="fontsize"> ${movieInfo.mo_title }</a><br>
-                <a class="fontsize"> 감독:${movieInfo.mo_director }</a><br>
-                <a class="fontsize"> 배우:${movieInfo.mo_actor }</a><br>
-                <a class="fontsize"> 관람등급:${movieInfo.mo_age }</a><br>
-                <a class="fontsize"> 장르:${movieInfo.mo_genre }</a><br>
-                <a class="fontsize"> 예매번호:${seatandTime.re_number }</a><br>
-                <a class="fontsize"> 좌석:${seatandTime.se_number }</a><br>
-                <a class="fontsize"> 날짜:${seatandTime.se_date}</a><br>
-                <a class="fontsize"> 시간:${seatandTime.se_time }</a><br>
-                <a class="fontsize"> 남은포인트 :${memberInfo.m_point}</a><br>
+        <div><h5>예매가 완료 되었습니다.</h5></div><br>
+        <br><br><br>
+
+        <div class="row">
+            <div class="col-6 ">
+                <div class="col-3"><img class="movie_img w-80" src="${movieInfo.mo_fileName }" alt=""><br></div>
+                <div class="col-9"></div>
+            </div>
+            <div class="col-6 ">
+                <div class="col-6">
+                    <a class="fontsize"> ${movieInfo.mo_title }</a><br>
+                    <a class="fontsize"> 감독:${movieInfo.mo_director }</a><br>
+                    <a class="fontsize"> 배우:${movieInfo.mo_actor }</a><br>
+                    <a class="fontsize"> 관람등급:${movieInfo.mo_age }</a><br>
+                    <a class="fontsize"> 장르:${movieInfo.mo_genre }</a><br>
+                    <a class="fontsize"> 예매번호:${seatandTime.re_number }</a><br>
+                    <a class="fontsize"> 좌석:${seatandTime.se_number }</a><br>
+                    <a class="fontsize"> 날짜:${seatandTime.se_date}</a><br>
+                    <a class="fontsize"> 시간:${seatandTime.se_time }</a><br>
+                    <a class="fontsize"> 남은포인트 :${memberInfo.m_point}</a><br>
+                    <input type="button" value="예매취소"
+                           onclick="cancel('${seatandTime.re_number}','${seatandTime.se_date}','${seatandTime.se_number }','${seatandTime.se_time }','${seatandTime.mo_number}') ">
+                </div>
+                <div class="col-6"></div>
+            </div>
+
 
             </div>
-            <input type="button" value="예매취소"
-                   onclick="cancel('${seatandTime.re_number}','${seatandTime.se_date}','${seatandTime.se_number }','${seatandTime.se_time }','${seatandTime.mo_number}') ">
+
+
         </div>
-
         <%@ include file="../footer.jsp" %>
-    </div>
-</div>
 
-<script type="text/javascript" src="js/cancel.js"></script>
+    </div>
+
+    <script type="text/javascript" src="js/reservation/cancel.js"></script>
 </body>
 
 </html>

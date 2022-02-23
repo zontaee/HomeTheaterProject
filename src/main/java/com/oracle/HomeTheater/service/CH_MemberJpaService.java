@@ -12,7 +12,7 @@ import com.oracle.HomeTheater.domain.MemberJpa;
 @Service
 public class CH_MemberJpaService {
 	private final CH_MemberJpaRepository memberJpaRepository;
-
+    
 	public CH_MemberJpaService(CH_MemberJpaRepository memberJpaRepository) {
 		this.memberJpaRepository = memberJpaRepository;
 	}
@@ -32,8 +32,8 @@ public class CH_MemberJpaService {
 
 
 
+	
+	
 
-
-
-
+	
 }

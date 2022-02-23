@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+.m_id{
+	background-color: #EAEAEA;
+	width: 100px;
+}
+.m_address{
+	width: 250px;
+}
+.m_point{
+	width: 70px;
+}
+.subject{
+	text-align: left;
+	margin-top: 50px;
+	margin-bottom: 30px;
+}
+table input{
+	border: 1px solid white;
+}
+.button:hover{
+	background: black;
+	color: white;
+}
+#subject{
+	font-size: 25px;
+}

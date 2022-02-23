@@ -1,0 +1,40 @@
+@CHARSET "UTF-8";
+.subject{
+	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 30px;
+	font-size: 25px;
+}
+#subject{
+	font-size: 25px;
+}
+.emailFind{
+	color: black;
+	display: none;
+}
+.emailNotFind{
+	color: red;
+	display: none;
+}
+.findIdForm{
+	border: 2px solid black;
+	width: 300px;
+	height: 260px;
+	display: inline-block;
+	text-align: center;
+}
+#inputTag{
+	font-size: 15px;
+}
+#sendEmail{
+	width: 152px;
+}
+.btn{
+	border: 1px solid white;
+	width: 50px; 
+	height: 25px;
+}
+.btn:hover{
+	background: black;
+	color: white;
+}
