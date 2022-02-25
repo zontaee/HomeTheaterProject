@@ -3,6 +3,7 @@ package com.oracle.HomeTheater.service;
 import com.oracle.HomeTheater.dao.IT_Dao;
 import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Movie;
+import com.oracle.HomeTheater.model.Reservation;
 import com.oracle.HomeTheater.model.SeatandTime;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -91,6 +92,14 @@ public class IT_ServiceImpl implements IT_Service {
         List<SeatandTime> findtime = ITDao.serchTime(seatandTime);
             return findtime;
 
+    }
+
+    @Override
+    public Reservation reservationInfo(String re_number) {
+        log.info("reservationInfo(service) start");
+        Reservation reservation = ITDao.reservationInfo(re_number);
+
+        return reservation;
     }
 
 

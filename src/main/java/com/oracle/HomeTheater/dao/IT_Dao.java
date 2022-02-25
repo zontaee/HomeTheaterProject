@@ -2,6 +2,7 @@ package com.oracle.HomeTheater.dao;
 
 import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Movie;
+import com.oracle.HomeTheater.model.Reservation;
 import com.oracle.HomeTheater.model.SeatandTime;
 
 import java.util.List;
@@ -29,4 +30,5 @@ public interface IT_Dao {
 
     List<SeatandTime> serchTime(SeatandTime seatandTime);
 
+    Reservation reservationInfo(String re_number);
 }

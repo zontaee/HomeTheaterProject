@@ -2,6 +2,7 @@ package com.oracle.HomeTheater.dao;
 
 import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Movie;
+import com.oracle.HomeTheater.model.Reservation;
 import com.oracle.HomeTheater.model.SeatandTime;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSession;
@@ -139,6 +140,19 @@ public class IT_DaoImpl implements IT_Dao {
         }
         log.info("serchTime(Dao) seat size-> " + findTime.size());
         return findTime;
+    }
+
+    @Override
+    public Reservation reservationInfo(String re_number) {
+        log.info("reservationInfo(Dao)start");
+        Reservation reservation = null;
+        try {
+            reservation = session.selectOne("IT_ReservationFind", re_number);
+        } catch (Exception e) {
+            log.info("serchTime(Dao) Exception -> " + e.getMessage());
+        }
+
+        return reservation;
     }
 
 

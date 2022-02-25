@@ -2,6 +2,7 @@ package com.oracle.HomeTheater.controller;
 
 import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Movie;
+import com.oracle.HomeTheater.model.Reservation;
 import com.oracle.HomeTheater.model.SeatandTime;
 import com.oracle.HomeTheater.service.IT_Service;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -75,38 +77,18 @@ public class It_Controller {
         return "reservation/PaymentInfo";
     }
 
-    @PostMapping("Payment")
-    public String finalReservation(SeatandTime seatandTime, Model model) {
-        //예약번호를 uuid로 지정
-        String uuid = UUID.randomUUID().toString().substring(0, 13);
-        seatandTime.setRe_number(uuid);
-
-        log.info(seatandTime.getRe_number());
-        log.info("seatandTable ->" + seatandTime);
-
-        //좌석 정보 업데이트
-        log.info("SeatandTimeUpdate(controller) start");
-        int resultUpdateSeat = ITService.SeatandTimeUpdate(seatandTime);
-        log.info("updatenumber" + resultUpdateSeat);
-
-        //예약정보 삽입
-        log.info("reservationSave(controller) start");
-        int resultSave = ITService.reservationSave(seatandTime);
-        if (resultSave == 1) {
-            log.info("reservation insert 성공");
-        } else {
-            log.info("insert 실패");
-        }
-        //맴버 포인트 업데이트
-        log.info("memberPointUpdate(controller) start");
-        int resultUpdatePoint = ITService.memberPointUpdate(seatandTime);
+    @GetMapping("PaymentResult")
+    public String finalReservation(@RequestParam("re_number") String re_number,Model model) {
+       log.info("re_number = " + re_number);
+        log.info("reservationInfo(Controller)start");
+        Reservation reservation = ITService.reservationInfo(re_number);
         //맴버 정보가져오기
-        Member memberInfo = ITService.memberInfo(seatandTime.getM_id());
+        Member memberInfo = ITService.memberInfo(reservation.getM_id());
         log.info("memberInfo -> " + memberInfo);
         //영화정보가져오기
-        Movie movieInfo = ITService.findMovie(seatandTime.getMo_number());
+        Movie movieInfo = ITService.findMovie(reservation.getMo_number());
         log.info("movieInfo ->" + movieInfo);
-        model.addAttribute("seatandTime", seatandTime);
+        model.addAttribute("seatandTime", reservation);
         model.addAttribute("memberInfo", memberInfo);
         model.addAttribute("movieInfo", movieInfo);
         return "reservation/Complete";

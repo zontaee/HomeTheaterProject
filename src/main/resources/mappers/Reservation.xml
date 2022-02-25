@@ -28,6 +28,13 @@
         FROM "RESERVATION"
         WHERE re_number = #{re_number}
     </delete>
+    <select id="IT_ReservationFind" parameterType="String" resultType="Reservation">
+        select *
+        from "RESERVATION"
+        where re_number = #{re_number}
+    </select>
+
+
 
 
 </mapper>
