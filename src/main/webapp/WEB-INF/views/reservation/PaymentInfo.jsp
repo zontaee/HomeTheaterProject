@@ -151,8 +151,8 @@
             <details>
                 <summary>최종결제수단</summary>
                 <div class="finalPayment">
-                    <label id="finalPayment1"><input type="radio" name="pay_how" id="pay_how" value="신용카드" checked
-                                                     onclick="payhow()">신용카드</label>&emsp;&emsp;
+                    <label id="finalPayment1"><input type="radio" name="pay_how" id="pay_how" value="카카오페이" checked
+                                                     onclick="payhow()">카카오페이</label>&emsp;&emsp;
                 </div>
             </details>
 

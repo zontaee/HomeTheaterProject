@@ -75,6 +75,38 @@
         background-color: greenyellow;
         margin-bottom: 2px;
     }
+    .seatinfo {
+        align-content: center;
+        border: 3px black;
+        border-color: black;
+        width: 20px;
+        height: 20px;
+        color: red;
+        background-color: dodgerblue;
+        margin-bottom: 2px;
+    }
+
+    .reservationedseatinfo {
+        align-content: center;
+        border: 3px black;
+        border-color: black;
+        width: 20px;
+        height: 20px;
+        color: red;
+        background-color: black;
+        margin-bottom: 2px;
+    }
+
+    .reservationingdseatinfo {
+        align-content: center;
+        border: 3px black;
+        border-color: black;
+        width: 20px;
+        height: 20px;
+        color: red;
+        background-color: greenyellow;
+        margin-bottom: 2px;
+    }
 
 
     .color {
@@ -162,9 +194,9 @@
             </c:choose>
         </c:forEach>
         <br><br>
-        <input type="button" class="reservationingdseat" value=" ">선택좌석
-        <input type="button" class="reservationedseat" value=" ">예매불가
-        <input type="button" class="seat" value=" ">예매가능
+        <input type="button" class="reservationingdseatinfo" value=" ">선택좌석
+        <input type="button" class="reservationedseatinfo" value=" ">예매불가
+        <input type="button" class="seatinfo" value=" ">예매가능
         <br>
         <div>
             <form id="seatcontainer" action="reservationpayment" method="post" onsubmit="return check();">

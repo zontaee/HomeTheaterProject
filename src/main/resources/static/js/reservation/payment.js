@@ -1,7 +1,4 @@
-const addhidden = document.getElementById("form");
-const newp = document.createElement("p");
-const newp2 = document.createElement("h2");
-const newp3 = document.createElement("p");
+
 let discountratio = 1;
 let discountsum = 0;   //할인 총합 계산
 let nowamount = document.getElementById("nowamount").innerText;
@@ -58,59 +55,4 @@ const usepoint = () => {
         }
     }
 }
-
-    function iamport(id,address,email,phonenumber){
-        var lastPayPrice = $("#nowamount").text();
-        var m_id = $("#m_id").val();
-        var se_identify = $("#se_identify").val();
-        var se_time = $("#se_time").val();
-        var se_date = $("#se_date").val();
-        var se_number = $("#se_number").val();
-        var mo_number = $("#mo_number").val();
-        var pay_totalprice = $("#pay_totalprice").val();
-        var m_point = $("#m_point").val();
-        var pay_how = $("#pay_how").val();
-        //가맹점 식별코드
-        IMP.init('imp03662835');
-        IMP.request_pay({
-            pg : 'kakaopay',
-            pay_method : 'card',
-            merchant_uid : 'merchant_' + new Date().getTime(),
-            name : id , //결제창에서 보여질 이름
-            amount : 100, //실제 결제되는 가격
-            buyer_email : email,
-            buyer_name : id,
-            buyer_tel : phonenumber,
-            buyer_addr : address,
-            buyer_postcode : '123-456',
-            /* 	    m_redirect_url: 'Payment' */
-        }, function(rsp) {
-            if (rsp.success ) {
-                var msg = '결제가 완료되었습니다.';
-                $.ajax({
-                    url: "Payment",
-                    type: "POST",
-                    data: {
-                        "m_id": m_id,
-                        "se_identify": se_identify,
-                        "se_time": se_time,
-                        "se_date": se_date,
-                        "se_number": se_number,
-                        "mo_number": mo_number,
-                        "pay_totalprice": pay_totalprice,
-                        "m_point": m_point,
-                        "pay_how": pay_how
-                    },
-                    success: function(re_number){
-                        location.href="PaymentResult?re_number="+re_number;
-                    }
-                })
-            } else {
-                var msg = '결제에 실패하였습니다.';
-                msg += '에러내용 : ' + rsp.error_msg;
-            }
-            alert(msg);
-        });
-    }
-
 
