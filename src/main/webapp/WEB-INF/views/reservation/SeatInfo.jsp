@@ -83,6 +83,9 @@
         margin-right: 300px;
         background-color: #BDBDBD;
     }
+    .margin {
+        margin-top: 15px;
+    }
 </style>
 </head>
 <body>
@@ -92,8 +95,8 @@
         <%@ include file="../header.jsp" %>
         <div class="color">
 
-        <div><img src="img/SCREEN.JPG" width="400"></div>
-        <br><br><br>
+        <div class="margin"><img src="img/SCREEN.JPG" width="400"></div>
+        <br><br>
         <c:forEach var="seat" items="${seatInfo}" begin="0" end="5" step="1">
             <c:choose>
                 <c:when test="${seat.se_identify eq 'T'}">

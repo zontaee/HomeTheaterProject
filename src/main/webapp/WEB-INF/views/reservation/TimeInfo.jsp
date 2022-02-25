@@ -46,6 +46,10 @@
         margin-right: 300px;
         background-color:#BDBDBD;
     }
+    .magin{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
 
 </style>
 </head>
@@ -56,7 +60,7 @@
         <%@ include file="../header.jsp" %>
 
         <div class="color" >
-        <img class="movie_img" src="${findMovie.mo_fileName }" alt=""><br>
+        <img class="movie_img magin" src="${findMovie.mo_fileName }" alt=""><br>
 
         <a class="fontsize"> ${findMovie.mo_title }</a><br>
         <a class="fontsize"> 감독:${findMovie.mo_director }</a><br>
@@ -64,7 +68,7 @@
         <a class="fontsize"> 관람등급:${findMovie.mo_age }</a><br>
         <a class="fontsize"> 장르:${findMovie.mo_genre }</a><br>
 
-        <form action="reservationtimedata" method="post" onsubmit="return check();">
+        <form action="reservationtimedata"  class="magin" method="post" onsubmit="return check();">
             <input type="hidden" name="mo_number" value="${findMovie.mo_number}">
             <input type="hidden" name="mo_fileName" value="${findMovie.mo_fileName }">
             <input type="hidden" name="mo_title" value="${findMovie.mo_title }">
@@ -86,7 +90,7 @@
                 <br>
                 <input type="submit" value="좌석선택" class="btn btn-outline-primary" >
             </div>
-        </form>
+        </form >
     </div>
         <%@ include file="../footer.jsp" %>
     </div>
