@@ -1,0 +1,346 @@
+DROP TABLE member CASCADE CONSTRAINTS ;
+DROP TABLE movie CASCADE CONSTRAINTS ;
+DROP TABLE seatandtime CASCADE CONSTRAINTS ;
+DROP TABLE BBS CASCADE CONSTRAINTS ;
+Drop TABLE choiceMovie CASCADE CONSTRAINTS;
+Drop TABLE reservation CASCADE CONSTRAINTS ;
+Drop TABLE actor CASCADE CONSTRAINTS ;
+Drop TABLE MOVIELIKE CASCADE CONSTRAINTS;
+----------------------------------------------------
+--시퀀스 드랍--
+DROP SEQUENCE BBS_SEQ;
+DROP SEQUENCE MOVIE_SEQ;
+DROP SEQUENCE RESERVATION_SEQ;
+DROP SEQUENCE ACTOR_SEQ;
+----------------------------------------------------
+--회원테이블--
+CREATE TABLE member( 
+m_id          VARCHAR2(15) PRIMARY key,  --회원 아이디 기본키
+m_password    VARCHAR2(15) NOT NULL ,    --회원 패스워드
+m_name        VARCHAR2(15) NOT NULL ,    --회원 이름
+m_phonenumber VARCHAR2(20),              --회원 이름
+m_address     VARCHAR2(200),              --회원 이름
+m_email       VARCHAR2(30),              --회원 이름
+m_point       VARCHAR2(10)  DEFAULT 5000,     --결제포인트
+m_delchk      VARCHAR2(1) DEFAULT 'F'      --삭제 여부
+);
+----------------------------------------------------
+--게시판 테이블--
+CREATE TABLE BBS(
+bbs_No       NUMBER(4)     , --게시판 번호
+bbs_category number(1)     , -- 카테고리
+bbs_title    VARCHAR2(200) NOT NULL, -- 게시판이름
+bbs_content  VARCHAR2(500) NOT NULL, -- 게시판 내용
+bbs_date     varchar(20)   NOT NULL, -- 날짜
+bbs_hit      NUMBER(4)     DEFAULT '0', -- 조회수
+m_id         VARCHAR2(15)          , -- id 외래키
+
+ FOREIGN KEY(m_id)
+REFERENCES member(m_id),
+CONSTRAINT BBS_PK PRIMARY KEY(bbs_No  , bbs_category )
+);
+----------------------------------------------------
+--영화 테이블--
+CREATE TABLE movie (
+mo_number   NUMBER(4)    NOT NULL PRIMARY key, -- 영화번호  primary key
+mo_title    VARCHAR2(50) NOT NULL,             -- 영화제목
+mo_director VARCHAR2(50) NOT NULL,             -- 감독
+mo_actor    VARCHAR2(80) NOT NULL,             -- 주연
+mo_genre    VARCHAR2(30) NOT NULL,             -- 장르
+mo_age      VARCHAR2(30)  NOT NULL,              -- 관란등급
+mo_playTime VARCHAR2(10) NOT NULL,             -- 진행시간
+mo_openDate VARCHAR2(10) NOT NULL,             -- 개봉일
+mo_recommendation NUMBER(4),                   -- 추천수
+mo_filename VARCHAR2(30)                       -- 이미지파일     
+);
+----------------------------------------------------
+--찜한 영화 테이블--
+CREATE TABLE choiceMovie(
+m_id  VARCHAR2(15),     --회원아이디
+mo_number NUMBER(4),    --영화번호
+m_selected    VARCHAR2(1) DEFAULT 'F' ,    --찜한 영화
+ FOREIGN KEY(m_id)
+REFERENCES member(m_id),
+FOREIGN KEY(mo_number)
+REFERENCES movie(mo_number),
+CONSTRAINT CHOICE_PK PRIMARY KEY(m_id , mo_number )
+);
+----------------------------------------------------
+--좌석시간테이블--
+CREATE TABLE seatandtime(
+se_number    VARCHAR2(3) ,           --좌석번호
+se_time      VARCHAR2(10)   ,        --상영시간번호
+se_date      VARCHAR2(10),           --상영날짜
+mo_number    NUMBER(4)   ,           --영화번호
+se_identify  VARCHAR2(1) DEFAULT 'F',     --예약여부
+ FOREIGN KEY(mo_number) 
+REFERENCES Movie(mo_number),
+CONSTRAINT seatand_PK PRIMARY KEY(se_number  , se_time, mo_number,se_date )
+);
+----------------------------------------------------
+--예약테이블--
+CREATE TABLE reservation(
+re_number varchar2(20) unique,    --예약번호
+se_time  VARCHAR2(10),                --타임번호 
+se_number VARCHAR2(3),              --좌석번호
+se_date   VARCHAR2(10),             --상영날짜
+re_date varchar(20),                --애매날짜
+se_identify  VARCHAR2(1) DEFAULT 'F',     --예약여부
+pay_how VARCHAR2(25),               --결제방법 
+pay_totalprice VARCHAR2(7),         --티켓가격
+m_id    VARCHAR2(15),               --회원아이디
+mo_number NUMBER(4),                --영화번호
+FOREIGN KEY(se_number,se_time,mo_number,se_date)
+REFERENCES seatandtime(se_number,se_time,mo_number,se_date),
+FOREIGN KEY(m_id )
+REFERENCES member(m_id),
+CONSTRAINT RESERVATION_PK PRIMARY KEY(se_number  , se_time ,se_date,mo_number )
+);
+----------------------------------------------------
+----------------------------------------------------
+--배우--
+CREATE TABLE actor(
+mo_number  NUMBER(4),               --영화번호    
+ac_number  NUMBER(2),               --배우번호 
+ac_name     VARCHAR2(30),            --배우이름
+ac_birthday   VARCHAR2(10),            --배우생일
+ac_file        VARCHAR2(50),            --배우이미지
+FOREIGN KEY(mo_number )
+REFERENCES movie(mo_number),
+CONSTRAINT actor_PK PRIMARY KEY(mo_number  , ac_number )
+);
+----------------------------------------------------
+----------------------------------------------------
+--좋아요--
+  CREATE TABLE MOVIELIKE
+   (	M_ID VARCHAR2(15), 
+	MO_NUMBER NUMBER(4,0), 
+	 CONSTRAINT LIKE_PK PRIMARY KEY (M_ID, MO_NUMBER),
+	 CONSTRAINT MOVIELIKE_M_ID_FK FOREIGN KEY (M_ID)
+	  REFERENCES MEMBER (M_ID) ON DELETE CASCADE ENABLE, 
+	 CONSTRAINT MOVIELIKE_MO_NUMBER_FK FOREIGN KEY (MO_NUMBER)
+	  REFERENCES MOVIE (MO_NUMBER) ON DELETE CASCADE ENABLE
+   );
+   
+----------------------------------------------------
+--시퀀스 생성--
+CREATE SEQUENCE  "BBS_SEQ"  
+MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE;
+CREATE SEQUENCE  "MOVIE_SEQ"  
+MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE;
+CREATE SEQUENCE  "RESERVATION_SEQ"  
+MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE;
+CREATE SEQUENCE  "ACTOR_SEQ"  
+MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE;
+-----------------------------------------------------
+--회원정보 삽입--
+-----------------------------------------------------
+INSERT INTO "MEMBER" (M_ID, M_PASSWORD, M_NAME, M_PHONENUMBER, M_ADDRESS, M_EMAIL, M_POINT) VALUES ('admin', '1234', '관리자', '010-1111-2222', '천국', 'heaven@naver.com',500000);
+INSERT INTO "MEMBER" (M_ID, M_PASSWORD, M_NAME, M_PHONENUMBER, M_ADDRESS, M_EMAIL, M_POINT) VALUES ('dlsxosla12', 'Dlsxo1234!!', '조인태', '010-3355-8455', '서울 강남구 강남대로 238(도곡동)', 'whdls232@naver.com',5000);
+INSERT INTO "MEMBER" (M_ID, M_PASSWORD, M_NAME, M_PHONENUMBER, M_ADDRESS, M_EMAIL, M_POINT) VALUES ('thddlsla34', 'Thddl1234!!', '김송이', '010-3412-2456', '서울 강남구 개포로 202(개포동)', 'rlathd@naver.com',5000);
+INSERT INTO "MEMBER" (M_ID, M_PASSWORD, M_NAME, M_PHONENUMBER, M_ADDRESS, M_EMAIL, M_POINT) VALUES ('dbalsla32', 'Tlsdb1234!!', '신유미', '010-4232-2846', '서울 강남구 강남대로 242(도곡동)', 'tlsdb@naver.com',5000);
+INSERT INTO "MEMBER" (M_ID, M_PASSWORD, M_NAME, M_PHONENUMBER, M_ADDRESS, M_EMAIL, M_POINT) VALUES ('tnals55', 'Rlatn1234!!', '김수민', '010-6322-8456', '서울 강남구 논현로6(개포동)', 'rlatn@naver.com',5000);
+INSERT INTO "MEMBER" (M_ID, M_PASSWORD, M_NAME, M_PHONENUMBER, M_ADDRESS, M_EMAIL, M_POINT) VALUES ('gudgns45', 'Rlagud1234!!', '김형훈', '010-5332-5646', '서울 강남구 남부순환로 2609(도곡동)', 'rlagud@naver.com',5000);
+INSERT INTO "MEMBER" (M_ID, M_PASSWORD, M_NAME, M_PHONENUMBER, M_ADDRESS, M_EMAIL, M_POINT) VALUES ('tjddn25', 'Rlatjd1234!!', '김성우', '010-8726-8656', '경기 용인시 기흥구 갈곡로 2(구갈동)', 'rlatjd@naver.com',5000);
+INSERT INTO "MEMBER" (M_ID, M_PASSWORD, M_NAME, M_PHONENUMBER, M_ADDRESS, M_EMAIL, M_POINT) VALUES ('cksgh75', 'Dlcks1234!!', '이찬호', '010-4332-2454', '경기 용인시 기흥구 강남로 3(구갈동)', 'dlcks@naver.com',5000);
+-----------------------------------------------------
+--영화 정보 삽입--
+-----------------------------------------------------
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '임신한 나무와 도깨비', '김동령, 박경태', '김아해, 신승태', '오드 판타지', '15세이상관람가', '2', '22/01/27',0 ,'img/pregnantTree.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '미싱타는 여자들', '이혁래, 김정영', '이숙희, 신순애', '다큐멘터리', '전체관람가', '2', '22/01/20',0 ,'img/sewingSister.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '무녀도', '안재훈', ' 소냐, 김다현', '애니메이션', '12세이상관람가', '2', '21/11/24',0 ,'img/TheShamanSorceress.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '소설가 구보의 하루', '임현묵 ', '박종환, 김새벽', '드라마', '12세이상관람가', '2', '21/12/09',0 ,'img/vacation.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '총을 들지 않는 사람들: 금기에 도전', '김환태 ', '이용석, 최정민', '다큐멘터리', '12세이상관람가', '2', '21/12/09',0 ,'img/GunPeople.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '1984 최동원', '조은성 ', '최동원', '다큐멘터리', '12세이상관람가', '2', '21/11/11',0 ,'img/baseball.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '나는 조선사람입니다 ', '김철민 ', '강종헌, 김창오','다큐멘터리' ,'12세이상관람가', '2', '21/12/09',0 ,'img/chosun.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '축복의 집', '박희권', '산소요', '드라마, 가족', '12세이상관람가', '1', '22/02/24',0 ,'img/House of  blessings.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '매미소리', '이충렬', '이양희', '드라마, 가족', '15세이상관람가', '2', '22/02/24',0 ,'img/The sound of  cicadas.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '우리가 사랑이라 믿는 것', '윌리엄 니콜슨', '아네트 베닝', '로맨스', '12세이상관람가', '2', '22/02/24',0 ,'img/What We blieve is love.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '미인', '홍태선', '이근이, 남호현', '다큐멘터리', '전체관람가', '1', '22/02/24',0 ,'img/Beauty.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '세라비 다섯번의 기적', '줄리앙 람발디', '레아 드루케', '코미디, 로맨스', '15세이상관람가', '2', '22/02/23',0 ,'img/Serabi.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '나이트메어 앨리', '기예르모 델 토르', '브래들리 쿠퍼', '범죄, 스릴러', '15세이상관람가', '2', '22/02/23',0 ,'img/Nightmare Ally.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '보드랍게', '박문칠', '김순악', '다큐멘터리', '전체관람가', '1', '22/02/23',0 ,'img/Softly.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '피그', '마이클 사노스키', '니콜라스 케이지', '스릴러', '12세이상관람가', '1', '22/02/23',0 ,'img/Pig.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '시라노', '조 라이트', '피터 딘클리지', '뮤지컬, 로맨스', '12세이상관람가', '2', '22/02/23',0 ,'img/Cyrano.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '역으로 가는 길을 알려줘', '하시모토 나오키', '오이다 요시', '드라마', '전체관람가', '2', '22/02/17',0 ,'img/Tell me the way.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '전투왕', '이상호', '이한열', '다큐멘터리', '12세이상관람가', '1', '22/22/17',0 ,'img/Battle king.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '대한민국 대통령', '배상국', '이재명, 윤석열, 안철수, 심상정', '다큐멘터리', '전체관람가', '1', '22/02/17',0 ,'img/The president of Korea.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '시크릿 카운터', '신지 아라키', '나카무라 토모야', '기타', '15세이상관람가', '2', '22/02/17',0 ,'img/Secret counter.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '리코리쉬 피자', '폴 토마스 앤더슨', '알라나 하임', '로맨스', '15세이상관람가', '2', '22/02/16',0 ,'img/Ricorish pizza.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '나의 촛불', '김의성', '박영수, 손석희', '다큐멘터리', '전체관람가', '1', '22/02/10',0 ,'img/My candle.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '온 세상이 하얗다', '김지석', '강길우, 박가영', '로맨스', '15세이상관람가', '2', '22/02/10',0 ,'img/The world is white.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '늦봄', '박규현', '문익환', '다큐멘터리', '전체관람가', '1', '22/02/10',0 ,'img/Late spring.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '굿보스', '페르난도 레온 데 아라노아', '하비에르 바르뎀', '코미디', '15세이상관람가', '2', '22/02/10',0 ,'img/Good boss.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '더 마더', '후안마 바호 우료아', '로지 데이', '스릴러', '15세이상관람가', '2', '22/02/10',0 ,'img/The Mother.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '만년이 지나도 변하지 않는게 있어', '구파도', '가진동, 송운화', '액션, 코미디, 판타지', '12세이상관람가', '2', '22/02/09',0 ,'img/Even after 10,000 year.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '가슴이 떨리는건 너 때문', '타카하시 히로토', '우키쇼 히다카', '로맨스', '12세이상관람가', '2', '22/02/09',0 ,'img/My heart is shaking.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '인어가 잠든 집', '츠츠미 유키히코', '시노하라 료코', '드라마', '12세이상관람가', '2', '22/01/28',0 ,'img/Mermaid.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '국민여러분', '김진흥', '김대중, 유시민', '다큐멘터리', '12세이상관람가', '1', '22/01/27',0 ,'img/Everyone.jpg' );
+INSERT INTO "MOVIE" (MO_NUMBER, MO_TITLE, MO_DIRECTOR, MO_ACTOR, MO_GENRE, MO_AGE, MO_PLAYTIME, MO_OPENDATE, MO_RECOMMENDATION, MO_FILENAME) VALUES (MOVIE_SEQ.NextVAL, '원 세컨드', '장예모', '범위, 장역', '드라마', '12세이상관람가', '2', '22/01/27',0 ,'img/One second.jpg' );
+-----------------------------------------------------
+--게시판 정보 삽입--
+-----------------------------------------------------
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '1', '모든 요일 천원 관람 종료 예정 안내', '지원 사업이 2월 중에 곧 종료됩니다. 이후에는 기존 요금체계로 전환되니 이용에 참조 바랍니다.', '2022/02/23', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '1', '[픽업시네마 2월 상영] <나의 위대한 친구, 세잔> with 서완호 서양화가 상영 및 씨네토크 안내', '본 행사는 방역정책 및 거리두기 조치에 따라 온라인 전환 또는 취소될 수 있습니다.', '2022/02/22', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '1', '[아트톡 3월 상영] <원 세컨드> with 조재휘 영화평론가 해설', '<원 세컨드> 전문가 심층해설', '2022/02/21', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '1', '[후원회원 시사회 2월 상영] <늦봄2020>', 'HomeTheater에서는 매월 개봉영화 가운데 1편을 선정하여 개봉 전 후원회원 시사회를 진행합니다. 2022년 2월 선정 작품은 박규현 감독의 <늦봄2020>입니다.', '2022/01/20', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '1', '<티탄> with 황미요조 영화평론가/서울국제여성영화제 프로그래머 해설', '<티탄> with 황미요조 영화평론가/서울국제여성영화제 프로그래머 해설', '2022/02/21', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '1', '<미싱타는 여자들> 감독초청 GV 안내', '<미싱타는 여자들> 감독초청 GV 안내', '2022/02/18', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '1', 'HomeTheater 방역패스 적용 해제 안내', 'HomeTheater 방역패스 적용 해제 안내', '2022/02/17', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '1', '[전주 쇼케이스 1월 상영] <말아>', '[전주 쇼케이스 1월 상영] <말아>', '2022/01/18', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '1', '[후원회원 시사회 1월 상영] <프랑스>', '[후원회원 시사회 1월 상영] <프랑스>', '2022/01/15', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '1', 'HomeTheater 긴급 휴관 안내', 'HomeTheater 긴급 휴관 안내', '2022/01/11', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '1', '<다시 태어나도 우리> with 장영준 비보이 상영 및 씨네토크 안내', '<다시 태어나도 우리> with 장영준 비보이 상영 및 씨네토크 안내', '2022/01/10', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '1', '[전주 쇼케이스 12월 상영] <창밖은 겨울>', '[전주 쇼케이스 12월 상영] <창밖은 겨울>', '2021/12/25', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '1', '[후원회원 시사회 12월 상영] <로그북>', '[후원회원 시사회 12월 상영] <로그북>', '2021/12/21', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '1', '<퍼스트 카우> with 정지연 영화평론가 해설', '<퍼스트 카우> with 정지연 영화평론가 해설', '2021/12/15', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '1', 'SAVE OUR CINEMA 캠페인 온라인 콘서트 안내', 'SAVE OUR CINEMA 캠페인 온라인 콘서트 안내', '2021/12/10', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '2', '관람 및 티켓 발권에 대한 규정입니다.', '관람 및 티켓 발권에 대한 규정입니다.', '2022/02/23', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '2', '입장료는 어떻게 되나요?', '입장료는 어떻게 되나요?', '2022/02/21', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '2', '할인받을 수 있는 제휴 신용통신카드가 있나요?', '할인받을 수 있는 제휴 신용통신카드가 있나요?', '2022/02/19', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '2', '홈페이지 회원도 할인 혜택을 받을수 있나요?', '홈페이지 회원도 할인 혜택을 받을수 있나요?', '2022/02/13', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '2', '좌석 배치가 어떻게 되어 있나요?', '좌석 배치가 어떻게 되어 있나요?', '2022/02/05', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '2', '단체관람은 어떻게 신청 해야 하나요?', '단체관람은 어떻게 신청 해야 하나요?', '2022/01/23', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '2', '대관신청은 어떻게 하나요?', '대관신청은 어떻게 하나요?', '2022/01/15', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '2', '주차장 이용은 가능한가요?', '주차장 이용은 가능한가요?', '2022/01/10', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '2', '포인트 사용은 어떻게 하나요?', '포인트 사용은 어떻게하나요?', '2022/01/05', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '2', '회원가입은 어떻게 하나요?', '회원가입은 어떻게하나요?', '2021/12/23', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '2', '영화예매는 어떻게 하나요?', '영화예매는 어떻게 하나요?', '2021/12/20', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '2', '아이디를 잃어버렸어요. 어떡하죠?', '아이디를 잃어버렸어요', '2021/12/10', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '2', '비밀번호를 까먹었어요. 어떡하죠?', '비밀번호를 까먹었어요', '2021/11/23', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '2', '잘못 예매를 했습니다. 어떡하죠?', '잘못 예매를 했습니다. 어떡하죠?', '2021/11/18', 'admin');
+INSERT INTO "BBS" (BBS_NO, BBS_CATEGORY, BBS_TITLE, BBS_CONTENT, BBS_DATE, M_ID) VALUES (BBS_SEQ.NextVAL, '2', '관심영화 등록을 어떻게 하나요?', '관심영화 등록을 어떻게 하나요?', '2021/11/11', 'admin');
+-----------------------------------------------------
+--좌석시간 정보 삽입--
+-----------------------------------------------------
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('A1', '06~08','1', '1', 'T');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('A2', '06~08','1', '1', 'T');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('A3', '06~08','1', '1', 'T');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('A4', '06~08','1', '1', 'T');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('A5', '06~08','1', '1', 'T');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('A6', '06~08','1', '1', 'T');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('B1', '06~08','1', '1', 'T');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('B2', '06~08','1', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('B3', '06~08','1', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('B4', '06~08','1', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('B5', '06~08','1', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('B6', '06~08','1', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('C1', '06~08','1', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('C2', '06~08','1', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('C3', '06~08','1', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('C4', '06~08','1', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('C5', '06~08','1', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('C6', '06~08','1', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('D1', '06~08','1', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('D2', '06~08','1', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('D3', '06~08','1', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('D4', '06~08','1', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('D5', '06~08','1', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('D6', '06~08','1', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('E1', '06~08','1', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('E2', '06~08','1', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('E3', '06~08','1', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('E4', '06~08','1', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('E5', '06~08','1', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('E6', '06~08','1', '1', 'F');
+
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('A1', '08~10','1', '1', 'T');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('A2', '10~12','1', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('A3', '12~14','1', '1', 'F');
+
+
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('A1', '06~08','2', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('A2', '06~08','2', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('A3', '06~08','2', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('A4', '06~08','2', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('A5', '06~08','2', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('A6', '06~08','2', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('B1', '06~08','2', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('B2', '06~08','2', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('B3', '06~08','2', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('B4', '06~08','2', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('B5', '06~08','2', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('B6', '06~08','2', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('C1', '06~08','2', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('C2', '06~08','2', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('C3', '06~08','2', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('C4', '06~08','2', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('C5', '06~08','2', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('C6', '06~08','2', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('D1', '06~08','2', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('D2', '06~08','2', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('D3', '06~08','2', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('D4', '06~08','2', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('D5', '06~08','2', '1', 'F');
+INSERT INTO "SEATANDTIME" (SE_NUMBER, se_time,se_date, MO_NUMBER, SE_IDENTIFY) VALUES ('D6', '06~08','2', '1', 'F');
+-----------------------------------------------------
+--예약 정보 삽입--
+-----------------------------------------------------
+INSERT INTO "RESERVATION" (re_number, SE_TIME, SE_NUMBER, SE_DATE, RE_DATE, SE_IDENTIFY, PAY_HOW, PAY_TOTALPRICE, M_ID, MO_NUMBER) VALUES ('01eb4a20-cf44', '06~08', 'A1', '1', Sysdate, 'T', '신용카드', '15000', 'dlsxosla12', '1');
+INSERT INTO "RESERVATION" (re_number, SE_TIME, SE_NUMBER, SE_DATE, RE_DATE, SE_IDENTIFY, PAY_HOW, PAY_TOTALPRICE, M_ID, MO_NUMBER) VALUES ('02eb4a21-cf31', '06~08', 'A2', '1', Sysdate, 'T', '신용카드', '15000', 'thddlsla34', '1');
+INSERT INTO "RESERVATION" (re_number, SE_TIME, SE_NUMBER, SE_DATE, RE_DATE, SE_IDENTIFY, PAY_HOW, PAY_TOTALPRICE, M_ID, MO_NUMBER) VALUES ('03eb4a22-cf21', '06~08', 'A3', '1', Sysdate, 'T', '신용카드', '15000', 'dbalsla32', '1');
+INSERT INTO "RESERVATION" (re_number, SE_TIME, SE_NUMBER, SE_DATE, RE_DATE, SE_IDENTIFY, PAY_HOW, PAY_TOTALPRICE, M_ID, MO_NUMBER) VALUES ('04eb4a23-cf32', '06~08', 'A4', '1', Sysdate, 'T', '신용카드', '15000', 'tnals55', '1');
+INSERT INTO "RESERVATION" (re_number, SE_TIME, SE_NUMBER, SE_DATE, RE_DATE, SE_IDENTIFY, PAY_HOW, PAY_TOTALPRICE, M_ID, MO_NUMBER) VALUES ('05eb4a24-cf34', '06~08', 'A5', '1', Sysdate, 'T', '신용카드', '15000', 'gudgns45', '1');
+INSERT INTO "RESERVATION" (re_number, SE_TIME, SE_NUMBER, SE_DATE, RE_DATE, SE_IDENTIFY, PAY_HOW, PAY_TOTALPRICE, M_ID, MO_NUMBER) VALUES ('06eb4a25-cf65', '06~08', 'A6', '1', Sysdate, 'T', '신용카드', '15000', 'tjddn25', '1');
+INSERT INTO "RESERVATION" (re_number, SE_TIME, SE_NUMBER, SE_DATE, RE_DATE, SE_IDENTIFY, PAY_HOW, PAY_TOTALPRICE, M_ID, MO_NUMBER) VALUES ('07eb4a26-cf63', '06~08', 'B1', '1', Sysdate, 'T', '신용카드', '15000', 'cksgh75', '1');
+-----------------------------------------------------
+--영화배우 정보 삽입--
+-----------------------------------------------------
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('1', ACTOR_SEQ.NextVAL, '김아해', '1991/01/04', 'img/actor/Kim Ahae.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('1', ACTOR_SEQ.NextVAL, '신승태', '1986/11/05', 'img/actor/Shin Seungtae.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('2', ACTOR_SEQ.NextVAL, '이숙희', '1970/03/05', 'img/actor/Lee Sookhee.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('2', ACTOR_SEQ.NextVAL, '신순애', '1971/06/15', 'img/actor/Shin Soonae.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('3', ACTOR_SEQ.NextVAL, '소냐', '1980/11/19', 'img/actor/Sonia.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('3', ACTOR_SEQ.NextVAL, '김다현', '1980/01/01', 'img/actor/DAHYUN.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('4', ACTOR_SEQ.NextVAL, '박종환', '1986/10/05', 'img/actor/Park Jong Hwan.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('4', ACTOR_SEQ.NextVAL, '김새벽', '1988/12/15', 'img/actor/Kim Saebyeok.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('5', ACTOR_SEQ.NextVAL, '이용석', '1985/12/05', 'img/actor/Lee Yongseok.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('5', ACTOR_SEQ.NextVAL, '최정민', '1986/11/25', 'img/actor/Choi Jeongmin.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('6', ACTOR_SEQ.NextVAL, '최동원', '1976/05/25', 'img/actor/Choi Dongwon.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('7', ACTOR_SEQ.NextVAL, '강종헌', '1970/08/05', 'img/actor/Kang Jongheon.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('7', ACTOR_SEQ.NextVAL, '김창오', '1972/06/24', 'img/actor/Kim Changoh.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('8', ACTOR_SEQ.NextVAL, '안소요', '1990/05/12', 'img/actor/Anso.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('9', ACTOR_SEQ.NextVAL, '이양희', '1986/06/15', 'img/actor/Lee Yanghee.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('10', ACTOR_SEQ.NextVAL, '아네트 베닝', '1958/05/29', 'img/actor/Annette Benning.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('11', ACTOR_SEQ.NextVAL, '이근이', '1983/11/05', 'img/actor/Lee Geun.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('11', ACTOR_SEQ.NextVAL, '남호현', '1982/08/01', 'img/actor/Nam Hohyun.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('12', ACTOR_SEQ.NextVAL, '레아 드루케', '1972/01/23', 'img/actor/LEA Druke.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('13', ACTOR_SEQ.NextVAL, '브래들리 쿠퍼', '1975/01/05', 'img/actor/Bradley Cooper.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('14', ACTOR_SEQ.NextVAL, '김순악', '1968/07/21', 'img/actor/Kim Soonak.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('15', ACTOR_SEQ.NextVAL, '니콜라스 케이지', '1964/01/07', 'img/actor/Nicholas Cage.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('16', ACTOR_SEQ.NextVAL, '피터 딘클리지', '1969/06/11', 'img/actor/Peter Dean Cleary.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('17', ACTOR_SEQ.NextVAL, '오이다 요시', '1933/07/26', 'img/actor/YOSHI.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('18', ACTOR_SEQ.NextVAL, '이한열', '1970/11/05', 'img/actor/LEE HAN YEOL.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('19', ACTOR_SEQ.NextVAL, '이재명', '1964/12/22', 'img/actor/Lee Jaemyeong.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('19', ACTOR_SEQ.NextVAL, '윤석열', '1960/12/18', 'img/actor/Yoon Seok Yeol.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('19', ACTOR_SEQ.NextVAL, '안철수', '1962/01/22', 'img/actor/Ahn Cheol Soo.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('19', ACTOR_SEQ.NextVAL, '심상정', '1959/02/20', 'img/actor/Sim Sang Jung.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('20', ACTOR_SEQ.NextVAL, '나카무라 토모야', '1986/12/24', 'img/actor/Nakamura Tomo.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('21', ACTOR_SEQ.NextVAL, '알라나 하임', '1991/12/15', 'img/actor/Alana Heim.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('22', ACTOR_SEQ.NextVAL, '박영수', '1952/02/15', 'img/actor/Park Youngsoo.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('22', ACTOR_SEQ.NextVAL, '손석희', '1956/06/20', 'img/actor/Son Seokhee.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('23', ACTOR_SEQ.NextVAL, '강길우', '1988/12/15', 'img/actor/Kang Gilwoo.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('23', ACTOR_SEQ.NextVAL, '박가영', '1987/12/25', 'img/actor/Park Ga Young.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('24', ACTOR_SEQ.NextVAL, '문익환', '1918/06/01', 'img/actor/Moon Ikhwan.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('25', ACTOR_SEQ.NextVAL, '하비에르 바르뎀', '1969/03/01', 'img/actor/Javier Bardem.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('26', ACTOR_SEQ.NextVAL, '로지 데이', '1995/03/06', 'img/actor/Rosy Day.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('27', ACTOR_SEQ.NextVAL, '가진동', '1991/06/18', 'img/actor/Gajin-dong.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('27', ACTOR_SEQ.NextVAL, '송운화', '1992/10/21', 'img/actor/Song Woonhwa.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('28', ACTOR_SEQ.NextVAL, '우키쇼 히다카', '2002/02/27', 'img/actor/Uki Show Hidaka.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('29', ACTOR_SEQ.NextVAL, '시노하라 료코', '1976/08/13', 'img/actor/Shinohara Ryoko.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('30', ACTOR_SEQ.NextVAL, '김대중', '1924/01/06', 'img/actor/Kim Dae Jung.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('30', ACTOR_SEQ.NextVAL, '유시민', '1959/07/28', 'img/actor/Yoo Si-min.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('31', ACTOR_SEQ.NextVAL, '범위', '1978/02/17', 'img/actor/Range.png');
+INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES ('31', ACTOR_SEQ.NextVAL, '장역', '1962/09/02', 'img/actor/jang Station.png');
+
+
+
+COMMIT;
+ 
+ --ver1.6 좌석정보 추가(한타임 좌석 30개)\
+ --ver1.7 결제(payment 테이블 resesrvation table과 병합 포인트 사용 여부 칼럼 삭제, 결제 포인트 member 테이블로 이동  ) 
+ --ver1.8 reservation 테이블 기본키 변경 예약번호는 유니크로 제약.
+ --ver1.9 맴버 테이블 주소 50 ->200으로 변경
+ --ver2.0 회원정보, 영화정보, 게시판정보 삽입 수정
+ --ver2.1 게시판정보 Qna로 수정
+ --ver2.2 회원 포인트 디폴트값 5000으로 수정, 회원 예약 정보 값 삽입, actor테이블 수정 & 값 삽입
