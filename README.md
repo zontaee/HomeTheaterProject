@@ -1,90 +1,90 @@
-# HomeTheater
-2022-01-26(프로젝트 기본설정 완료)
+# HomeTheater (제작기간 2022/01/26 ~ 2022/02/28)
+- - -
 
-![erd1](https://user-images.githubusercontent.com/90680271/151178002-6aba8091-32a8-4b04-a4fe-85e868c3d061.png)
-이번 프로젝트 erd 테이블 설계 이번 erd를 설계하면서 테이블 연관관계와 기본키, 복합키 , 외래키에대해 좀더 자세히 알게되었다.
++ 디지털 빅데이터 융합 JAVA응용 SW개발자 전문과정에서 진행한 팀 프로젝트로 영화 예매 사이트입니다.
++ Spring 개발툴을 이용했고 MVC2 패턴 방식으로 진행하였습니다.
+# 프로젝트 일정
+- - -
++ 1/26 ~ 1/31 : 아키텍처 설계 ,DB 작성(DDL/DML)
++ 2/11 ~ 2/12 : 1차 취합
++ 2/12 ~ 2/18 : 최종 기능 완료
++ 2/21 ~ 2/27 : 2차 취합, 오류 수정
 
+# 사용 skill
+- - -
++ Oracle DataBase
++ Spring boot
++ jQuery
++ Jsp & Servlet JDBC
++ Maven
++ Apache
++ Ajax
++ MyBatis
++ Lombok
++ JavaScript
++ Css
++ Html
 
-2022-01-27(예약페이지구현)
+# 사용 IDE
+- - -
+intellij, eclipse
 
-![01_27](https://user-images.githubusercontent.com/90680271/151337329-77e6d0f5-6d26-4043-a887-fd0ee31d298b.JPG)
-디자인은 모든기능을 완성하고 다듬을 예정이다.
-seatAndTime table에 se_date칼럼을 추가했다.
-날짜에 따른 그 영화(mo_number)에 시간을 다중 셀렉트로 구현하고 싶었다.
-ajax를 통해 시도해 보았으나 영화 번호(mo_number) 날짜(se_date) 두 가지 정보가 다 필요해서 컨트롤로 객체를 반환하고 싶은데 아직 방법을 모르겠다.
-좀 더 공부해 보고 es6로는 가능한지 자바스크립트를 세밀하게 공부해 봐야겠다.
+# 개발 부분
 
+- - -
 
+1.회원 (CRUD, 로그인, 로그아웃, 아이디 & 비밀번호 찾기, 마이페이지)
 
-2022-01-28(좌석페이지구현)
+2.관리자 (관리자페이지, 관리자 예약 관리, 관리자 회원 관리)
 
-![좌석페이지](https://user-images.githubusercontent.com/90680271/151520566-2c30f1b3-0ce2-4a29-957c-1816791586b2.JPG)
-좌석페이지에서 결제 컨트롤까지 연결했다.
-만들면서
-seatandtime table의 갯수가 비정상적으로 많다는 생각이들었다
-예를들어 한영화가 30개의 좌석에 5일동안 하루에 8번씩 상영한다고 가정하면 테이블이 1200개나 필요하다. 너무 많은 느낌이다.
-좌석을 보여주는 화면구성을 할때 자바스크립트로 만들고 싶었다. 하지만 seatAndTime 테이블에서 좌석 정보와 시간을 끌어와서 써야하는데
-자바스크립트는 클라이언트단이고 Jsp는 서버단이여서 어떻게 연결해야 할지 몰라서 일단 이렇게 만들었다. (ajax같은 기능을 쓰면될거같은데)
-전체적으로 코드가 많이 더러운거같다 모든 기능을 구현하고 다듬어야겠고 다른기능을 추가 할 수 있는지 고민해봐야겠다.
+3.검색 (Main페이지 통합검색, 게시판 검색)
 
+4.배우 정보
 
-2022-01-29(좌석페이지구현)
+5.인터셉터 (관리자 페이지는 관리자만 접속할 수 있도록 인터셉터 사용)
+# ERD
+- - -
+![image](https://user-images.githubusercontent.com/90680271/164666443-e7c75248-b1bf-4cf6-bc6e-465de45f04a8.png)
 
-![좌석12](https://user-images.githubusercontent.com/90680271/152371540-c70553fe-fca4-45fb-8557-23607129b80b.JPG)
+# 프로세스 흐름
 
-좌석 초기화 ,페이지 로드될때 이미 예약된 좌석 검은색으로 표현, 좌선 선택 안하고 결제하기 누르면 alert발생 기능 구현
+- - -
+![image](https://user-images.githubusercontent.com/90680271/164667073-141a3826-e9d3-44a1-90b7-8b1843d34368.png)
 
+# 화면 구성
 
+- - -
+**메인 페이지**
 
-2022-02-03(결제페이지 화면구현)
+![image](https://user-images.githubusercontent.com/90680271/164669306-093760f1-b1c8-443a-81c8-cd8fe047e05d.png)
 
+**영화 페이지**
 
-![좌석](https://user-images.githubusercontent.com/90680271/152370996-f4e47878-51e9-4d05-a7d1-08a264ad931d.JPG)
+![image](https://user-images.githubusercontent.com/90680271/164670376-bcbf1279-2035-42aa-b5fd-975717b98530.png)
 
+**예매 하기**
 
-만약 동시에 많은 사람들이 한번에 같은 영화 시간 좌석을 클릭하게 되면 사진처럼  시간 좌석 이 중복되는 테이블이 생긴다. 제약조건을 따로 걸어서 제약조건에 위배되는 데이터가
-삽입될때 따로 예외페이지를 만들어서 처리하는 서비스를 구현예정이다.
+![image](https://user-images.githubusercontent.com/90680271/164673636-20783b09-7509-4f11-9d77-e9b32ab83642.png)
 
+**좌석 선택**
+ 
+![image](https://user-images.githubusercontent.com/90680271/164673717-45808e6e-8c1b-4969-b57b-6b8a71cb0021.png)
 
+**결제 하기**
 
-2022-02-04(결제페이지 기능구현)
+![image](https://user-images.githubusercontent.com/90680271/164673771-70cf9639-418d-436b-b8f1-04a4ccf8fc5d.png)
 
+![image](https://user-images.githubusercontent.com/90680271/164673854-4d87dbad-0e14-4f04-929f-e3dddf84deaa.png)
 
+![image](https://user-images.githubusercontent.com/90680271/164673891-b97f18de-a296-4280-9069-fbd1123351bf.png)
 
-![결제페이지](https://user-images.githubusercontent.com/90680271/152476658-32068aac-72c5-4b92-ad51-801ac22eb789.JPG)
+**결제 완료**
 
-
-
-쿠폰 사용과 포인트를 사용하면 동적으로 결제할 금액과 할인금액이 적용 되도록 기능을 구현하였다.
-
-
-2022-02-05(예외페이지 처리)
-
-
-사용자가 동시에 같은 좌석을 클릭하고 결제하기를 누르게되면 중복되는 좌석이 db에 삽입되는 결과가 나와 
-
-제약조건을 따로 걸어두고 제약조건에 걸리면 예외페이지를 발생시켜 중복 삽입되는 결과를 예방하였다 
-
-
-2022-02-07(예매완료 페이지구현)
-
-
-예매완료 페이지까지 데이터전송 완료 
-
-
-구현해야할 서비스 예매취소, 예매도중 다른화면으로 넘어갈시 좌석정보 롤백 , 결제페이지 자바스크립트 수정
-
-
-2022-02-07(payment.js 수정)
-
-
-
-구현해야할 서비스 예매취소, 예매도중 다른화면으로 넘어갈시 좌석정보 롤백 예매취소-> fetch로 구현예정
-
-
-2022-02-08(예매취소 기능 구현)
+![image](https://user-images.githubusercontent.com/90680271/164673966-04baa150-2f69-42a5-8b14-019f60beaa6a.png)
 
 
-fetch API로 구현해봤다. 구현하면서 fetch API 반환값은 promise 객체형태로 오며 promise 객체를 풀기위해 then을 사용하였다.
+
+
+
 
 
