@@ -2,7 +2,51 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="SeatandTime">
+<mapper namespace="IT_Dao">
+
+    <resultMap type="Movie" id="Movie">
+        <result column="mo_number" property="mo_number"/>
+        <result column="mo_title" property="mo_title"/>
+        <result column="mo_director" property="mo_director"/>
+        <result column="mo_actor" property="mo_actor"/>
+        <result column="mo_genre" property="mo_genre"/>
+        <result column="mo_age" property="mo_age"/>
+        <result column="mo_playTime" property="mo_playTime"/>
+        <result column="mo_openDate" property="mo_openDate"/>
+        <result column="mo_recommendation" property="mo_recommendation"/>
+        <result column="mo_fileName" property="mo_fileName"/>
+        <collection property="seatandTime" resultMap="SeatandTime"/>
+    </resultMap>
+
+    <resultMap type="SeatandTime" id="SeatandTime">
+        <result column="se_number" property="se_number"/>
+        <result column="se_time" property="se_time"/>
+        <result column="se_date" property="se_date"/>
+        <result column="mo_number" property="mo_number"/>
+        <result column="se_identify" property="se_identify"/>
+
+    </resultMap>
+    <select id="IT_FindMovieInfoDate" parameterType="int" resultMap="Movie">
+        SELECT m.mo_number,
+               m.mo_title,
+               m.mo_director,
+               m.mo_actor,
+               m.mo_genre,
+               m.mo_age,
+               m.mo_playTime,
+               m.mo_openDate,
+               m.mo_recommendation,
+               m.mo_fileName,
+               s.se_number,
+               s.se_time,
+               s.se_date,
+               s.se_identify
+        FROM movie m
+                 Left JOIN
+             seatandTime s
+             ON m.mo_number = s.mo_number
+        where m.mo_number = #{mo_number}
+    </select>
 
     <select id="It_SeatSelFindDate" parameterType="int" resultType="SeatandTime">
 
@@ -52,7 +96,6 @@
 
 
     </select>
-
 
 
 </mapper>

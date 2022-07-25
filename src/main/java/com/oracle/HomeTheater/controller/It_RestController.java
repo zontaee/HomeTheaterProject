@@ -1,20 +1,18 @@
 package com.oracle.HomeTheater.controller;
 
 
-import com.oracle.HomeTheater.model.Member;
+import com.oracle.HomeTheater.dao.IT_Dao;
 import com.oracle.HomeTheater.model.Movie;
 import com.oracle.HomeTheater.model.SeatandTime;
 import com.oracle.HomeTheater.service.IT_Service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,6 +23,7 @@ import java.util.UUID;
 public class It_RestController {
 
     private final IT_Service ITService;
+    private final IT_Dao it_dao;
 
     @PostMapping("Cancel")
     public String finalReservation(SeatandTime seatandTime) {
@@ -87,15 +86,12 @@ public class It_RestController {
         //맴버 포인트 업데이트
         log.info("memberPointUpdate(controller) start");
         int resultUpdatePoint = ITService.memberPointUpdate(seatandTime);
-        /*//맴버 정보가져오기
-        Member memberInfo = ITService.memberInfo(seatandTime.getM_id());
-        log.info("memberInfo -> " + memberInfo);
-        //영화정보가져오기
-        Movie movieInfo = ITService.findMovie(seatandTime.getMo_number());
-        log.info("movieInfo ->" + movieInfo);
-        model.addAttribute("seatandTime", seatandTime);
-        model.addAttribute("memberInfo", memberInfo);
-        model.addAttribute("movieInfo", movieInfo);*/
         return re_number;
     }
+    @GetMapping("identify")
+    public List<Movie> asd(int monumber) {
+        List<Movie> movieInfoDate = it_dao.findMovieInfoDate(monumber);
+        return movieInfoDate;
+    }
+
 }

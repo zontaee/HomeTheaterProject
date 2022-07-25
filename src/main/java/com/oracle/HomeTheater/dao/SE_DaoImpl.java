@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import com.oracle.HomeTheater.model.ChoiceMovie;
 import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Movie;
-import com.oracle.HomeTheater.model.MovieLike;
 
 @Repository
 public class SE_DaoImpl implements SE_Dao {

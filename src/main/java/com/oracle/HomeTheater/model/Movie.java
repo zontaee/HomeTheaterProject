@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Getter
 @Setter
 @ToString
@@ -18,6 +20,7 @@ public class Movie {
     private String mo_openDate;
     private int mo_recommendation;
     private String mo_fileName;
+    private List<SeatandTime> seatandTime;
 
 
 }

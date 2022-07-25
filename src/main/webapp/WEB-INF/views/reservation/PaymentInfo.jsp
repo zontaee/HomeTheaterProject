@@ -184,8 +184,6 @@
 
             <input type="button" class="btn btn-outline-secondary" value="결제하기"
                    onclick="iamport('${memberInfo.m_id}','${memberInfo.m_address}','${memberInfo.m_email}','${memberInfo.m_phonenumber}')">
-            <input type="button" class="btn btn-outline-secondary" value="테스트"
-                   onclick="test()">
         </div>
 
         <%@ include file="../footer.jsp" %>

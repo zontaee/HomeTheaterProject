@@ -155,5 +155,19 @@ public class IT_DaoImpl implements IT_Dao {
         return reservation;
     }
 
+    @Override
+    public List<Movie> findMovieInfoDate(int mo_number) {
+        log.info("findMovieInfoDate(Dao)start");
+        List<Movie> findMovieInfoDate = null;
+        try {
+            findMovieInfoDate =session.selectList("IT_FindMovieInfoDate",mo_number );
+        } catch (Exception e) {
+            log.info("serchTime(Dao) Exception -> " + e.getMessage());
+        }
+
+
+        return findMovieInfoDate;
+    }
+
 
 }

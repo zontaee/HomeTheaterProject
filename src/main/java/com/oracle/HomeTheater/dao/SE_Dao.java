@@ -6,7 +6,6 @@ import java.util.Map;
 import com.oracle.HomeTheater.model.ChoiceMovie;
 import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Movie;
-import com.oracle.HomeTheater.model.MovieLike;
 
 public interface SE_Dao {
 

@@ -32,4 +32,6 @@ public interface IT_Service {
     List<SeatandTime> serchTime(SeatandTime seatandTime);
 
     Reservation reservationInfo(String re_number);
+
+    List<Movie> findMovieInfoDate(int mo_number);
 }

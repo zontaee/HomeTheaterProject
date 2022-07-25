@@ -31,4 +31,6 @@ public interface IT_Dao {
     List<SeatandTime> serchTime(SeatandTime seatandTime);
 
     Reservation reservationInfo(String re_number);
+
+    List<Movie> findMovieInfoDate(int mo_number);
 }

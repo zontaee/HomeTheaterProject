@@ -70,22 +70,19 @@
 
         <form action="reservationtimedata"  class="magin" method="post" onsubmit="return check();">
             <input type="hidden" name="mo_number" value="${findMovie.mo_number}">
-            <input type="hidden" name="mo_fileName" value="${findMovie.mo_fileName }">
-            <input type="hidden" name="mo_title" value="${findMovie.mo_title }">
+        <%--    <input type="hidden" name="mo_fileName" value="${findMovie.mo_fileName }">
+            <input type="hidden" name="mo_title" value="${findMovie.mo_title }">--%>
             <div>
                 <select name="se_date" id="se_date"
                         onchange="changetime(this.value,${findMovie.mo_number})">
                     <option value="">날짜선택</option>
                     <c:forEach var="list" items="${findDate}">
-                        <option value="${list.se_date}">${list.se_date }일</option>
+                        <option value="${list.se_date}">${list.se_date }</option>
                     </c:forEach>
                 </select>
                 <select name="se_time" id="se_time" >
                     <a>상영시간</a>
                     <option value="">시간선택</option>
-                    <%--  <c:forEach var="list" items="${findTime}">
-                          <option value="${list.se_time}">${list.se_time}</option>
-                      </c:forEach>--%>
                 </select>
                 <br>
                 <input type="submit" value="좌석선택" class="btn btn-outline-primary" >

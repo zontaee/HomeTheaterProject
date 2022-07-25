@@ -1,5 +1,4 @@
 const addSelect = document.getElementById("se_time");
-//const newp = document.createElement("p");
 
 //날짜에 따른 동적 시간변화 함수(Fetch API사용)
 async function changetime(se_date, mo_number) {
@@ -31,7 +30,6 @@ async function changetime(se_date, mo_number) {
     //날짜에 따른 시간 추가 로직
     for (let i = 0; i < seatandTime.length; i++) {
 
-        /*  newp.innerText ="<option value='" + seatandTime[i].se_time + "'>'" + seatandTime[i].se_time + "'</option>"*/
         let option = document.createElement("option");
         option.value = seatandTime[i].se_time;
         option.innerText = seatandTime[i].se_time;

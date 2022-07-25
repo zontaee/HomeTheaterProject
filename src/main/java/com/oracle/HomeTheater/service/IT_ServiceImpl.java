@@ -5,13 +5,10 @@ import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Movie;
 import com.oracle.HomeTheater.model.Reservation;
 import com.oracle.HomeTheater.model.SeatandTime;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Id;
 import java.util.List;
 
 @Slf4j
@@ -100,6 +97,13 @@ public class IT_ServiceImpl implements IT_Service {
         Reservation reservation = ITDao.reservationInfo(re_number);
 
         return reservation;
+    }
+
+    @Override
+    public List<Movie> findMovieInfoDate(int mo_number) {
+        log.info("reservationInfo(service) start");
+        List<Movie> findMovieInfoDate = ITDao.findMovieInfoDate(mo_number);
+        return findMovieInfoDate;
     }
 
 

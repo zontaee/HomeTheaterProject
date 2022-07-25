@@ -1,5 +1,5 @@
 
-let discountratio = 1;
+let discountratio = 1; //할인률 초기화
 let discountsum = 0;   //할인 총합 계산
 let nowamount = document.getElementById("nowamount").innerText;
 let count = 0; //쿠폰은 하나만 등록하기 위한 카운팅

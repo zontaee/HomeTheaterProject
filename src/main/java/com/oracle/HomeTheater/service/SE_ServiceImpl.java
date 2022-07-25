@@ -1,6 +1,5 @@
 package com.oracle.HomeTheater.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +10,6 @@ import com.oracle.HomeTheater.dao.SE_Dao;
 import com.oracle.HomeTheater.model.ChoiceMovie;
 import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Movie;
-import com.oracle.HomeTheater.model.MovieLike;
 
 @Service
 public class SE_ServiceImpl implements SE_Service {

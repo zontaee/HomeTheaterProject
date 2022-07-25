@@ -1,0 +1,132 @@
+
+.container {
+    text-align: center;
+    width: 1000px;
+}
+.btn {
+    background-color: white;
+    border-color: black;
+    border: 1px solid black;
+    border-radius: 3px;
+    font-size: 12px;
+    cursor: pointer;
+}
+a {
+    color: black;
+    border-radius: 5px;
+    font-size: 15px;
+}
+h4 {
+    font-size: 18px;
+}
+/*.content {
+    overflow-x: hidden;
+    width: 1000px;
+}*/
+.movie_img {
+    border: 1px solid black;
+    width: 200px;
+    height: 250px;
+}
+.seat {
+    align-content: center;
+    border: 3px black;
+    border-color: black;
+    width: 20px;
+    height: 20px;
+    color: white;
+    background-color: #A6A6A6;
+    margin-bottom: 2px;
+}
+.reservationedseat {
+    align-content: center;
+    border: 3px black;
+    border-color: black;
+    width: 20px;
+    height: 20px;
+    color: white;
+    background-color: #5D5D5D;
+    margin-bottom: 2px;
+}
+.reservationingdseat {
+    align-content: center;
+    border: 3px black;
+    border-color: black;
+    width: 20px;
+    height: 20px;
+    color: white;
+    background-color: #A566FF;
+    margin-bottom: 2px;
+}
+.seatinfo {
+    align-content: center;
+    border: 3px black;
+    border-color: black;
+    width: 20px;
+    height: 20px;
+    color: white;
+    background-color: #A6A6A6;
+    margin-bottom: 2px;
+    margin-left: 10px;
+    margin-right: 5px;
+}
+.reservationedseatinfo {
+    align-content: center;
+    border: 3px black;
+    border-color: black;
+    width: 20px;
+    height: 20px;
+    color: white;
+    background-color: #5D5D5D;
+    margin-bottom: 2px;
+    margin-left: 10px;
+    margin-right: 5px;
+}
+.reservationingdseatinfo {
+    align-content: center;
+    border: 3px black;
+    border-color: black;
+    width: 20px;
+    height: 20px;
+    color: white;
+    background-color: #A566FF;
+    margin-bottom: 2px;
+    margin-right: 5px;
+}
+.color {
+    margin-left: 300px;
+    margin-right: 300px;
+    background-color: #212121;
+}
+.margin {
+    margin-top: 15px;
+}
+label{
+    color: white;
+}
+.btnPay{
+    margin-top: 20px;
+    width: 100px;
+    height: 25px;
+    background-color: white;
+    border-color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.btnPay:hover{
+    background: black;
+    color: white;
+    border-color: white;
+}
+#reset{
+    background: #212121;
+    color: white;
+    border: #212121;
+    margin-left: -4px;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+#resetIcon{
+    margin-left: 340px;
+    cursor: pointer;
+}

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="Reservation">
+<mapper namespace="IT_Dao">
 
     <insert id="It_ReservationSave" parameterType="SeatandTime">
         INSERT INTO "RESERVATION"
@@ -33,8 +33,6 @@
         from "RESERVATION"
         where re_number = #{re_number}
     </select>
-
-
 
 
 </mapper>
