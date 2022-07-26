@@ -30,7 +30,6 @@ public class It_Controller {
         Movie findMovie = ITService.findMovie(mo_number);
         log.info("resvervation(controller) findDate start mo_number -> " + mo_number);
         List<SeatandTime> findDate = ITService.findDate(mo_number);
-        List<Movie> findMovieInfoDate = ITService.findMovieInfoDate(mo_number);
         model.addAttribute("findMovie", findMovie);
         model.addAttribute("findDate", findDate);
         return "reservation/TimeInfo";
@@ -39,7 +38,7 @@ public class It_Controller {
     //예매 페이지 - 좌석 선택
     @PostMapping("/reservationtimedata")
     public String reservationTimeData(SeatandTime seatandTime, Model model) {
-        log.info("reservationtimedata(controller) findseat start");
+        log.info("reservationtimedata(controller) start");
         //좌성정보(좌석) 조회
         List<SeatandTime> seatInfo = ITService.findSeatData(seatandTime);
         model.addAttribute("seatandTime", seatandTime);

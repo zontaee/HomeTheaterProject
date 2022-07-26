@@ -70,8 +70,6 @@
 
         <form action="reservationtimedata"  class="magin" method="post" onsubmit="return check();">
             <input type="hidden" name="mo_number" value="${findMovie.mo_number}">
-        <%--    <input type="hidden" name="mo_fileName" value="${findMovie.mo_fileName }">
-            <input type="hidden" name="mo_title" value="${findMovie.mo_title }">--%>
             <div>
                 <select name="se_date" id="se_date"
                         onchange="changetime(this.value,${findMovie.mo_number})">
