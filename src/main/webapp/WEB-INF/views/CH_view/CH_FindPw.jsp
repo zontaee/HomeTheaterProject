@@ -30,6 +30,6 @@
  	<%@ include file="../footer.jsp"%>
  </div>
 </div>
-<script type="text/javascript" src="js/CH_js/CH_FindPw.js"></script>
+<script type="text/javascript" src="js/member/FindPw.js"></script>
 </body>
 </html>

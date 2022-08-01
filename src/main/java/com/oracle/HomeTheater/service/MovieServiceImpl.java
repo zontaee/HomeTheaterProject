@@ -6,15 +6,15 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.oracle.HomeTheater.dao.SE_Dao;
+import com.oracle.HomeTheater.dao.MovieDao;
 import com.oracle.HomeTheater.model.ChoiceMovie;
 import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Movie;
 
 @Service
-public class SE_ServiceImpl implements SE_Service {
+public class MovieServiceImpl implements MovieService {
 	@Autowired
-	private SE_Dao sd;
+	private MovieDao sd;
 	
 	@Override
 	public List<Movie> listMovie() {

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import com.oracle.HomeTheater.domain.MailDTO;
 
 @Component
-public class CH_MailService {
+public class MailService {
 	@Autowired
 	private JavaMailSender mailSender;
 	

@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.oracle.HomeTheater.domain.MemberJpa;
-import com.oracle.HomeTheater.service.CH_MemberJpaService;
+import com.oracle.HomeTheater.service.MemberJpaService;
 
 @Controller
-public class CH_MemberJpaController {
-	private final CH_MemberJpaService memberJpaService;
+public class MemberJpaController {
+	private final MemberJpaService memberJpaService;
 	
 	@Autowired
-	public CH_MemberJpaController(CH_MemberJpaService memberJpaService) {
+	public MemberJpaController(MemberJpaService memberJpaService) {
 		this.memberJpaService = memberJpaService;
 	}
 	

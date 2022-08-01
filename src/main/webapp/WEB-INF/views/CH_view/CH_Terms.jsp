@@ -60,6 +60,6 @@ HomeTheater에서 제공하는 이벤트/혜택 등 다양한 정보를 휴대�
  	<%@ include file="../footer.jsp"%>
  </div>
 </div>
-<script type="text/javascript" src="js/CH_js/CH_Terms.js"></script>
+<script type="text/javascript" src="js/member/Terms.js"></script>
 </body>
 </html>

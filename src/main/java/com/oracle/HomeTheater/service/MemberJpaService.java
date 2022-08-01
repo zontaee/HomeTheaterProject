@@ -1,19 +1,17 @@
 package com.oracle.HomeTheater.service;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.oracle.HomeTheater.dao.CH_MemberJpaRepository;
+import com.oracle.HomeTheater.dao.MemberJpaRepository;
 import com.oracle.HomeTheater.domain.MemberJpa;
 
 @Transactional
 @Service
-public class CH_MemberJpaService {
-	private final CH_MemberJpaRepository memberJpaRepository;
+public class MemberJpaService {
+	private final MemberJpaRepository memberJpaRepository;
     
-	public CH_MemberJpaService(CH_MemberJpaRepository memberJpaRepository) {
+	public MemberJpaService(MemberJpaRepository memberJpaRepository) {
 		this.memberJpaRepository = memberJpaRepository;
 	}
 

@@ -31,6 +31,6 @@
  	<%@ include file="../footer.jsp"%>
  </div>
 </div>
-<script type="text/javascript" src="js/CH_js/CH_FindId.js"></script>
+<script type="text/javascript" src="js/member/FindId.js"></script>
 </body>
 </html>

@@ -8,7 +8,7 @@ import java.util.List;
 import com.oracle.HomeTheater.model.Bbs;
 
 
-public interface YM_Service {
+public interface BoardService {
 	 int           total(Bbs bbs);
 	 List<Bbs>     listBbs(Bbs bbs);
 	 Bbs           noticeContents(Bbs bbs);

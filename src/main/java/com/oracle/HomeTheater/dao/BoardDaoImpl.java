@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.oracle.HomeTheater.model.Bbs;
 
 @Repository
-public class YM_DaoImpl implements YM_Dao {
+public class BoardDaoImpl implements BoardDao {
 
 	
 	@Autowired

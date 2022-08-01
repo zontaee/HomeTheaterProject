@@ -1,6 +1,6 @@
 package com.oracle.HomeTheater.service;
 
-import com.oracle.HomeTheater.dao.IT_Dao;
+import com.oracle.HomeTheater.dao.ReservationDao;
 import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Movie;
 import com.oracle.HomeTheater.model.Reservation;
@@ -14,9 +14,9 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class IT_ServiceImpl implements IT_Service {
+public class ReservationServiceImpl implements ReservationService {
 
-    private final IT_Dao ITDao;
+    private final ReservationDao ITDao;
 
 
     @Override

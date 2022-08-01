@@ -7,7 +7,7 @@ import com.oracle.HomeTheater.model.ChoiceMovie;
 import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Movie;
 
-public interface SE_Dao {
+public interface MovieDao {
 
 	List<Movie> listMoive();
 

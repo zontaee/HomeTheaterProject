@@ -119,6 +119,6 @@
   <%@ include file="../footer.jsp"%>	
  </div>
 </div>
-<script type="text/javascript" src="js/CH_js/CH_JoinMember.js"></script>
+<script type="text/javascript" src="js/member/JoinMember.js"></script>
 </body>
 </html>

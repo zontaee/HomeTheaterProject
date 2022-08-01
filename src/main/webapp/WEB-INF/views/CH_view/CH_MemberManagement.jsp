@@ -43,6 +43,6 @@
  	<%@ include file="../footer.jsp"%>
  </div>
 </div>
-<script type="text/javascript" src="js/CH_js/CH_MemberManagement.js"></script>
+<script type="text/javascript" src="js/member/MemberManagement.js"></script>
 </body>
 </html>

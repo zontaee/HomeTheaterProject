@@ -25,15 +25,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Movie;
-import com.oracle.HomeTheater.service.SE_Service;
+import com.oracle.HomeTheater.service.MovieService;
 
 
 @Controller
-public class SE_Controller {
+public class MovieController {
 	HttpSession session;
 
 	@Autowired
-	private SE_Service ses;
+	private MovieService ses;
 
 	@GetMapping("/username")
 	@ResponseBody

@@ -21,13 +21,14 @@ import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Movie;
 import com.oracle.HomeTheater.model.Reservation;
 import com.oracle.HomeTheater.model.SeatandTime;
-import com.oracle.HomeTheater.service.CH_Service;
+import com.oracle.HomeTheater.service.MemberService;
 
 
 @Controller
-public class CH_Controller {
+public class MemberController {
+
 	@Autowired
-	private CH_Service cs;
+	private MemberService cs;
 
 	@RequestMapping(value = "main")
 	public String main(Bbs bbs, Model model) {

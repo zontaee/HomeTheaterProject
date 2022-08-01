@@ -10,7 +10,7 @@ import com.oracle.HomeTheater.model.Reservation;
 import com.oracle.HomeTheater.model.SeatandTime;
 
 
-public interface CH_Service {
+public interface MemberService {
 
     List<Movie> SearchMovieList(Movie movie);
 

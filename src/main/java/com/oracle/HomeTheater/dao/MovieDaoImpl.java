@@ -12,7 +12,7 @@ import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Movie;
 
 @Repository
-public class SE_DaoImpl implements SE_Dao {
+public class MovieDaoImpl implements MovieDao {
 	@Autowired
 	private SqlSession session;
 

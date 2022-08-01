@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.oracle.HomeTheater.model.Bbs;
 
-public interface YM_Dao {
+public interface BoardDao {
 	
 	int 			total(Bbs bbs);
 	List<Bbs>       listBbs(Bbs bbs);

@@ -4,7 +4,7 @@ import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Movie;
 import com.oracle.HomeTheater.model.Reservation;
 import com.oracle.HomeTheater.model.SeatandTime;
-import com.oracle.HomeTheater.service.IT_Service;
+import com.oracle.HomeTheater.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -19,9 +19,9 @@ import java.util.List;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
-public class It_Controller {
+public class ReservationController {
 
-    private final IT_Service ITService;
+    private final ReservationService ITService;
 
     //예매 페이지 - 날짜 시간 선택
     @GetMapping("/reservation")

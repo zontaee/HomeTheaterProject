@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.oracle.HomeTheater.dao.CH_Dao;
+import com.oracle.HomeTheater.dao.MemberDao;
 import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Bbs;
 import com.oracle.HomeTheater.model.ChoiceMovie;
@@ -17,9 +17,9 @@ import com.oracle.HomeTheater.model.SeatandTime;
 
 
 @Service
-public class CH_ServiceImpl implements CH_Service {
+public class MemberServiceImpl implements MemberService {
 	@Autowired
-	private CH_Dao cd;
+	private MemberDao cd;
 	
 	@Override
 	public List<Movie> SearchMovieList(Movie movie) {

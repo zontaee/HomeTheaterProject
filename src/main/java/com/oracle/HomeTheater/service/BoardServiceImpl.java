@@ -2,18 +2,18 @@ package com.oracle.HomeTheater.service;
 
 import java.util.List;
 
+import com.oracle.HomeTheater.dao.BoardDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.oracle.HomeTheater.dao.YM_Dao;
 import com.oracle.HomeTheater.model.Bbs;
 
 
 @Service
-public class YM_ServiceImpl implements YM_Service {
+public class BoardServiceImpl implements BoardService {
 	
 	@Autowired
-	private  YM_Dao	ymDao;
+	private BoardDao ymDao;
 	
 	
 	@Override

@@ -13,7 +13,7 @@ import java.util.List;
 
 @Repository
 @Slf4j
-public class IT_DaoImpl implements IT_Dao {
+public class ReservationDaoImpl implements ReservationDao {
     @Autowired
     private SqlSession session;
 

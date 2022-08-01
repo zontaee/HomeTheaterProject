@@ -10,7 +10,7 @@ import com.oracle.HomeTheater.model.Reservation;
 import com.oracle.HomeTheater.model.SeatandTime;
 
 
-public interface CH_Dao {
+public interface MemberDao {
 
 	List<Movie> SearchMovieList(Movie movie);
 	List<Bbs> SearchBbsList(Bbs bbs);

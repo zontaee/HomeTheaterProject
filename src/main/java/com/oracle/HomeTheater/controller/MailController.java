@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.oracle.HomeTheater.domain.MailDTO;
 import com.oracle.HomeTheater.model.Member;
-import com.oracle.HomeTheater.service.CH_MailService;
-import com.oracle.HomeTheater.service.CH_Service;
+import com.oracle.HomeTheater.service.MailService;
+import com.oracle.HomeTheater.service.MemberService;
 
 @RestController
-public class CH_MailController {
+public class MailController {
 	@Autowired
-	private CH_MailService mailService;
+	private MailService mailService;
 	@Autowired
-	private CH_Service cs;
+	private MemberService cs;
 	
 	// 비밀번호찾기(임시 비밀번호 생성)
 	@GetMapping(value="sendTempPw")

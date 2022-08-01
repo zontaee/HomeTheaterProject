@@ -14,7 +14,7 @@ import com.oracle.HomeTheater.model.Reservation;
 import com.oracle.HomeTheater.model.SeatandTime;
 
 @Repository
-public class CH_DaoImpl implements CH_Dao {
+public class MemberDaoImpl implements MemberDao {
 	@Autowired
 	private SqlSession session;
 

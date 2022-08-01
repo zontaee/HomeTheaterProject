@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.oracle.HomeTheater.domain.MemberJpa;
 
 @Repository
-public interface CH_MemberJpaRepository extends JpaRepository<MemberJpa, String>{
+public interface MemberJpaRepository extends JpaRepository<MemberJpa, String>{
 
 	@Query("select u from MemberJpa u where u.m_id=:m_id and u.m_password=:m_password")
 	MemberJpa selectUserInfo(@Param("m_id")String m_id,@Param("m_password")String m_password);

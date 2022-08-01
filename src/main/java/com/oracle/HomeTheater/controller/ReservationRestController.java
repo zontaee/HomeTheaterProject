@@ -1,10 +1,10 @@
 package com.oracle.HomeTheater.controller;
 
 
-import com.oracle.HomeTheater.dao.IT_Dao;
+import com.oracle.HomeTheater.dao.ReservationDao;
 import com.oracle.HomeTheater.model.Movie;
 import com.oracle.HomeTheater.model.SeatandTime;
-import com.oracle.HomeTheater.service.IT_Service;
+import com.oracle.HomeTheater.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,10 +20,10 @@ import java.util.UUID;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-public class It_RestController {
+public class ReservationRestController {
 
-    private final IT_Service ITService;
-    private final IT_Dao it_dao;
+    private final ReservationService ITService;
+    private final ReservationDao reservation_dao;
 
     @PostMapping("Cancel")
     public String finalReservation(SeatandTime seatandTime) {
@@ -86,7 +86,7 @@ public class It_RestController {
      */
     @GetMapping("identify")
     public List<Movie> asd(int monumber) {
-        List<Movie> movieInfoDate = it_dao.findMovieInfoDate(monumber);
+        List<Movie> movieInfoDate = reservation_dao.findMovieInfoDate(monumber);
         return movieInfoDate;
     }
 

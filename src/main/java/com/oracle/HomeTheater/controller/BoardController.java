@@ -12,20 +12,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.oracle.HomeTheater.model.Bbs;
-import com.oracle.HomeTheater.service.CH_Service;
+import com.oracle.HomeTheater.service.MemberService;
 import com.oracle.HomeTheater.service.Paging;
-import com.oracle.HomeTheater.service.YM_Service;
+import com.oracle.HomeTheater.service.BoardService;
 
 
 
 
 
 @Controller
-public class YM_Controller {
+public class BoardController {
 	@Autowired
-	private YM_Service ymService;
+	private BoardService ymService;
 	@Autowired
-	private CH_Service cs;
+	private MemberService cs;
 	
 ////main 페이지
 //	@RequestMapping(value = "main")

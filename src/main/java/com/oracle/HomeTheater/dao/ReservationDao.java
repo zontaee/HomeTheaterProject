@@ -1,4 +1,4 @@
-package com.oracle.HomeTheater.service;
+package com.oracle.HomeTheater.dao;
 
 import com.oracle.HomeTheater.model.Member;
 import com.oracle.HomeTheater.model.Movie;
@@ -7,8 +7,7 @@ import com.oracle.HomeTheater.model.SeatandTime;
 
 import java.util.List;
 
-
-public interface IT_Service {
+public interface ReservationDao {
 
     Movie findMovie(int mo_number);
 
