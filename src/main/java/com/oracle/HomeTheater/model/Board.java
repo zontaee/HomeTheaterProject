@@ -18,51 +18,11 @@ public class Board {
     private String pageNum;
     private int start; 		 	private int end;
 
-    public int getBoard_no() {
-        return board_no;
-    }
-
-    public int getBoard_category() {
-        return board_category;
-    }
-
-    public String getBoard_title() {
-        return board_title;
-    }
-
-    public String getBoard_content() {
-        return board_content;
-    }
-
-    public String getBoard_date() {
-        return board_date;
-    }
-
-    public int getBoard_hit() {
-        return board_hit;
-    }
-
-    public String getM_id() {
-        return m_id;
-    }
-
-    public String getSearch() {
-        return search;
-    }
-
-    public String getKeyword() {
-        return keyword;
-    }
-
-    public String getPageNum() {
-        return pageNum;
-    }
-
-    public int getStart() {
-        return start;
-    }
-
-    public int getEnd() {
-        return end;
+    public Board(int board_category, String board_title, String board_content, String board_date, int board_hit) {
+        this.board_category = board_category;
+        this.board_title = board_title;
+        this.board_content = board_content;
+        this.board_date = board_date;
+        this.board_hit = board_hit;
     }
 }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="IT_Dao">
+
+
+
+    <delete id="deleteMember" parameterType="String">
+        DELETE
+        FROM "MEMBER"
+
+    </delete>
+    <delete id="deleteBoard">
+        DELETE
+        FROM "BOARD"
+
+    </delete>
+    <delete id="deleteMOVIE" parameterType="String">
+        DELETE
+        FROM "MOVIE"
+
+    </delete>
+    <delete id="deleteCHOICEMOVIE" parameterType="String">
+        DELETE
+        FROM "CHOICEMOVIE"
+
+    </delete>
+    <delete id="deleteSEATANDTIME" parameterType="String">
+        DELETE
+        FROM "SEATANDTIME"
+
+    </delete>
+    <delete id="deleteRESERVATION" parameterType="String">
+        DELETE
+        FROM "RESERVATION"
+
+    </delete>
+    <delete id="deleteACTOR" parameterType="String">
+        DELETE
+        FROM "ACTOR"
+
+    </delete>
+    <insert id="insertBoard" parameterType="Board">
+        INSERT into Board (Board_no,
+                           Board_category, Board_title, Board_content, Board_date, m_id)
+        VALUES (1,
+                #{board_category}, #{board_title}, #{board_content}, #{board_date}, 'admin')
+    </insert>
+
+
+</mapper>
