@@ -47,7 +47,7 @@ public class MovieController {
 
 		List<Movie> listMovie = ses.listMovie();
 		model.addAttribute("listMovie", listMovie);
-		return "views/movieList";
+		return "Movie/movieList";
 	}
 
 	@RequestMapping(value = "movieDetail") // 영화 상세보기
@@ -72,7 +72,7 @@ public class MovieController {
 		model.addAttribute("movie", movie);
 		model.addAttribute("member", member);
 
-		return "views/movieDetail";
+		return "Movie/movieDetail";
 	}
 
 	/*
@@ -84,7 +84,7 @@ public class MovieController {
 	 * map.put("m_id", m_id); int check = ses.likeCheck(map);
 	 * System.out.println("check-> : " + check); model.addAttribute("check", check);
 	 * 
-	 * return "views/movieDetail"; }
+	 * return "/movieDetail"; }
 	 */
 
 	// 영화 추천 버튼 누를 시 작동
@@ -119,7 +119,7 @@ public class MovieController {
 		System.out.println("Contorller movieRecommendList Start...");
 		List<Movie> listRecommendMovie = ses.listRecommendMovie();
 		model.addAttribute("listRecommendMovie", listRecommendMovie);
-		return "views/movieRecommendList";
+		return "Movie/movieRecommendList";
 	}
 
 	// 관리자 영화 등록 페이지
@@ -127,7 +127,7 @@ public class MovieController {
 	public String adminMovieAddForm(Model model) {
 		System.out.println("Contorller adminMovieAddForm Start...");
 
-		return "views/adminMovieAddForm";
+		return "Movie/adminMovieAddForm";
 	}
 
 	// 관리자 영화 등록
@@ -168,7 +168,7 @@ public class MovieController {
 		Movie movie = ses.movieDetail(mo_number);
 		model.addAttribute("movie",movie);
 
-		return "views/adminMovieUpdateForm";
+		return "Movie/adminMovieUpdateForm";
 	}
 	
 	//관리자 영화 수정 처리

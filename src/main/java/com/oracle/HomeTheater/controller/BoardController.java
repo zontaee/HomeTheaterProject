@@ -35,7 +35,7 @@ public class BoardController {
 //	}
 	
 //메인페이지 -> 공지사항클릭
-	@RequestMapping(value="Boardviews/mainNotice")
+	@RequestMapping(value="Board/mainNotice")
 	public String mainNotice(Model model,Bbs bbs, String currentPage, HttpServletRequest request) {
 		System.out.println("BoardContorller mainNotice Start...");
 		
@@ -100,11 +100,11 @@ public class BoardController {
 		model.addAttribute("pg", pg);
 		model.addAttribute("listBbs",listBbs);
 		
-		return "Boardviews/mainNotice";
+		return "Board/mainNotice";
 	}
 	
 //BoardnoticeContents 공지사항 내용확인 페이지
-	@RequestMapping(value = "Boardviews/noticeContents")
+	@RequestMapping(value = "Board/noticeContents")
 	public String noticeContents(Bbs bbs, Model model){
 		System.out.println("BoardContorller noticeContents Start...");
 		
@@ -114,22 +114,22 @@ public class BoardController {
 		
 		model.addAttribute("bbsContents",bbsContents);
 		
-		return "Boardviews/noticeContents";
+		return "Board/noticeContents";
 	}
 
 
 
 	
 //BoardnoticeWriteForm 공지사항 글쓰기 페이지폼 호출 컨트롤러
-		@RequestMapping(value = "Boardviews/noticeWriteForm")
+		@RequestMapping(value = "Board/noticeWriteForm")
 		public String noticeWriteForm(Bbs bbs,Model model){
 			System.out.println("BoardContorller noticeWriteForm Start...");	
 			System.out.println("BoardContorller noticeWriteForm bbs.getBbs_category() ->"+ bbs.getBbs_category());
 			System.out.println("BoardContorller noticeWriteForm finsh...");
-		return "Boardviews/noticeWriteForm";
+		return "Board/noticeWriteForm";
 		}
 //BoardnoticeWriteForm에서 입력받은 데이터 처리 컨트롤러
-		@RequestMapping(value = "Boardviews/noticeWrite", method = RequestMethod.POST )
+		@RequestMapping(value = "Board/noticeWrite", method = RequestMethod.POST )
 		public String noticeWrite(Bbs bbs, Model model) {
 			System.out.println("BoardContorller noticeWrite start...");		
 			int result = ymService.noticeWrite(bbs);
@@ -143,7 +143,7 @@ public class BoardController {
 		}
 		
 //BoardcontentsDelete 글삭제
-		@RequestMapping(value = "Boardviews/contentsDelete")
+		@RequestMapping(value = "Board/contentsDelete")
 		public String contentsDelete(Bbs bbs, Model model) {
 			System.out.println("BoardContorller contentsDelete start...");
 			int bbsDelete = ymService.contentsDelete(bbs);
@@ -152,12 +152,12 @@ public class BoardController {
 		}
 
 //BoardcontentsUpdateForm 글 수정하기위해 수정폼 호출 컨트롤러 및 글내용 입력받기 위한 페이지
-// Boardviews/mainNotice.jsp -> noticeContents.jsp 수정버튼 클릭 -> contentsUpdateForm.jsp
-		@RequestMapping(value="Boardviews/contentsUpdateForm")
+// Board/mainNotice.jsp -> noticeContents.jsp 수정버튼 클릭 -> contentsUpdateForm.jsp
+		@RequestMapping(value="Board/contentsUpdateForm")
 		public String  contentsUpdateForm(Bbs bbs, Model model){
 			System.out.println("BoardContorller contentsUpdateForm Start...");
 			
-			//noticeContents.jsp view와 동일한 메소드 사용 
+			//noticeContents.jsp 와 동일한 메소드 사용 
 			Bbs bbsContents = ymService.noticeContents(bbs);
 			System.out.println("BoardContorller contentsUpdateForm bbsContents.getBbs_date() ->"+bbsContents.getBbs_date());
 			System.out.println("BoardContorller contentsUpdateForm bbsContents.getBbs_title() ->"+bbsContents.getBbs_title());
@@ -166,12 +166,12 @@ public class BoardController {
 			
 			System.out.println("BoardContorller contentsUpdateForm finish...");
 			
-			return "Boardviews/contentsUpdateForm";
+			return "Board/contentsUpdateForm";
 		}
 		
-//Boardviews/contentsUpdateForm.jsp -> 에서 글쓰기 버튼 클릭시 이동		
+//Board/contentsUpdateForm.jsp -> 에서 글쓰기 버튼 클릭시 이동		
 //BoardcontentsUpdate 글 수정 
-		@RequestMapping(value = "Boardviews/contentsUpdate", method = RequestMethod.POST )
+		@RequestMapping(value = "Board/contentsUpdate", method = RequestMethod.POST )
 		public String contentsUpdate(Bbs bbs, Model model) {
 			System.out.println("BoardContorller contentsUpdate start...");
 			int bbsContentsUpdate = ymService.contentsUpdate(bbs);

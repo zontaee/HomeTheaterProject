@@ -41,7 +41,7 @@ public class MemberController {
 	@RequestMapping(value = "MemberPayment")
 	public String MemberPayment() {
 		System.out.println("MemberContorller MemberPayment Start...");
-		return "Memberview/Payment";
+		return "Member/Payment";
 	}
 	
 	// 통합검색
@@ -53,7 +53,7 @@ public class MemberController {
 		model.addAttribute("SearchMovieList",SearchMovieList);
 		model.addAttribute("SearchBbsList",SearchBbsList);
 		
-		return "Memberview/SearchTotalList";
+		return "Member/SearchTotalList";
 	}
 	
 	// 회원정보
@@ -63,7 +63,7 @@ public class MemberController {
 		String m_id = (String)session.getAttribute("sessionId");
 		member = cs.searchUserInfo(m_id);
 		model.addAttribute("member",member);
-		return "Memberview/ModifyMember";
+		return "Member/ModifyMember";
 	}
 	
 	// 회원수정
@@ -124,7 +124,7 @@ public class MemberController {
 	@GetMapping(value = "findPwForm")
 	public String findPwForm() {
 		System.out.println("MemberContorller findPwForm Start...");
-		return "Memberview/MemberFindPw";
+		return "Member/MemberFindPw";
 	}
 	
 	// 본인이메일 확인(비밀번호찾기용)
@@ -162,7 +162,7 @@ public class MemberController {
 	@GetMapping(value = "findIdForm")
 	public String findIdForm() {
 		System.out.println("MemberContorller findIdForm Start...");
-		return "Memberview/MemberFindId";
+		return "Member/MemberFindId";
 	}
 	
 	// 관심영화
@@ -188,7 +188,7 @@ public class MemberController {
 			TotalList.addAll(InterestMovieList);
 		}
 		model.addAttribute("TotalList",TotalList);
-		return "Memberview/InterestMovie";
+		return "Member/InterestMovie";
 	}
 	
 	// 예약정보
@@ -202,7 +202,7 @@ public class MemberController {
 		List<SeatandTime> searchSeatInfo = cs.searchSeatInfo(seatTime);
 		model.addAttribute("checkReservationInfo",checkReservationInfo);
 		model.addAttribute("searchSeatInfo",searchSeatInfo);	
-		return "Memberview/ReservationInfo";
+		return "Member/ReservationInfo";
 	}
 	
 	// 관리자 회원리스트
@@ -211,7 +211,7 @@ public class MemberController {
 		System.out.println("MemberContorller memberList Start...");
 		List<Member> memberList = cs.memberList(member);
 		model.addAttribute("memberList",memberList);
-		return "Memberview/MemberManagement";
+		return "Member/MemberManagement";
 	}
 	
 	// 관리자 회원수정
@@ -237,7 +237,7 @@ public class MemberController {
 		System.out.println("MemberContorller reservationList Start...");
 		List<Reservation> reservationList = cs.reservationList(reservation);
 		model.addAttribute("reservationList",reservationList);
-		return "Memberview/MemberReservationList";
+		return "Member/MemberReservationList";
 	}
 	
 	// 관리자 예매수정

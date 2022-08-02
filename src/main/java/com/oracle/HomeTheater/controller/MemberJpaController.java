@@ -30,14 +30,14 @@ public class MemberJpaController {
 	@GetMapping(value = "terms")
 	public String terms() {
 		System.out.println("MemberJpaController terms Start...");
-		return "Memberview/Terms";
+		return "Member/Terms";
 	}
 
 	// 회원가입 폼 
 	@GetMapping(value = "joinMember")
 	public String joinUserForm() {
 		System.out.println("MemberJpaController joinUserForm Start...");
-		return "Memberview/JoinMember";
+		return "Member/JoinMember";
 	}
 	
 	// 회원가입
@@ -60,7 +60,7 @@ public class MemberJpaController {
 	@GetMapping(value="loginForm")
 	public String loginForm() {
 		System.out.println("MemberJpaController loginForm Start...");
-		return "Memberview/Login";
+		return "Member/Login";
 	}
 
 	// 로그인
@@ -73,7 +73,7 @@ public class MemberJpaController {
 
 		if (memberVO == null) {
 			model.addAttribute("loginMessage", "아이디 혹은 비밀번호가 틀립니다.");
-			return "Memberview/Login";
+			return "Member/Login";
 		}
 		// 로그인 성공 처리
 		// 세션이 있으면 있는 세션 반환, 없으면 신규 세션 생성
@@ -100,7 +100,7 @@ public class MemberJpaController {
 		System.out.println("MemberJpaController logout Start...");
 		HttpSession session = request.getSession();
 		session.invalidate();
-		return "Memberview/Login";
+		return "Member/Login";
 	}
 
 	// 마이페이지 폼
@@ -109,9 +109,9 @@ public class MemberJpaController {
 		System.out.println("MemberJpaController myPage Start...");
 		String m_id = (String)session.getAttribute("sessionId");
 		if(m_id == null) {
-			return "Memberview/Login";
+			return "Member/Login";
 		}
-		return "Memberview/MyPage";
+		return "Member/MyPage";
 	}
 	
 	
