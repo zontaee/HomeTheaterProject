@@ -49,15 +49,15 @@
  </div>
  <!-- 게시판 검색 리스트  -->
  <div class="content">
-  <div class="bbsList">
- 	<c:if test="${fn:length(SearchBbsList)==0}">
+  <div class="boardList">
+ 	<c:if test="${fn:length(searchBoardList)==0}">
 		<div class="subject">
 			<b id="header">게시판정보</b>
 		</div>
 		<hr>
 		<h2>**** 입력하신 게시물 정보가 없습니다. ****</h2>
 	</c:if>
- 	<c:if test="${fn:length(SearchBbsList)!=0 }">
+ 	<c:if test="${fn:length(searchBoardList)!=0 }">
 			<div class="subject">
 				<b id="header">게시판정보</b>
 			</div>
@@ -70,13 +70,13 @@
 						<th>조회수</th>
 						<th>작성자</th>
 					</tr>				
-					<c:forEach var="bbs" items="${SearchBbsList }">		
+					<c:forEach var="board" items="${searchBoardList }">
 					<tr>
-						<td>${bbs.bbs_category}</td>
-						<td><a href="YM_views/noticeContents?bbs_no=${bbs.bbs_no }&bbs_category=${bbs.bbs_category}">${bbs.bbs_title}</a></td>
-						<td>${bbs.bbs_date}</td>
-						<td>${bbs.bbs_hit}</td>
-						<td>${bbs.m_id}</td>
+						<td>${board.board_category}</td>
+						<td><a href="YM_views/noticeContents?board_no=${board.board_no }&board_category=${board.board_category}">${board.board_title}</a></td>
+						<td>${board.board_date}</td>
+						<td>${board.board_hit}</td>
+						<td>${board.m_id}</td>
 					</tr>
 					</c:forEach>
 				</table>

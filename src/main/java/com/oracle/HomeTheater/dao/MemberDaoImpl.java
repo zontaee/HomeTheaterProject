@@ -2,16 +2,12 @@ package com.oracle.HomeTheater.dao;
 
 import java.util.List;
 
+import com.oracle.HomeTheater.model.*;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.oracle.HomeTheater.model.Member;
-import com.oracle.HomeTheater.model.Bbs;
-import com.oracle.HomeTheater.model.ChoiceMovie;
-import com.oracle.HomeTheater.model.Movie;
-import com.oracle.HomeTheater.model.Reservation;
-import com.oracle.HomeTheater.model.SeatandTime;
+import com.oracle.HomeTheater.model.Board;
 
 @Repository
 public class MemberDaoImpl implements MemberDao {
@@ -31,15 +27,15 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public List<Bbs> SearchBbsList(Bbs bbs) {
-		System.out.println("CH_DaoImpl SearchBbsList Start...");
-		List<Bbs> SearchBbsList = null;
+	public List<Board> SearchBoardList(Board Board) {
+		System.out.println("CH_DaoImpl SearchBoardList Start...");
+		List<Board> searchBoardList = null;
 		try {
-			SearchBbsList = session.selectList("CH_SearchBbsList", bbs);
+			searchBoardList = session.selectList("CH_SearchBoardList", Board);
 		} catch (Exception e) {
-			System.out.println("CH_DaoImpl SearchBbsList Excetption->"+e.getMessage());
+			System.out.println("CH_DaoImpl SearchBoardList Excetption->"+e.getMessage());
 		}
-		return SearchBbsList;
+		return searchBoardList;
 	}
 
 	@Override
@@ -272,63 +268,63 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public List<Bbs> mainBbsList(Bbs bbs) {
-		System.out.println("CH_DaoImpl mainBbsList Start...");
-		List<Bbs> mainBbsList = null;
+	public List<Board> mainBoardList(Board Board) {
+		System.out.println("CH_DaoImpl mainBoardList Start...");
+		List<Board> mainBoardList = null;
 		try {
-			mainBbsList = session.selectList("CH_MainBbsList", bbs);
+			mainBoardList = session.selectList("CH_MainBoardList", Board);
 		} catch (Exception e) {
-			System.out.println("CH_DaoImpl mainBbsList Excetption->"+e.getMessage());
+			System.out.println("CH_DaoImpl mainBoardList Excetption->"+e.getMessage());
 		}
-		return mainBbsList;
+		return mainBoardList;
 	}
 
 	@Override
-	public List<Bbs> bbsSearchTotal(Bbs bbs) {
-		System.out.println("CH_DaoImpl bbsSearchTotal Start...");
-		List<Bbs> bbsSearchTotal = null;
+	public List<Board> BoardSearchTotal(Board Board) {
+		System.out.println("CH_DaoImpl BoardSearchTotal Start...");
+		List<Board> BoardSearchTotal = null;
 		try {
-			bbsSearchTotal = session.selectList("CH_BbsSearchTotal", bbs);
+			BoardSearchTotal = session.selectList("CH_BoardSearchTotal", Board);
 		} catch (Exception e) {
-			System.out.println("CH_DaoImpl bbsSearchTotal Excetption->"+e.getMessage());
+			System.out.println("CH_DaoImpl BoardSearchTotal Excetption->"+e.getMessage());
 		}
-		return bbsSearchTotal;
+		return BoardSearchTotal;
 	}
 
 	@Override
-	public List<Bbs> bbsSearchTitle(Bbs bbs) {
-		System.out.println("CH_DaoImpl bbsSearchTitle Start...");
-		List<Bbs> bbsSearchTitle = null;
+	public List<Board> BoardSearchTitle(Board Board) {
+		System.out.println("CH_DaoImpl BoardSearchTitle Start...");
+		List<Board> BoardSearchTitle = null;
 		try {
-			bbsSearchTitle = session.selectList("CH_BbsSearchTitle", bbs);
+			BoardSearchTitle = session.selectList("CH_BoardSearchTitle", Board);
 		} catch (Exception e) {
-			System.out.println("CH_DaoImpl bbsSearchTitle Excetption->"+e.getMessage());
+			System.out.println("CH_DaoImpl BoardSearchTitle Excetption->"+e.getMessage());
 		}
-		return bbsSearchTitle;
+		return BoardSearchTitle;
 	}
 
 	@Override
-	public List<Bbs> bbsSearchContent(Bbs bbs) {
-		System.out.println("CH_DaoImpl bbsSearchContent Start...");
-		List<Bbs> bbsSearchContent = null;
+	public List<Board> BoardSearchContent(Board Board) {
+		System.out.println("CH_DaoImpl BoardSearchContent Start...");
+		List<Board> BoardSearchContent = null;
 		try {
-			bbsSearchContent = session.selectList("CH_BbsSearchContent", bbs);
+			BoardSearchContent = session.selectList("CH_BoardSearchContent", Board);
 		} catch (Exception e) {
-			System.out.println("CH_DaoImpl bbsSearchContent Excetption->"+e.getMessage());
+			System.out.println("CH_DaoImpl BoardSearchContent Excetption->"+e.getMessage());
 		}
-		return bbsSearchContent;
+		return BoardSearchContent;
 	}
 
 	@Override
-	public List<Bbs> bbsSearchId(Bbs bbs) {
-		System.out.println("CH_DaoImpl bbsSearchId Start...");
-		List<Bbs> bbsSearchId = null;
+	public List<Board> BoardSearchId(Board Board) {
+		System.out.println("CH_DaoImpl BoardSearchId Start...");
+		List<Board> BoardSearchId = null;
 		try {
-			bbsSearchId = session.selectList("CH_BbsSearchId", bbs);
+			BoardSearchId = session.selectList("CH_BoardSearchId", Board);
 		} catch (Exception e) {
-			System.out.println("CH_DaoImpl bbsSearchId Excetption->"+e.getMessage());
+			System.out.println("CH_DaoImpl BoardSearchId Excetption->"+e.getMessage());
 		}
-		return bbsSearchId;
+		return BoardSearchId;
 	}
 
 

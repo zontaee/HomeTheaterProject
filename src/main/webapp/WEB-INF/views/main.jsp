@@ -142,12 +142,12 @@ h4{
 		<li>
 			<table class="newNotic" style="table-layout:fixed">
 				<tr>
-				<c:forEach var="bbs" items="${mainBbsList}" begin="0" end="2">	
+				<c:forEach var="board" items="${mainBoardList}" begin="0" end="2">
 					<td width="10px">
-						<label class="noticeDate">${fn:replace(bbs.bbs_date,'-',' ')}</label>
+						<label class="noticeDate">${fn:replace(board.board_date,'-',' ')}</label>
 					</td>	
 					<td width="240px">	
-						<a href="YM_views/noticeContents?bbs_no=${bbs.bbs_no }&bbs_category=${bbs.bbs_category}">${bbs.bbs_title}</a>
+						<a href="YM_views/noticeContents?board_no=${board.board_no }&board_category=${board.board_category}">${board.board_title}</a>
 					</td>
 				</c:forEach>
 				</tr>

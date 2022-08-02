@@ -5,16 +5,16 @@ import java.util.List;
 
 
 
-import com.oracle.HomeTheater.model.Bbs;
+import com.oracle.HomeTheater.model.Board;
 
 
 public interface BoardService {
-	 int           total(Bbs bbs);
-	 List<Bbs>     listBbs(Bbs bbs);
-	 Bbs           noticeContents(Bbs bbs);
-	 int 		   noticeWrite(Bbs bbs);
-	 int           contentsDelete(Bbs bbs);
-	 int           contentsUpdate(Bbs bbs);
+	 int           total(Board board);
+	 List<Board>     listboard(Board board);
+	 Board noticeContents(Board board);
+	 int 		   noticeWrite(Board board);
+	 int           contentsDelete(Board board);
+	 int           contentsUpdate(Board board);
 	 
 	
 

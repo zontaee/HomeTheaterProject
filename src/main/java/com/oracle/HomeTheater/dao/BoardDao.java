@@ -2,15 +2,15 @@ package com.oracle.HomeTheater.dao;
 
 import java.util.List;
 
-import com.oracle.HomeTheater.model.Bbs;
+import com.oracle.HomeTheater.model.Board;
 
 public interface BoardDao {
 	
-	int 			total(Bbs bbs);
-	List<Bbs>       listBbs(Bbs bbs);
-	Bbs             noticeContents(Bbs bbs);
-	int 			noticeWrite(Bbs bbs);
-	int 			contentsDelete(Bbs bbs);
-	int             contentsUpdate(Bbs bbs);
+	int 			total(Board Board);
+	List<Board>       listBoard(Board Board);
+	Board noticeContents(Board Board);
+	int 			noticeWrite(Board Board);
+	int 			contentsDelete(Board Board);
+	int             contentsUpdate(Board Board);
 	
 }

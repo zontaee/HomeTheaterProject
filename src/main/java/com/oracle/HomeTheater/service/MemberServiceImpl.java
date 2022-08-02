@@ -3,17 +3,12 @@ package com.oracle.HomeTheater.service;
 
 import java.util.List;
 
+import com.oracle.HomeTheater.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.oracle.HomeTheater.dao.MemberDao;
-import com.oracle.HomeTheater.model.Member;
-import com.oracle.HomeTheater.model.Bbs;
-import com.oracle.HomeTheater.model.ChoiceMovie;
-import com.oracle.HomeTheater.model.Movie;
-import com.oracle.HomeTheater.model.Reservation;
-import com.oracle.HomeTheater.model.SeatandTime;
-
+import com.oracle.HomeTheater.model.Board;
 
 
 @Service
@@ -30,11 +25,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<Bbs> SearchBbsList(Bbs bbs) {
-		System.out.println("CH_ServiceImpl SearchBbsList Start...");
-		List<Bbs> SearchBbsList = null;
-		SearchBbsList = cd.SearchBbsList(bbs);
-		return SearchBbsList;
+	public List<Board> SearchboardList(Board board) {
+		System.out.println("CH_ServiceImpl SearchboardList Start...");
+		List<Board> searchBoardList = null;
+		searchBoardList = cd.SearchBoardList(board);
+		return searchBoardList;
 	}
 
 	@Override
@@ -184,43 +179,43 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<Bbs> mainBbsList(Bbs bbs) {
-		System.out.println("CH_ServiceImpl mainBbsList Start...");
-		List<Bbs> mainBbsList = null;
-		mainBbsList = cd.mainBbsList(bbs);
-		return mainBbsList;
+	public List<Board> mainboardList(Board board) {
+		System.out.println("CH_ServiceImpl mainboardList Start...");
+		List<Board> mainBoardList = null;
+		mainBoardList = cd.mainBoardList(board);
+		return mainBoardList;
 	}
 
 	@Override
-	public List<Bbs> bbsSearchTotal(Bbs bbs) {
-		System.out.println("CH_ServiceImpl bbsSearchTotal Start...");
-		List<Bbs> bbsSearchTotal = null;
-		bbsSearchTotal = cd.bbsSearchTotal(bbs);
-		return bbsSearchTotal;
+	public List<Board> boardSearchTotal(Board board) {
+		System.out.println("CH_ServiceImpl boardSearchTotal Start...");
+		List<Board> boardSearchTotal = null;
+		boardSearchTotal = cd.BoardSearchTotal(board);
+		return boardSearchTotal;
 	}
 
 	@Override
-	public List<Bbs> bbsSearchTitle(Bbs bbs) {
-		System.out.println("CH_ServiceImpl bbsSearchTitle Start...");
-		List<Bbs> bbsSearchTitle = null;
-		bbsSearchTitle = cd.bbsSearchTitle(bbs);
-		return bbsSearchTitle;
+	public List<Board> boardSearchTitle(Board board) {
+		System.out.println("CH_ServiceImpl boardSearchTitle Start...");
+		List<Board> boardSearchTitle = null;
+		boardSearchTitle = cd.BoardSearchTitle(board);
+		return boardSearchTitle;
 	}
 
 	@Override
-	public List<Bbs> bbsSearchContent(Bbs bbs) {
-		System.out.println("CH_ServiceImpl bbsSearchContent Start...");
-		List<Bbs> bbsSearchContent = null;
-		bbsSearchContent = cd.bbsSearchContent(bbs);
-		return bbsSearchContent;
+	public List<Board> boardSearchContent(Board board) {
+		System.out.println("CH_ServiceImpl boardSearchContent Start...");
+		List<Board> boardSearchContent = null;
+		boardSearchContent = cd.BoardSearchContent(board);
+		return boardSearchContent;
 	}
 
 	@Override
-	public List<Bbs> bbsSearchId(Bbs bbs) {
-		System.out.println("CH_ServiceImpl bbsSearchId Start...");
-		List<Bbs> bbsSearchId = null;
-		bbsSearchId = cd.bbsSearchId(bbs);
-		return bbsSearchId;
+	public List<Board> boardSearchId(Board board) {
+		System.out.println("CH_ServiceImpl boardSearchId Start...");
+		List<Board> boardSearchId = null;
+		boardSearchId = cd.BoardSearchId(board);
+		return boardSearchId;
 	}
 
 

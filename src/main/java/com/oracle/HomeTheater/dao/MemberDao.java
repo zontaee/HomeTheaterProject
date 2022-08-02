@@ -2,18 +2,14 @@ package com.oracle.HomeTheater.dao;
 
 import java.util.List;
 
-import com.oracle.HomeTheater.model.Member;
-import com.oracle.HomeTheater.model.Bbs;
-import com.oracle.HomeTheater.model.ChoiceMovie;
-import com.oracle.HomeTheater.model.Movie;
-import com.oracle.HomeTheater.model.Reservation;
-import com.oracle.HomeTheater.model.SeatandTime;
+import com.oracle.HomeTheater.model.*;
+import com.oracle.HomeTheater.model.Board;
 
 
 public interface MemberDao {
 
 	List<Movie> SearchMovieList(Movie movie);
-	List<Bbs> SearchBbsList(Bbs bbs);
+	List<Board> SearchBoardList(Board Board);
 	Member searchUserInfo(String m_id);
 	int memberUpdate(Member member);
 	int memberDelete(String m_id);
@@ -33,11 +29,11 @@ public interface MemberDao {
 	int adminUpdateMember(Member member);
 	List<Reservation> reservationList(Reservation reservation);
 	int adminUpdateReservation(Reservation reservation);
-	List<Bbs> mainBbsList(Bbs bbs);
-	List<Bbs> bbsSearchTotal(Bbs bbs);
-	List<Bbs> bbsSearchTitle(Bbs bbs);
-	List<Bbs> bbsSearchContent(Bbs bbs);
-	List<Bbs> bbsSearchId(Bbs bbs);
+	List<Board> mainBoardList(Board Board);
+	List<Board> BoardSearchTotal(Board Board);
+	List<Board> BoardSearchTitle(Board Board);
+	List<Board> BoardSearchContent(Board Board);
+	List<Board> BoardSearchId(Board Board);
 
 
 }

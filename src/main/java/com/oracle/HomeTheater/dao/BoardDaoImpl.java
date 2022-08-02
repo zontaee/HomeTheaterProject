@@ -2,11 +2,10 @@ package com.oracle.HomeTheater.dao;
 
 import java.util.List;
 
+import com.oracle.HomeTheater.model.Board;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import com.oracle.HomeTheater.model.Bbs;
 
 @Repository
 public class BoardDaoImpl implements BoardDao {
@@ -18,13 +17,13 @@ public class BoardDaoImpl implements BoardDao {
 	//YM_게시판 글 수 조회
 	@Override
 	
-	public int total(Bbs bbs) {
+	public int total(Board Board) {
 		int tot = 0;
 		System.out.println("YM_DaoImpl Start total..." );
 		
 		// Result = > 14
 		try {
-			tot = session.selectOne("YM_TotalBbs", bbs);
+			tot = session.selectOne("YM_TotalBoard", Board);
 			System.out.println("YM_DaoImpl total tot->"+tot );
 			
 		} catch (Exception e) {
@@ -35,61 +34,53 @@ public class BoardDaoImpl implements BoardDao {
 	
 	//YM_공지사항 리스트 조회
 	@Override
-	public List<Bbs> listBbs(Bbs bbs) {
-		List<Bbs> bbsList = null;
-		System.out.println("YM_DaoImpl Start bbsList Start..." );
+	public List<Board> listBoard(Board Board) {
+		List<Board> BoardList = null;
+		System.out.println("YM_DaoImpl Start BoardList Start..." );
 		try {			
-			bbsList = session.selectList("YM_SelectListBbs", bbs);			
+			BoardList = session.selectList("YM_SelectListBoard", Board);
 			
 		} catch (Exception e) {
 			System.out.println("YM_DaoImpl Noticelist Exception->"+e.getMessage());	
 		}
 		
-		return bbsList;
+		return BoardList;
 	}
 
 	//noticeContents 공지사항 글 내용 보기
 	@Override
-	public Bbs noticeContents(Bbs bbs) {
-		Bbs bbsContents=null;
+	public Board noticeContents(Board Board) {
+		Board BoardContents =null;
 		System.out.println("YM_DaoImpl Start noticeContents..." );
 		try {
-			bbsContents = session.selectOne("YM_ClickTitleBbs", bbs);
-			System.out.println("YM_DaoImpl noticeContents getBbs_no ->"+bbs.getBbs_no());
-			System.out.println("YM_DaoImpl noticeContents getBbs_category ->"+bbs.getBbs_category());
-			System.out.println("YM_DaoImpl noticeContents getBbs_hit() ->"+bbs.getBbs_hit());
-			System.out.println("YM_DaoImpl noticeContents bbsContemts.getBbs_no , getBbs_category ->"
-												+bbsContents.getBbs_no()+","+bbsContents.getBbs_category());
-			System.out.println("YM_DaoImpl noticeContents bbsContents.getBbs_date() ->"+bbsContents.getBbs_date());
-			System.out.println("YM_DaoImpl noticeContents bbsContents.getBbs_title() ->"+bbsContents.getBbs_title());
-			System.out.println("YM_DaoImpl noticeContents bbsContents.getBbs_content() ->"+bbsContents.getBbs_content());
+			BoardContents = session.selectOne("YM_ClickTitleBoard", Board);
+
 			
 			try {  
 				//조회수 증가 시퀀스
-				System.out.println("YM_DaoImpl noticeContents YM_ClickTitleCntHitBbs start  getBbs_category() ->"+bbs.getBbs_category());
-				System.out.println("YM_DaoImpl noticeContents YM_ClickTitleCntHitBbs start  getBbs_no() ->"+bbs.getBbs_no());
-				session.update("YM_ClickTitleCntHitBbs", bbs);
+
+				session.update("YM_ClickTitleCntHitBoard", Board);
 				
 			} catch (Exception e) {
-				System.out.println("YM_DaoImpl noticeContents YM_ClickTitleCntHitBbs Exception->"+e.getMessage());	
-				System.out.println("YM_DaoImpl noticeContents YM_ClickTitleCntHitBbs  실패 getBbs_hit() ->"+bbs.getBbs_hit());
+				System.out.println("YM_DaoImpl noticeContents YM_ClickTitleCntHitBoard Exception->"+e.getMessage());	
+
 			}
 			
 		} catch (Exception e) {
 			System.out.println("YM_DaoImpl noticeContents Exception->"+e.getMessage());	
 		}
-		return bbsContents;
+		return BoardContents;
 	}
 
 //YM_noticeWrite 글 내용 작성하기
 	@Override
-	public int noticeWrite(Bbs bbs) {
+	public int noticeWrite(Board Board) {
 		int result = 0;
 		System.out.println("YM_DaoImpl noticeWrite  start.......->");	
 		try {
-			System.out.println("YM_DaoImpl noticeWrite 세션전  getBbs_category->"+bbs.getBbs_category());
-			result = session.insert("YM_InsertBbs", bbs);
-			System.out.println("YM_DaoImpl noticeWrite 세션후  getBbs_category->"+bbs.getBbs_category());
+
+			result = session.insert("YM_InsertBoard", Board);
+
 		} catch (Exception e) {
 			System.out.println("YM_DaoImpl noticeWrite Exception->"+e.getMessage());
 		}
@@ -102,34 +93,31 @@ public class BoardDaoImpl implements BoardDao {
 
 //YM_contentsDelete 글 삭제 하기
 	@Override
-	public int contentsDelete(Bbs bbs) {
+	public int contentsDelete(Board Board) {
 		System.out.println("YM_DaoImpl contentsDelete  start.......");
-		int bbsContentsDelete=0;
+		int BoardContentsDelete=0;
 		try {
-			bbsContentsDelete  = session.delete("YM_DeleteBbs",bbs);
+			BoardContentsDelete  = session.delete("YM_DeleteBoard", Board);
 		} catch (Exception e) {
 			System.out.println("YM_DaoImpl contentsDelete Exception->"+e.getMessage());
 		}
 		
-		return bbsContentsDelete;
+		return BoardContentsDelete;
 	}
 
 //YM_contentsUpdate
 	@Override
-	public int contentsUpdate(Bbs bbs) {
-		int bbsContentsUpdate=0;
+	public int contentsUpdate(Board Board) {
+		int BoardContentsUpdate=0;
 		System.out.println("YM_DaoImpl contentsUpdate start.......");
 		try {
-			System.out.println("YM_DaoImpl contentsUpdate bbs.getBbs_no()->"+bbs.getBbs_no());
-			System.out.println("YM_DaoImpl contentsUpdate getBbs_category()->"+bbs.getBbs_category());
-			System.out.println("YM_DaoImpl contentsUpdate bbs.getBbs_title()->"+bbs.getBbs_title());
-			System.out.println("YM_DaoImpl contentsUpdate bbs.getBbs_content()->"+bbs.getBbs_content());
 
-			bbsContentsUpdate=session.update("YM_UpdateBbs",bbs);
+
+			BoardContentsUpdate=session.update("YM_UpdateBoard", Board);
 		} catch (Exception e) {
 			System.out.println("YM_DaoImpl contentsUpdate Exception->"+e.getMessage());
 		}
-		return bbsContentsUpdate;
+		return BoardContentsUpdate;
 	}
 	
 

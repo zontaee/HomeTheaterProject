@@ -3,70 +3,70 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="YM_DaoImpl">
-    <select id="YM_TotalBbs" parameterType="Bbs" resultType="int">
+    <select id="YM_TotalBoard" parameterType="Board" resultType="int">
 		<![CDATA[
         SELECT Count(*)
-        FROM bbs
-        WHERE bbs_category = #{bbs_category}
+        FROM Board
+        WHERE Board_category = #{board_category}
         ]]>
 	</select>
 
-    <select id="YM_SelectListBbs" parameterType="Bbs" resultType="Bbs">
+    <select id="YM_SelectListBoard" parameterType="Board" resultType="Board">
         SELECT *
         FROM (
                  SELECT rownum rn, a.*
                  FROM (SELECT *
-                       FROM BBS
-                       WHERE bbs_category = #{bbs_category}
-                       ORDER BY bbs_no DESC
+                       FROM Board
+                       WHERE Board_category = #{board_category}
+                       ORDER BY Board_no DESC
                       ) a
              )
         WHERE rn between #{start} AND #{end}
     </select>
 
-    <select id="YM_ClickTitleBbs" parameterType="Bbs" resultType="Bbs">
+    <select id="YM_ClickTitleBoard" parameterType="Board" resultType="Board">
         select *
-        From bbs
-        Where bbs_no = #{bbs_no}
-          and bbs_category = #{bbs_category}
+        From Board
+        Where Board_no = #{board_no}
+          and Board_category = #{board_category}
     </select>
-    <!-- YM_ClickTitleBbs시 조회수 증가   -->
-    <update id="YM_ClickTitleCntHitBbs" parameterType="Bbs">
-        UPDATE bbs
-        SET bbs_hit=bbs_hit + 1
-        WHERE bbs_category = #{bbs_category}
-          and bbs_no = #{bbs_no}
+    <!-- YM_ClickTitleBoard시 조회수 증가   -->
+    <update id="YM_ClickTitleCntHitBoard" parameterType="Board">
+        UPDATE Board
+        SET Board_hit=Board_hit + 1
+        WHERE Board_category = #{board_category}
+          and Board_no = #{board_no}
     </update>
 
 
     <!-- 시퀀스 조건 카테고리 =1로 고정  -->
-    <!--  <insert id="YM_InsertBbs" parameterType="Bbs">
-          INSERT into bbs (bbs_no,
-                                     bbs_category,    bbs_title,    bbs_content,   bbs_date, m_id)
-                   VALUES(	(SELECT MAX(bbs_no )+1 FROM bbs WHERE bbs_category = 1 ) ,
-                                1   ,#{bbs_title},#{bbs_content}, #{bbs_date}, 'admin')
+    <!--  <insert id="YM_InsertBoard" parameterType="Board">
+          INSERT into Board (Board_no,
+                                     Board_category,    Board_title,    Board_content,   Board_date, m_id)
+                   VALUES(	(SELECT MAX(Board_no )+1 FROM Board WHERE Board_category = 1 ) ,
+                                1   ,#{Board_title},#{Board_content}, #{Board_date}, 'admin')
       </insert>    -->
 
-    <insert id="YM_InsertBbs" parameterType="Bbs">
-        INSERT into bbs (bbs_no,
-                         bbs_category, bbs_title, bbs_content, bbs_date, m_id)
-        VALUES ((SELECT MAX(bbs_no) + 1 FROM bbs WHERE bbs_category = #{bbs_category}),
-                #{bbs_category}, #{bbs_title}, #{bbs_content}, #{bbs_date}, 'admin')
+    <insert id="YM_InsertBoard" parameterType="Board">
+        INSERT into Board (Board_no,
+                         Board_category, Board_title, Board_content, Board_date, m_id)
+        VALUES ((SELECT MAX(Board_no) + 1 FROM Board WHERE Board_category = #{board_category}),
+                #{board_category}, #{board_title}, #{board_content}, #{board_date}, 'admin')
     </insert>
 
-    <delete id="YM_DeleteBbs" parameterType="Bbs">
+    <delete id="YM_DeleteBoard" parameterType="Board">
         delete
-        from bbs
-        where bbs_no = #{bbs_no}
-          and bbs_category = #{bbs_category}
+        from Board
+        where Board_no = #{board_no}
+          and Board_category = #{board_category}
     </delete>
 
-    <update id="YM_UpdateBbs" parameterType="Bbs">
-        UPDATE bbs
-        SET bbs_title   = #{bbs_title},
-            bbs_content = #{bbs_content}
-        where bbs_no = ${bbs_no}
-          and bbs_category = ${bbs_category}
+    <update id="YM_UpdateBoard" parameterType="Board">
+        UPDATE Board
+        SET Board_title   = #{board_title},
+            Board_content = #{board_content}
+        where Board_no = ${board_no}
+          and Board_category = ${board_category}
     </update>
 
 

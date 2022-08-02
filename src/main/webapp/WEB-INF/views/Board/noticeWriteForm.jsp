@@ -44,16 +44,16 @@
 				<h3 class="hidden">글을 작성하는 공간입니다.</ h3>
 				<!-- <form action="mainNotice"> -->
 				<form action="noticeWrite"  method="post">
-					 <input type="hidden" name="bbs_category" value="${bbs.bbs_category}">
+					 <input type="hidden" name="board_category" value="${board.board_category}">
 					<div>
-						<input type="date" name="bbs_date" required="required">
+						<input type="date" name="board_date" required="required">
 					</div>
 					<div id="BoardboardTitle">
 					<!-- name=""파라미터로 데이터를 넘겨주는역활      required-->
-						<textarea  name="bbs_title"  placeholder="제목" maxlength="100" required ></textarea>					
+						<textarea  name="board_title"  placeholder="제목" maxlength="100" required ></textarea>
 					</div>
 					<div id="BoardboardContent">
-						 <textarea name="bbs_content"  placeholder="내용" maxlength="250" required></textarea>
+						 <textarea name="board_content"  placeholder="내용" maxlength="250" required></textarea>
 					</div>
 					<div>
 						<button type="submit" onclick="location.href='mainNotice">글 작성</button>

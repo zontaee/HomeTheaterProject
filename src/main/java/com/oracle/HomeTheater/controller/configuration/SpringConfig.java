@@ -1,4 +1,4 @@
-package com.oracle.HomeTheater.configuration;
+package com.oracle.HomeTheater.controller.configuration;
 
 import javax.persistence.EntityManager;
 import javax.sql.DataSource;

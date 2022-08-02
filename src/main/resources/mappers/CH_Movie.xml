@@ -7,10 +7,10 @@
         from movie
         where mo_title like '%${mo_title}%'
     </select>
-    <select id="CH_SearchBbsList" parameterType="Bbs" resultType="Bbs">
+    <select id="CH_SearchBoardList" parameterType="Board" resultType="Board">
         select *
-        from bbs
-        where bbs_title like '%${bbs_title}%'
+        from Board
+        where Board_title like '%${board_title}%'
     </select>
     <select id="CH_SearchUserInfo" parameterType="String" resultType="Member">
         select *
@@ -135,34 +135,34 @@
             se_time   = #{se_time}
         where m_id = #{m_id}
     </update>
-    <select id="CH_MainBbsList" parameterType="bbs" resultType="bbs">
-        select bbs_title, bbs_category, bbs_no, bbs_date
-        from bbs
-        where bbs_category = '1'
-        order by bbs_date desc
+    <select id="CH_MainBoardList" parameterType="Board" resultType="Board">
+        select Board_title, Board_category, Board_no, Board_date
+        from Board
+        where Board_category = '1'
+        order by Board_date desc
     </select>
-    <select id="CH_BbsSearchTotal" parameterType="bbs" resultType="bbs">
+    <select id="CH_BoardSearchTotal" parameterType="Board" resultType="Board">
         select *
-        from bbs
-        where bbs_category = #{bbs_category}
-          and (bbs_title like '%${bbs_title}%' or bbs_content like '%${bbs_content}%' or m_id like '%${m_id}%')
+        from Board
+        where Board_category = #{board_category}
+          and (Board_title like '%${board_title}%' or Board_content like '%${board_content}%' or m_id like '%${m_id}%')
     </select>
-    <select id="CH_BbsSearchTitle" parameterType="bbs" resultType="bbs">
+    <select id="CH_BoardSearchTitle" parameterType="Board" resultType="Board">
         select *
-        from bbs
-        where bbs_category = #{bbs_category}
-          and bbs_title like '%${bbs_title}%'
+        from Board
+        where Board_category = #{board_category}
+          and Board_title like '%${board_title}%'
     </select>
-    <select id="CH_BbsSearchContent" parameterType="bbs" resultType="bbs">
+    <select id="CH_BoardSearchContent" parameterType="Board" resultType="Board">
         select *
-        from bbs
-        where bbs_category = #{bbs_category}
-          and bbs_content like '%${bbs_content}%'
+        from Board
+        where Board_category = #{board_category}
+          and Board_content like '%${board_content}%'
     </select>
-    <select id="CH_BbsSearchId" parameterType="bbs" resultType="bbs">
+    <select id="CH_BoardSearchId" parameterType="Board" resultType="Board">
         select *
-        from bbs
-        where bbs_category = #{bbs_category}
+        from Board
+        where Board_category = #{board_category}
           and m_id like '%${m_id}%'
     </select>
 </mapper>

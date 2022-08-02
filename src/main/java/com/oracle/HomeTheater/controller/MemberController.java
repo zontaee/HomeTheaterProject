@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.oracle.HomeTheater.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,12 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.oracle.HomeTheater.model.Bbs;
-import com.oracle.HomeTheater.model.ChoiceMovie;
-import com.oracle.HomeTheater.model.Member;
-import com.oracle.HomeTheater.model.Movie;
-import com.oracle.HomeTheater.model.Reservation;
-import com.oracle.HomeTheater.model.SeatandTime;
+import com.oracle.HomeTheater.model.Board;
 import com.oracle.HomeTheater.service.MemberService;
 
 
@@ -31,10 +27,10 @@ public class MemberController {
 	private MemberService cs;
 
 	@RequestMapping(value = "main")
-	public String main(Bbs bbs, Model model) {
+	public String main(Board board, Model model) {
 		System.out.println("MemberContorller main Start...");
-		List<Bbs> mainBbsList = cs.mainBbsList(bbs);
-		model.addAttribute("mainBbsList",mainBbsList);
+		List<Board> mainBoardList = cs.mainboardList(board);
+		model.addAttribute("mainboardList", mainBoardList);
 		return "main";
 	}
 	
@@ -46,12 +42,12 @@ public class MemberController {
 	
 	// 통합검색
 	@GetMapping(value="SearchTotalList")
-	public String list(Movie movie, Bbs bbs, Model model) {
+	public String list(Movie movie, Board board, Model model) {
 		System.out.println("MemberContorller SearchTotalList Start list...");
 		List<Movie> SearchMovieList = cs.SearchMovieList(movie);
-		List<Bbs> SearchBbsList = cs.SearchBbsList(bbs);
+		List<Board> searchBoardList = cs.SearchboardList(board);
 		model.addAttribute("SearchMovieList",SearchMovieList);
-		model.addAttribute("SearchBbsList",SearchBbsList);
+		model.addAttribute("SearchboardList", searchBoardList);
 		
 		return "Member/SearchTotalList";
 	}

@@ -44,18 +44,18 @@
 				<h3 class="hidden">글을 수정하는 공간입니다.</h3>
 				<!-- <form action="mainNotice"> -->
 				<form action="contentsUpdate" method="post">
-				     <input type="hidden" name="bbs_no" value="${bbsContents.bbs_no }">
-			          <input type="hidden" name="bbs_category" value="${bbsContents.bbs_category }">
+				     <input type="hidden" name="board_no" value="${boardContents.board_no }">
+			          <input type="hidden" name="board_category" value="${boardContents.board_category }">
 				
 					<div>
-						작성일 : ${bbsContents.bbs_date}
+						작성일 : ${boardContents.board_date}
 					</div>
 					<div id="BoardboardTitle">
 					<!-- name=""파라미터로 데이터를 넘겨주는역활      required-->
-						<textarea  name="bbs_title"  placeholder="제목" maxlength="100">${bbsContents.bbs_title}</textarea>					
+						<textarea  name="board_title"  placeholder="제목" maxlength="100">${boardContents.board_title}</textarea>
 					</div>
 					<div id="BoardboardContent">
-						 <textarea name="bbs_content"  placeholder="내용" maxlength="250">${bbsContents.bbs_content}</textarea>
+						 <textarea name="board_content"  placeholder="내용" maxlength="250">${boardContents.board_content}</textarea>
 					</div>
 					<div>
 						<button type="submit"  onclick="location.href='mainNotice'">글 수정</button>

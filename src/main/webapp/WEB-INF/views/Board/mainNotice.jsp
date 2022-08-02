@@ -68,20 +68,20 @@
 	
 </style>
 <script>
-function searchBbs(){
-	var bbs_category = $("#bbs_category").val();
+function searchboard(){
+	var board_category = $("#board_category").val();
 	var selectValue = $("#selectBox option:selected").text();
-	var bbs_title = $("#searchValue").val();
-	alert("카테고리="+bbs_category);
+	var board_title = $("#searchValue").val();
+	alert("카테고리="+board_category);
 	
 	if(selectValue==="전체"){
 		alert("전체이다.");
 		$.ajax({
-			url: "bbsTotal",
+			url: "boardTotal",
 			type: "GET",
 			data: {
-				"bbs_title": bbs_title,
-				"bbs_category": bbs_category
+				"board_title": board_title,
+				"board_category": board_category
 			},
 			success: function(){
 				alert("전체찾기성공");
@@ -107,12 +107,12 @@ function searchBbs(){
 
 <!-- visual box -->
 <div id="BoardnoticeVisualBox" class="wrapper">
-		<!-- bbs_category값을 이용하여 if문으로 제목 바꾸기 -->
+		<!-- board_category값을 이용하여 if문으로 제목 바꾸기 -->
 		<div id="BoardsiteLocationL">
 			<h3 id="BoardtextChangeL"></h3>
 			
 				<script type="text/javascript">	
-					if(${bbs.bbs_category}==2){
+					if(${board.board_category}==2){
 						document.getElementById("BoardtextChangeL").innerHTML = "QnA";
 					}else{
 						document.getElementById("BoardtextChangeL").innerHTML = "공지사항";
@@ -123,7 +123,7 @@ function searchBbs(){
                <a href="../main"><img src="<%=context%>/img/BoardImg/b_home.png" alt="home" style="width: 20px; height: 20px;" /></a> > 게시판 ><strong id="BoardtextChangeR"></strong>
                
                	<script type="text/javascript">	
-					if(${bbs.bbs_category}==2){
+					if(${board.board_category}==2){
 						document.getElementById("BoardtextChangeR").innerHTML = "QnA";
 					}else{
 						document.getElementById("BoardtextChangeR").innerHTML = "공지사항";
@@ -140,7 +140,7 @@ function searchBbs(){
 		
 		<!--공지사항 Qna 전환 selectBox -->
  		<form action="mainNotice">
-			 <select name="bbs_category">	
+			 <select name="board_category">
 				<option value=1>공지사항</option>	
 				<option value=2>QNA</option>	
 			</select> 
@@ -149,12 +149,12 @@ function searchBbs(){
 	
 		
 		
-		<c:if test="${fn:length(listBbs)==0}">
+		<c:if test="${fn:length(listboard)==0}">
 			<h3>Total : ${total}</h3>
 			<h2>검색한 결과가 없습니다.</h2>
 		</c:if>
 		<!-- 전체 테이블 -->
-		<c:if test="${fn:length(listBbs)!=0}">
+		<c:if test="${fn:length(listboard)!=0}">
 			<h3>Total : ${total}</h3>
 			<table border="1">		
 				<thead>
@@ -168,13 +168,13 @@ function searchBbs(){
 				</thead>
 				<tbody>	
 					<!-- DB 연결 js부분 -->
-					<c:forEach var="bbs" items="${listBbs}" varStatus="status">
+					<c:forEach var="board" items="${listboard}" varStatus="status">
 						<!-- 전체 레코드 수 - ( (현재 페이지 번호 - 1) * 한 페이지당 보여지는 레코드 수 + 현재 게시물 출력 순서 ) -->
 						<tr><td> ${pg.total-((pg.currentPage-1)*pg.rowPage+ status.index)} </td>
-							<td><a href="noticeContents?bbs_no=${bbs.bbs_no }&bbs_category=${bbs.bbs_category}">${bbs.bbs_title}</a></td>
-							<td>${bbs.bbs_hit}</td>
-							<td>${bbs.m_id}</td>
-							<td colspan="2">${bbs.bbs_date}</td>
+							<td><a href="noticeContents?board_no=${board.board_no }&board_category=${board.board_category}">${board.board_title}</a></td>
+							<td>${board.board_hit}</td>
+							<td>${board.m_id}</td>
+							<td colspan="2">${board.board_date}</td>
 						</tr>
 					</c:forEach> 
 				</tbody>
@@ -186,7 +186,7 @@ function searchBbs(){
 			<a href="mainNotice?currentPage=${pg.startPage-pg.pageBlock}">[이전]</a>
 		</c:if>
 		<c:forEach var="i" begin="${pg.startPage}" end="${pg.endPage}">
-			<a href="mainNotice?currentPage=${i}&bbs_category=${bbs.bbs_category}">[${i}]</a>
+			<a href="mainNotice?currentPage=${i}&board_category=${board.board_category}">[${i}]</a>
 		</c:forEach>
 		<c:if test="${pg.endPage < pg.totalPage }">
 			<a href="mainNotice?currentPage=${pg.startPage+pg.pageBlock}">[다음]</a>
@@ -201,14 +201,14 @@ function searchBbs(){
 					<option>내용</option>
 					<option>작성자</option>
 				</select>
-				<input type="hidden" name="bbs_category" value="${bbs.bbs_category}">
+				<input type="hidden" name="board_category" value="${board.board_category}">
 				<input type="text" name="searchValue">
 				<input type="submit" id="searchValue" value="검색">
 			</div>
 			</form>
 			<c:if test="${sessionScope.sessionId == 'admin'}">	<!-- 관리자로 로그인 했을때만 새글 쓰기 버튼 보여줌. -->
 				<div>
-					<button onclick="location.href='noticeWriteForm?bbs_category=${bbs.bbs_category}'">글쓰기</button>
+					<button onclick="location.href='noticeWriteForm?board_category=${board.board_category}'">글쓰기</button>
 				</div>
 			</c:if>
 		</div>

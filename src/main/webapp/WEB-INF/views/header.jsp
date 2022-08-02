@@ -7,10 +7,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
-	//input에 받은 text값을 bbs_title에도 넘겨주기위한 기능
+	//input에 받은 text값을 board_title에도 넘겨주기위한 기능
 	function getInputValue(){	
 		var valueByName = $('input[name=mo_title]').val();
-		$("#bbs_title").val(valueByName);
+		$("#board_title").val(valueByName);
 	}
 </script>
 <title>header</title>
@@ -132,7 +132,7 @@ a:hover{
 		<input type="text" name="mo_title" id="mo_title" style="width: 100px;" placeholder="통합 검색" 
 			   required oninvalid="this.setCustomValidity('검색어를 입력해주세요.')"
 			   oninput = "setCustomValidity('')"/>	
-		<input type="hidden" name="bbs_title" id="bbs_title">		
+		<input type="hidden" name="board_title" id="board_title">
 		<input type="submit" class="submitBtn" value="검색" onclick="getInputValue();"></li>
 	</ul>
 	</form>

@@ -2,19 +2,15 @@ package com.oracle.HomeTheater.service;
 
 import java.util.List;
 
-import com.oracle.HomeTheater.model.Member;
-import com.oracle.HomeTheater.model.Bbs;
-import com.oracle.HomeTheater.model.ChoiceMovie;
-import com.oracle.HomeTheater.model.Movie;
-import com.oracle.HomeTheater.model.Reservation;
-import com.oracle.HomeTheater.model.SeatandTime;
+import com.oracle.HomeTheater.model.*;
+import com.oracle.HomeTheater.model.Board;
 
 
 public interface MemberService {
 
     List<Movie> SearchMovieList(Movie movie);
 
-    List<Bbs> SearchBbsList(Bbs bbs);
+    List<Board> SearchboardList(Board board);
 
     Member searchUserInfo(String m_id);
 
@@ -54,15 +50,15 @@ public interface MemberService {
 
     int adminUpdateReservation(Reservation reservation);
 
-    List<Bbs> mainBbsList(Bbs bbs);
+    List<Board> mainboardList(Board board);
 
-    List<Bbs> bbsSearchTotal(Bbs bbs);
+    List<Board> boardSearchTotal(Board board);
 
-    List<Bbs> bbsSearchTitle(Bbs bbs);
+    List<Board> boardSearchTitle(Board board);
 
-    List<Bbs> bbsSearchContent(Bbs bbs);
+    List<Board> boardSearchContent(Board board);
 
-    List<Bbs> bbsSearchId(Bbs bbs);
+    List<Board> boardSearchId(Board board);
 
 
 }
