@@ -8,14 +8,14 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 <style type="text/css">
 /* MainContent Box ------------------------------------------ */
-	#YM_board_write>div{
+	#Boardboard_write>div{
 		width: 1000px;
 		border:1px solid;
 	}
-	#YM_boardTitle{
+	#BoardboardTitle{
 		height: 30px;	
 	}
-	#YM_boardContent{
+	#BoardboardContent{
 		height: 430px;	
 	}
 	
@@ -30,17 +30,17 @@
 <body>
 
 <!-- main header -->
-<div id="YM_noticeHeaderBox">
+<div id="BoardnoticeHeaderBox">
 	<%@ include file="../header.jsp"%>
 </div>
 
-<div id="YM_noticeContentBody">
+<div id="BoardnoticeContentBody">
 	<main>
-		<div id="YM_siteLocation">
+		<div id="BoardsiteLocation">
 			<h2>공지사항</h2>
 		</div>
-		<div id="YM_noticeContentBox">
-			<div id="YM_board_write">
+		<div id="BoardnoticeContentBox">
+			<div id="Boardboard_write">
 				<h3 class="hidden">글을 작성하는 공간입니다.</ h3>
 				<!-- <form action="mainNotice"> -->
 				<form action="noticeWrite"  method="post">
@@ -48,11 +48,11 @@
 					<div>
 						<input type="date" name="bbs_date" required="required">
 					</div>
-					<div id="YM_boardTitle">
+					<div id="BoardboardTitle">
 					<!-- name=""파라미터로 데이터를 넘겨주는역활      required-->
 						<textarea  name="bbs_title"  placeholder="제목" maxlength="100" required ></textarea>					
 					</div>
-					<div id="YM_boardContent">
+					<div id="BoardboardContent">
 						 <textarea name="bbs_content"  placeholder="내용" maxlength="250" required></textarea>
 					</div>
 					<div>
@@ -72,7 +72,7 @@
 
 
 <!-- main footer -->
-<div id="YM_noticeFooterBox">
+<div id="BoardnoticeFooterBox">
 	<%@ include file="../footer.jsp"%>
 </div>
 

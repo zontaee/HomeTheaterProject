@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html><html><head><meta charset="UTF-8">
-<link rel="stylesheet" href="css/CH_css/CH_FindPw.css">
+<link rel="stylesheet" href="css/member_css/MemberFindPw.css">
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>비밀번호 찾기</title>
 </head>

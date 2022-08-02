@@ -24,7 +24,7 @@ public class MailController {
 	@GetMapping(value="sendTempPw")
 	@ResponseBody
 	public MailDTO sendMail_Pw(@RequestParam("m_id") String m_id, @RequestParam("m_email") String m_email, Member member, Model model) {
-		System.out.println("CH_MailController sendMail Start...");
+		System.out.println("MemberMailController sendMail Start...");
 		
 		MailDTO dto = new MailDTO();
 		
@@ -49,7 +49,7 @@ public class MailController {
 	@GetMapping(value="sendAuthenticationNum")
 	@ResponseBody
 	public String sendMail_Id(@RequestParam("m_phonenumber") String m_phonenumber, @RequestParam("m_email") String m_email) {
-		System.out.println("CH_MailController sendMail_Id Start...");
+		System.out.println("MemberMailController sendMail_Id Start...");
 		
 		// 메일 내용에 이름을 넣어주고 싶어서 찾아옴
 		String result = cs.findName(m_phonenumber);
@@ -70,7 +70,7 @@ public class MailController {
 	@GetMapping(value = "checkNum")
 	@ResponseBody
 	public String checkNum(@RequestParam("inputNum") String inputNum, @RequestParam("num") String num, @RequestParam("m_phonenumber") String m_phonenumber) {
-		System.out.println("CH_MailController checkNum Start...");
+		System.out.println("MemberMailController checkNum Start...");
 		String id = null;
 		System.out.println("num="+num);
 		System.out.println("inpuNum="+inputNum);

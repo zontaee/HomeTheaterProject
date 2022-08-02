@@ -41,23 +41,18 @@ public class MovieController {
 		return principal.getName();
 	}
 
-	/*
-	 * @RequestMapping(value = "main") public String main() {
-	 * System.out.println("SE_Contorller main Start..."); return "main"; }
-	 */
-
 	@RequestMapping(value = "movieList") // 영화 목록
 	public String movieList(HttpServletRequest request, Model model) {
-		System.out.println("SE_Contorller main Start...");
+		System.out.println("Contorller main Start...");
 
 		List<Movie> listMovie = ses.listMovie();
 		model.addAttribute("listMovie", listMovie);
-		return "SE_views/SE_movieList";
+		return "views/movieList";
 	}
 
 	@RequestMapping(value = "movieDetail") // 영화 상세보기
 	public String movieDetail(int mo_number, HttpServletRequest request, Model model) {
-		System.out.println("SE_Contorller movieDetail Start...");
+		System.out.println("Contorller movieDetail Start...");
 		HttpSession session = request.getSession();
 		String m_id = (String) session.getAttribute("sessionId");
 		System.out.println(m_id);
@@ -77,19 +72,19 @@ public class MovieController {
 		model.addAttribute("movie", movie);
 		model.addAttribute("member", member);
 
-		return "SE_views/SE_movieDetail";
+		return "views/movieDetail";
 	}
 
 	/*
 	 * @RequestMapping(value = "likeCheck", produces =
 	 * "application/text;chraset=utf-8") public String likeCheck(int mo_number,
 	 * String m_id, Model model) {
-	 * System.out.println("SE_Contorller likeCheck Start..."); Map<String, Object>
+	 * System.out.println("Contorller likeCheck Start..."); Map<String, Object>
 	 * map = new HashMap<String, Object>(); map.put("mo_number", mo_number);
 	 * map.put("m_id", m_id); int check = ses.likeCheck(map);
 	 * System.out.println("check-> : " + check); model.addAttribute("check", check);
 	 * 
-	 * return "SE_views/SE_movieDetail"; }
+	 * return "views/movieDetail"; }
 	 */
 
 	// 영화 추천 버튼 누를 시 작동
@@ -121,28 +116,28 @@ public class MovieController {
 	// 영화 추천수에 따라 리스트 출력
 	@RequestMapping(value = "movieRecommendList")
 	public String movieRecommendList(Model model) {
-		System.out.println("SE_Contorller movieRecommendList Start...");
+		System.out.println("Contorller movieRecommendList Start...");
 		List<Movie> listRecommendMovie = ses.listRecommendMovie();
 		model.addAttribute("listRecommendMovie", listRecommendMovie);
-		return "SE_views/SE_movieRecommendList";
+		return "views/movieRecommendList";
 	}
 
 	// 관리자 영화 등록 페이지
 	@RequestMapping(value = "adminMovieAddForm")
 	public String adminMovieAddForm(Model model) {
-		System.out.println("SE_Contorller adminMovieAddForm Start...");
+		System.out.println("Contorller adminMovieAddForm Start...");
 
-		return "SE_views/SE_adminMovieAddForm";
+		return "views/adminMovieAddForm";
 	}
 
 	// 관리자 영화 등록
 	@RequestMapping(value = "adminMovieAdd", method = RequestMethod.POST)
 	public String adminMovieAdd(Movie movie, MultipartFile file, Model model) {
-		System.out.println("SE_Contorller adminMovieAdd Start...");
+		System.out.println("Contorller adminMovieAdd Start...");
 		//영화 이미지 업로드
 		String savePath="C:\\spring\\Source\\HomeTheater\\src\\main\\resources\\static\\Img\\";
 		movie.setMo_fileName("Img/"+file.getOriginalFilename());
-		System.out.println("SE_Contorller adminMovieAdd Start..." + movie.getMo_fileName());
+		System.out.println("Contorller adminMovieAdd Start..." + movie.getMo_fileName());
 		Path filePath = Paths.get(savePath + movie.getMo_fileName());
 		
 		try {
@@ -169,11 +164,11 @@ public class MovieController {
 	//관리자 영화 수정 폼
 	@GetMapping(value="adminMovieUpdateForm")
 	public String updateForm(int mo_number,Model model) {
-		System.out.println("SE_Contorller Start adminMovieUpdateForm..." );
+		System.out.println("Contorller Start adminMovieUpdateForm..." );
 		Movie movie = ses.movieDetail(mo_number);
 		model.addAttribute("movie",movie);
 
-		return "SE_views/SE_adminMovieUpdateForm";
+		return "views/adminMovieUpdateForm";
 	}
 	
 	//관리자 영화 수정 처리
@@ -189,7 +184,7 @@ public class MovieController {
 	//관리자 영화 삭제
 	@RequestMapping(value="adminMovieDelete")
 	public String adminMovieDelete(int mo_number, Model model) {
-		System.out.println("SE_Contorller Start adminMovieDelete..." );
+		System.out.println("Contorller Start adminMovieDelete..." );
 		int result = ses.adminMovieDelete(mo_number);
 		return "redirect:movieList";
 	}
@@ -198,7 +193,7 @@ public class MovieController {
 	@RequestMapping(value="/choiceMovie",method = RequestMethod.POST)
 	@ResponseBody
 	public int choiceMovie(@RequestParam Map<String, Object> param) {
-		System.out.println("SE_Contorller Start choiceMovie..." );
+		System.out.println("Contorller Start choiceMovie..." );
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("mo_number", param.get("mo_number"));

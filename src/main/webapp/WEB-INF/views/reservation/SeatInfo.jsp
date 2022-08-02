@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html><html><head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/IT_css/bootstrap-select.css">
+<link rel="stylesheet" href="css/reservation_css/bootstrap-select.css">
 
 <meta charset="UTF-8">
 <title>메인페이지</title>

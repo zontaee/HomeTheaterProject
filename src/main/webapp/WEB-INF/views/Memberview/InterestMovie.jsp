@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html><html><head><meta charset="UTF-8">
-<link rel="stylesheet" href="css/CH_css/CH_InterestMovie.css">
+<link rel="stylesheet" href="css/member_css/MemberInterestMovie.css">
 <title>관심영화</title>
 </head>
 <body>

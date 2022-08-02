@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html><html><head><meta charset="UTF-8">
-<link rel="stylesheet" href="css/CH_css/CH_FindId.css">
+<link rel="stylesheet" href="css/member_css/MemberFindId.css">
 <title>아이디 찾기</title>
 </head>
 <body>

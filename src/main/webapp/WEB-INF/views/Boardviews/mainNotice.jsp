@@ -22,7 +22,7 @@
 		 display: none;
 	}
 /* visualbox부분 --------------------------------------------------- */
-	#YM_noticeVisualBox{
+	#BoardnoticeVisualBox{
 		height: 170px;
 		weight: 1200px;
 		overflow: hidden;
@@ -34,32 +34,32 @@
 		border-bottom: 1px solid;
 	}
 	
-		#YM_siteLocationL{
+		#BoardsiteLocationL{
 			width: 130px; --background-color: red;
 			
 		}
-			#YM_siteLocationL>h3{
+			#BoardsiteLocationL>h3{
 				font-size: 30px;
 			}
 		
-		#YM_siteLocationR{
+		#BoardsiteLocationR{
 			--background-color: green;
 			font-size: 20px;
 			text-decoration: underline;
 		}
 /*--------------------------------------------------------------  */
-	#YM_mainContentFooter{
+	#BoardmainContentFooter{
 		display: flex;
 		flex-direction: row;
 		align-content: center;
 		justify-content: space-around;
 		
 	}
-		 #YM_mainContentFooter>div:nth-child(1){
+		 #BoardmainContentFooter>div:nth-child(1){
 			background: white;
 			
 		}
-		#YM_mainContentFooter>div:nth-child(2){
+		#BoardmainContentFooter>div:nth-child(2){
 			background: green;
 			
 		}
@@ -101,41 +101,41 @@ function searchBbs(){
 <body>
 
 <!-- main header -->
-<div id="YM_noticeHeaderBox">
+<div id="BoardnoticeHeaderBox">
 	<%@ include file="../header.jsp"%>
 </div>
 
 <!-- visual box -->
-<div id="YM_noticeVisualBox" class="wrapper">
+<div id="BoardnoticeVisualBox" class="wrapper">
 		<!-- bbs_category값을 이용하여 if문으로 제목 바꾸기 -->
-		<div id="YM_siteLocationL">
-			<h3 id="YM_textChangeL"></h3>	
+		<div id="BoardsiteLocationL">
+			<h3 id="BoardtextChangeL"></h3>
 			
 				<script type="text/javascript">	
 					if(${bbs.bbs_category}==2){
-						document.getElementById("YM_textChangeL").innerHTML = "QnA";
+						document.getElementById("BoardtextChangeL").innerHTML = "QnA";
 					}else{
-						document.getElementById("YM_textChangeL").innerHTML = "공지사항";
+						document.getElementById("BoardtextChangeL").innerHTML = "공지사항";
 					}
 				</script>			
 		</div>
-		<div id="YM_siteLocationR">
-               <a href="../main"><img src="<%=context%>/img/YM_Img/b_home.png" alt="home" style="width: 20px; height: 20px;" /></a> > 게시판 ><strong id="YM_textChangeR"></strong>
+		<div id="BoardsiteLocationR">
+               <a href="../main"><img src="<%=context%>/img/BoardImg/b_home.png" alt="home" style="width: 20px; height: 20px;" /></a> > 게시판 ><strong id="BoardtextChangeR"></strong>
                
                	<script type="text/javascript">	
 					if(${bbs.bbs_category}==2){
-						document.getElementById("YM_textChangeR").innerHTML = "QnA";
+						document.getElementById("BoardtextChangeR").innerHTML = "QnA";
 					}else{
-						document.getElementById("YM_textChangeR").innerHTML = "공지사항";
+						document.getElementById("BoardtextChangeR").innerHTML = "공지사항";
 					}
 				</script>	
                
 		</div>		
 </div>
-<div id="YM_noticeMainBox" class="wrapper">
+<div id="BoardnoticeMainBox" class="wrapper">
 
 	<!--본문 -->
-	<main id="YM_mainContent">
+	<main id="BoardmainContent">
 		<h2 class="hidden">본문내용</h2>
 		
 		<!--공지사항 Qna 전환 selectBox -->
@@ -192,8 +192,8 @@ function searchBbs(){
 			<a href="mainNotice?currentPage=${pg.startPage+pg.pageBlock}">[다음]</a>
 		</c:if>		 
 			
-		<div id="YM_mainContentFooter" >
-			<form action="<%=context%>/YM_views/mainNotice" method="GET">
+		<div id="BoardmainContentFooter" >
+			<form action="<%=context%>/Boardviews/mainNotice" method="GET">
 			<div>
 				<select name="selectBox">
 					<option>전체</option>
@@ -217,7 +217,7 @@ function searchBbs(){
 </div>
 	
 <!-- main footer-->
-<div id="YM_noticeFooterBox">
+<div id="BoardnoticeFooterBox">
 	<%@ include file="../footer.jsp"%>
 </div>
 	

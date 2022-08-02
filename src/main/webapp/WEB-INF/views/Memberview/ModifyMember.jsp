@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html><html><head><meta charset="UTF-8">
-<link rel="stylesheet" href="css/CH_css/CH_ModifyMember.css">
+<link rel="stylesheet" href="css/member_css/MemberModifyMember.css">
 <title>회원정보변경</title>
 <script>
 function memberDelete(){

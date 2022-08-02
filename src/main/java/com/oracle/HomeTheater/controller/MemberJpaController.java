@@ -29,15 +29,15 @@ public class MemberJpaController {
 	// 이용약관 폼
 	@GetMapping(value = "terms")
 	public String terms() {
-		System.out.println("CH_MemberJpaController terms Start...");
-		return "CH_view/CH_Terms";
+		System.out.println("MemberJpaController terms Start...");
+		return "Memberview/Terms";
 	}
 
 	// 회원가입 폼 
 	@GetMapping(value = "joinMember")
 	public String joinUserForm() {
-		System.out.println("CH_MemberJpaController joinUserForm Start...");
-		return "CH_view/CH_JoinMember";
+		System.out.println("MemberJpaController joinUserForm Start...");
+		return "Memberview/JoinMember";
 	}
 	
 	// 회원가입
@@ -45,7 +45,7 @@ public class MemberJpaController {
 	public String joinUser(MemberJpa member,@RequestParam("phone1") String phone1, @RequestParam("phone2") String phone2, @RequestParam("phone3") String phone3,
 			@RequestParam("mail1") String mail1, @RequestParam("mail2") String mail2, @RequestParam("zipcode") String zipcode, @RequestParam("roadAddress") String roadAddress,
 			@RequestParam("jibunAddress") String jibunAddress, @RequestParam("detailAddress") String detailAddress, @RequestParam("extraAddress") String extraAddress, Model model) {
-		System.out.println("CH_MemberJpaController joinMember/save Start...");
+		System.out.println("MemberJpaController joinMember/save Start...");
 		String m_phonenumber = phone1 + "-" + phone2 + "-" + phone3;
 		String m_email = mail1 + "@" + mail2;
 		String m_address = zipcode + roadAddress + jibunAddress + detailAddress + extraAddress;
@@ -59,8 +59,8 @@ public class MemberJpaController {
 	// 로그인 폼
 	@GetMapping(value="loginForm")
 	public String loginForm() {
-		System.out.println("CH_MemberJpaController loginForm Start...");
-		return "CH_view/CH_Login";
+		System.out.println("MemberJpaController loginForm Start...");
+		return "Memberview/Login";
 	}
 
 	// 로그인
@@ -73,7 +73,7 @@ public class MemberJpaController {
 
 		if (memberVO == null) {
 			model.addAttribute("loginMessage", "아이디 혹은 비밀번호가 틀립니다.");
-			return "CH_view/CH_Login";
+			return "Memberview/Login";
 		}
 		// 로그인 성공 처리
 		// 세션이 있으면 있는 세션 반환, 없으면 신규 세션 생성
@@ -97,21 +97,21 @@ public class MemberJpaController {
 	// 로그아웃
 	@RequestMapping(value = "logout")
 	public String logout(HttpServletRequest request) {
-		System.out.println("CH_MemberJpaController logout Start...");
+		System.out.println("MemberJpaController logout Start...");
 		HttpSession session = request.getSession();
 		session.invalidate();
-		return "CH_view/CH_Login";
+		return "Memberview/Login";
 	}
 
 	// 마이페이지 폼
 	@RequestMapping(value = "myPage")
 	public String myPage(HttpSession session) {
-		System.out.println("CH_MemberJpaController myPage Start...");
+		System.out.println("MemberJpaController myPage Start...");
 		String m_id = (String)session.getAttribute("sessionId");
 		if(m_id == null) {
-			return "CH_view/CH_Login";
+			return "Memberview/Login";
 		}
-		return "CH_view/CH_MyPage";
+		return "Memberview/MyPage";
 	}
 	
 	

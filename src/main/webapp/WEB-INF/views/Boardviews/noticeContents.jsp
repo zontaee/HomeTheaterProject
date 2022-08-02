@@ -7,7 +7,7 @@
 <title>공지사항 글 내용 페이지야~</title>
 <style type="text/css">
 /* MainContent Box ------------------------------------------ */
-	#YM_MainContentsBox>div{
+	#BoardMainContentsBox>div{
 		width: 1000px;
 		border:1px solid;
 	}
@@ -27,18 +27,18 @@
 
 
 <!-- main header -->
-<div id="YM_NoticeContentsHeaderBox">
+<div id="BoardNoticeContentsHeaderBox">
 	<%@ include file="../header.jsp"%>
 </div>
 
-<div id="YM_NoticeContentsBody">
+<div id="BoardNoticeContentsBody">
 
-	<main id="YM_NoticeContentsMainBox">
-		<div class="YM_siteLocation">
+	<main id="BoardNoticeContentsMainBox">
+		<div class="BoardsiteLocation">
 			<h2>공지사항 or Qna</h2>
 		</div>
 		
-		<div id="YM_MainContentsBox">	
+		<div id="BoardMainContentsBox">
 			<div id="boardDate">
 				작성일 : ${bbsContents.bbs_date}
 			</div>
@@ -50,7 +50,7 @@
 			</div>	
 		</div>
 
-		<div id="YM_Mainfooter">
+		<div id="BoardMainfooter">
 			<div>
 				<button onclick="location.href='mainNotice'" >목록</button>
 				<c:if test="${sessionScope.sessionId == 'admin'}">			<!-- 관리자로 로그인 했을때만 수정, 삭제 버튼 보여줌. -->
@@ -67,7 +67,7 @@
 
 
 <!-- main footer -->
-<div id="YM_NoticeContentsFooterBox">
+<div id="BoardNoticeContentsFooterBox">
 	<%@ include file="../footer.jsp"%>
 </div>
 

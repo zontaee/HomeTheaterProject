@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>    
 <!DOCTYPE html><html><head><meta charset="UTF-8">
-<link rel="stylesheet" href="css/CH_css/CH_ReservationList.css">
+<link rel="stylesheet" href="css/member_css/MemberReservationList.css">
 <script>
 function updateReservation(Vindex){
 	var m_id = $("#m_id" + Vindex).val();
