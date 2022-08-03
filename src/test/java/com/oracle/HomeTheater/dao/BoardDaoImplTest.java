@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -39,16 +40,18 @@ class BoardDaoImplTest {
 
     @Test
     void insertBoard() {
-        Board board = new Board(1, "testname", "testcontent", "11", 0);
+        Board board = new Board(1,1, "testname", "testcontent", "11", 0);
         testDao.insertBoard(board);
     }
 
     @Test
     void total() {
-        Board board = new Board(1, "testname", "testcontent", "11", 0);
+        Board board = new Board(1,1, "testname", "testcontent", "11", 0);
+        Board board2 = new Board(2,1, "testname", "testcontent", "11", 0);
         testDao.insertBoard(board);
+        testDao.insertBoard(board2);
         int total = boardDao.total(board);
-        assertThat(total).isEqualTo(1);
+        assertThat(total).isEqualTo(2);
     }
 
     @Test
