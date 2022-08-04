@@ -76,7 +76,7 @@
 						<td><a href="YM_views/noticeContents?board_no=${board.board_no }&board_category=${board.board_category}">${board.board_title}</a></td>
 						<td>${board.board_date}</td>
 						<td>${board.board_hit}</td>
-						<td>${board.m_id}</td>
+						<td>${board.memberId}</td>
 					</tr>
 					</c:forEach>
 				</table>

@@ -28,14 +28,14 @@ function memberDelete(){
  	<div class="form-grou row">
  		<label class="col-sm-2"><b>아이디:</b></label>
  		<div class="col-sm-3">
-	 		<input type="text" id="id" name="m_id" value="${member.m_id}" readonly><br><br>
+	 		<input type="text" id="id" name="memberId" value="${memberJpa.memberId}" readonly><br><br>
  		</div>
 	 </div>
 	 		
 	 <div class="form-grou row">
  		<label class="col-sm-2"><b>비밀번호:</b></label>
  		<div class="col-sm-3">
-	 		<input type="password" id="password" name="m_password" value="${member.m_password }" readonly><br><br>
+	 		<input type="password" id="password" name="memberPassword" value="${memberJpa.memberPassword }" readonly><br><br>
  		</div>
  		<div class="col-sm-1">
  			<input type="button" id="popup_open_btn" value="비밀번호변경" >
@@ -45,28 +45,28 @@ function memberDelete(){
 	 <div class="form-grou row">
 	 	<label class="col-sm-2"><b>이름:</b></label>
  		<div class="col-sm-3">
-	 		<input type="text" id="m_name" name="m_name" value="${member.m_name}" required><br><br>
+	 		<input type="text" id="memberName" name="memberName" value="${memberJpa.memberName}" required><br><br>
  		</div>
 	 </div>
 	 		
 	 <div class="form-grou row">
  		<label class="col-sm-2"><b>전화번호:</b></label>
  		<div class="col-sm-3">
-			<input type="text" id="phone" name="m_phonenumber" value="${member.m_phonenumber}" readonly><br><br>
+			<input type="text" id="phone" name="memberPhonenumber" value="${memberJpa.memberPhonenumber}" readonly><br><br>
  		</div>
 	 </div>
 	 		
 	 <div class="form-grou row">
  		<label class="col-sm-2"><b>주소:</b></label>
  		<div class="col-sm-3">
-			<input type="text" name="m_address" value="${member.m_address }" required><br><br>
+			<input type="text" name="memberAddress" value="${memberJpa.memberAddress }" required><br><br>
  		</div>
 	 </div>
 	 		
 	 <div class="form-grou row">
  	 	<label class="col-sm-2"><b>이메일:</b></label>
  		<div class="col-sm-3">
-			<input type="text" id="m_email" name="m_email" value="${member.m_email }" required><br><br><br><br>
+			<input type="text" id="memberEmail" name="memberEmail" value="${memberJpa.memberEmail }" required><br><br><br><br>
  		</div>
 	 </div>
 	 <input class="btn" type="submit" value="확인 " style="font-weight: bold;" onclick="checkForm()">
@@ -84,8 +84,8 @@ function memberDelete(){
 	    <input id="modalInput" class="newPw" type="password" name="m_newPassword" required><br>
 	    <b>새로운 비밀번호 확인</b>
 	    <input id="modalInput" type="password" name="m_newPasswordConfirm" required><br><br>
-	    <input type="hidden" name="m_id" value="${member.m_id}">
-	    <input type="hidden" name="m_name" value="${member.m_name}">
+	    <input type="hidden" name="memberId" value="${memberJpa.memberId}">
+	    <input type="hidden" name="memberName" value="${memberJpa.memberName}">
 	    
 	    <input type="submit" class="btn" value="확인" onclick="checkPassword()">
 	    <input type="button" class="btn" value="취소" onclick="location.href='modifyForm'">
@@ -94,6 +94,6 @@ function memberDelete(){
  <%@ include file="../footer.jsp"%>
  </div>
 </div>
-<script type="text/javascript" src="js/member/ModifyMember.js"></script>
+<script type="text/javascript" src="js/memberJpa/ModifyMember.js"></script>
 </body>
 </html>

@@ -94,7 +94,7 @@ function movieDelete(){
 					</c:when>
 					<c:otherwise>
 					var mo_num = ${movie.mo_number};
-					var m_num = "${member.m_id}";
+					var m_num = "${memberJpa.m_id}";
 					
 					     $.ajax({
 					            type : "POST",  
@@ -141,7 +141,7 @@ function movieDelete(){
 					</c:when>
 					<c:otherwise>
 						var mo_num = ${movie.mo_number};
-						var m_num = "${member.m_id}";
+						var m_num = "${memberJpa.m_id}";
 				
 					   	 	 $.ajax({
 					  	     	     type : "POST",  
@@ -176,7 +176,7 @@ function movieDelete(){
 /* function recommendationUpdate(){ 
 		
 		var mo_num = ${movie.mo_number};
-		var m_num = "${member.m_id}";
+		var m_num = "${memberJpa.m_id}";
 		
 		     $.ajax({
 		            type : "POST",  

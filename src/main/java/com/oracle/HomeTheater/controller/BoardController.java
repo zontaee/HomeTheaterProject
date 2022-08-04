@@ -23,16 +23,10 @@ import com.oracle.HomeTheater.service.BoardService;
 @Controller
 public class BoardController {
 	@Autowired
-	private BoardService ymService;
+	private BoardService boardService;
 	@Autowired
-	private MemberService cs;
-	
-////main 페이지
-//	@RequestMapping(value = "main")
-//	public String main() {
-//		System.out.println("MemberContorller main Start...");
-//		return "main";
-//	}
+	private MemberService memberService;
+
 	
 //메인페이지 -> 공지사항클릭
 	@RequestMapping(value="Board/mainNotice")
@@ -51,7 +45,7 @@ public class BoardController {
 		System.out.println("BoardContorller mainNotice 연산을 거친  board.getboard_category()->"+ board.getBoard_category() );
 		
 		System.out.println("BoardContorller mainNotice Start list..." );
-		int total = ymService.total(board);   // board Count -> 42
+		int total = boardService.total(board);   // board Count -> 42
 		System.out.println("BoardContorller total=>" + total);
 		
 		//paging		
@@ -70,7 +64,7 @@ public class BoardController {
 		int board_category = board.getBoard_category();
 		
 		if(selectBox==null || searchValue==null) {
-			listboard = ymService.listboard(board);
+			listboard = boardService.listboard(board);
 		}else {
 			// 검색 조회에 필요한 값들 셋팅
 			board.setBoard_title(searchValue);
@@ -79,16 +73,16 @@ public class BoardController {
 			board.setBoard_category(board_category);
 			
 			if(selectBox.equals("전체")) {
-				listboard = cs.boardSearchTotal(board);
+				listboard = memberService.boardSearchTotal(board);
 				total = listboard.size();
 			}else if(selectBox.equals("제목")) {
-				listboard = cs.boardSearchTitle(board);
+				listboard = memberService.boardSearchTitle(board);
 				total = listboard.size();
 			}else if(selectBox.equals("내용")) {
-				listboard = cs.boardSearchContent(board);
+				listboard = memberService.boardSearchContent(board);
 				total = listboard.size();
 			}else if(selectBox.equals("작성자")) {
-				listboard = cs.boardSearchId(board);
+				listboard = memberService.boardSearchId(board);
 				total = listboard.size();
 			}
 		} // 검색기능을 위해 추가한 부분 end
@@ -109,7 +103,7 @@ public class BoardController {
 		System.out.println("BoardContorller noticeContents Start...");
 		System.out.println("Board" + board.toString());
 		
-		Board boardContents = ymService.noticeContents(board);
+		Board boardContents = boardService.noticeContents(board);
 
 		System.out.println("BoardContorller noticeContents finsh...");
 		
@@ -133,7 +127,7 @@ public class BoardController {
 		@RequestMapping(value = "Board/noticeWrite", method = RequestMethod.POST )
 		public String noticeWrite(Board board, Model model) {
 			System.out.println("BoardContorller noticeWrite start...");		
-			int result = ymService.noticeWrite(board);
+			int result = boardService.noticeWrite(board);
 			System.out.println("BoardContorller noticeWrite db data input...");		
 			if(result>0) {
 				return "forward:mainNotice";
@@ -147,7 +141,7 @@ public class BoardController {
 		@RequestMapping(value = "Board/contentsDelete")
 		public String contentsDelete(Board board, Model model) {
 			System.out.println("BoardContorller contentsDelete start...");
-			int boardDelete = ymService.contentsDelete(board);
+			int boardDelete = boardService.contentsDelete(board);
 			System.out.println("BoardContorller contentsDelete finsh");	
 			return "redirect:mainNotice";
 		}
@@ -159,7 +153,7 @@ public class BoardController {
 			System.out.println("BoardContorller contentsUpdateForm Start...");
 			
 			//noticeContents.jsp 와 동일한 메소드 사용 
-			Board boardContents = ymService.noticeContents(board);
+			Board boardContents = boardService.noticeContents(board);
 			System.out.println("BoardContorller contentsUpdateForm boardContents.getboard_date() ->"+ boardContents.getBoard_date());
 			System.out.println("BoardContorller contentsUpdateForm boardContents.getboard_title() ->"+ boardContents.getBoard_title());
 			System.out.println("BoardContorller contentsUpdateForm boardContents.getboard_content() ->"+ boardContents.getBoard_content());
@@ -175,7 +169,7 @@ public class BoardController {
 		@RequestMapping(value = "Board/contentsUpdate", method = RequestMethod.POST )
 		public String contentsUpdate(Board board, Model model) {
 			System.out.println("BoardContorller contentsUpdate start...");
-			int boardContentsUpdate = ymService.contentsUpdate(board);
+			int boardContentsUpdate = boardService.contentsUpdate(board);
 			System.out.println("BoardContorller contentsUpdate db data input boardContentsUpdate->"+boardContentsUpdate );		
 			if(boardContentsUpdate>0) {
 				System.out.println("BoardContorller contentsUpdate db data boardContentsUpdate 성공");		

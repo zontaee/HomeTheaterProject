@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.oracle.HomeTheater.domain.MemberJpa;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.oracle.HomeTheater.domain.MemberJpa;
 import com.oracle.HomeTheater.service.MemberJpaService;
 
 @Controller
+@Slf4j
 public class MemberJpaController {
 	private final MemberJpaService memberJpaService;
 	
@@ -42,17 +44,17 @@ public class MemberJpaController {
 	
 	// 회원가입
 	@RequestMapping(value = "joinMember/save")
-	public String joinUser(MemberJpa member,@RequestParam("phone1") String phone1, @RequestParam("phone2") String phone2, @RequestParam("phone3") String phone3,
-			@RequestParam("mail1") String mail1, @RequestParam("mail2") String mail2, @RequestParam("zipcode") String zipcode, @RequestParam("roadAddress") String roadAddress,
-			@RequestParam("jibunAddress") String jibunAddress, @RequestParam("detailAddress") String detailAddress, @RequestParam("extraAddress") String extraAddress, Model model) {
+	public String joinUser(MemberJpa memberJpa, @RequestParam("phone1") String phone1, @RequestParam("phone2") String phone2, @RequestParam("phone3") String phone3,
+						   @RequestParam("mail1") String mail1, @RequestParam("mail2") String mail2, @RequestParam("zipcode") String zipcode, @RequestParam("roadAddress") String roadAddress,
+						   @RequestParam("jibunAddress") String jibunAddress, @RequestParam("detailAddress") String detailAddress, @RequestParam("extraAddress") String extraAddress, Model model) {
 		System.out.println("MemberJpaController joinMember/save Start...");
 		String m_phonenumber = phone1 + "-" + phone2 + "-" + phone3;
 		String m_email = mail1 + "@" + mail2;
 		String m_address = zipcode + roadAddress + jibunAddress + detailAddress + extraAddress;
-		member.setM_address(m_address);
-		member.setM_email(m_email);
-		member.setM_phonenumber(m_phonenumber);
-		memberJpaService.joinUser(member);
+		memberJpa.setMemberAddress(m_address);
+		memberJpa.setMemberEmail(m_email);
+		memberJpa.setMemberPhonenumber(m_phonenumber);
+		memberJpaService.joinUser(memberJpa);
 		return "redirect:/loginForm";
 	}
 	
@@ -65,13 +67,15 @@ public class MemberJpaController {
 
 	// 로그인
 	@PostMapping(value = "login")
-	public String login(MemberJpa member, Model model, HttpServletRequest request, HttpSession session, HttpServletResponse response) {
+	public String login(MemberJpa memberJpa, Model model, HttpServletRequest request, HttpSession session, HttpServletResponse response) {
 		String sessionUrl = String.valueOf(session.getAttribute("sessionUrl")).substring(1);
 		System.out.println("sessionUrl =" + sessionUrl);
-		session.invalidate();
-		MemberJpa memberVO = memberJpaService.loginUser(member.getM_id(), member.getM_password());
+		log.info("controller memberId={},memberpassword={}" + memberJpa.getMemberId(), memberJpa.getMemberPassword());
 
-		if (memberVO == null) {
+		session.invalidate();
+		MemberJpa memberJpaVO = memberJpaService.loginUser(memberJpa.getMemberId(), memberJpa.getMemberPassword());
+
+		if (memberJpaVO == null) {
 			model.addAttribute("loginMessage", "아이디 혹은 비밀번호가 틀립니다.");
 			return "Member/Login";
 		}
@@ -80,10 +84,10 @@ public class MemberJpaController {
 		session = request.getSession();
 
 		// 로그인 세션 유지를 위해 header부분에 있는 userName으로 세션 저장
-		session.setAttribute("userName", memberVO.getM_name());
-		session.setAttribute("sessionId", memberVO.getM_id());
-		model.addAttribute("sessionId", memberVO.getM_id());
-		model.addAttribute("userName", memberVO.getM_name());
+		session.setAttribute("userName", memberJpaVO.getMemberName());
+		session.setAttribute("sessionId", memberJpaVO.getMemberId());
+		model.addAttribute("sessionId", memberJpaVO.getMemberId());
+		model.addAttribute("userName", memberJpaVO.getMemberName());
 		if (sessionUrl.equals("ull")) {
 			return "forward:/main";
 		}else {

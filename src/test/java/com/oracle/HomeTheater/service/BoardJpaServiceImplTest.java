@@ -1,6 +1,5 @@
 package com.oracle.HomeTheater.service;
 
-import com.oracle.HomeTheater.dao.BoardDao;
 import com.oracle.HomeTheater.dao.TestDao;
 import com.oracle.HomeTheater.domain.MemberJpa;
 import com.oracle.HomeTheater.model.Board;
@@ -16,11 +15,10 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @Transactional
 @SpringBootTest
-class BoardServiceImplTest {
+class BoardJpaServiceImplTest {
     @Autowired
     BoardService boardService;
     @Autowired
@@ -40,7 +38,7 @@ class BoardServiceImplTest {
 
     @Test
     void total() {
-        Board board = new Board(1, 1, "testname", "testcontent", "11", 0);
+        Board board = new Board(1L, 1, "testname", "testcontent", "11", 0);
         testDao.insertBoard(board);
 
         int total = boardService.total(board);
@@ -50,7 +48,7 @@ class BoardServiceImplTest {
 
     @Test
     void listboard() {
-        Board board = new Board(1, 1, "testname", "testcontent", "11", 0);
+        Board board = new Board(1L, 1, "testname", "testcontent", "11", 0);
         testDao.insertBoard(board);
         int total = 1;
         String currentPage = "1";
@@ -64,7 +62,7 @@ class BoardServiceImplTest {
 
     @Test
     void noticeContents() {
-        Board board = new Board(1, 1, "testname", "testcontent", "11", 0);
+        Board board = new Board(1L, 1, "testname", "testcontent", "11", 0);
         testDao.insertBoard(board);
         Board boardContents = boardService.noticeContents(board);
         assertThat(boardContents.getBoard_title()).isEqualTo("testname");
@@ -74,7 +72,7 @@ class BoardServiceImplTest {
 
     @Test
     void noticeWrite() {
-        Board board = new Board(1, 1, "testname", "testcontent", "11", 0);
+        Board board = new Board(1L, 1, "testname", "testcontent", "11", 0);
         testDao.insertBoard(board);
         Board board2 = new Board(1, "testname", "testcontent", "11", 0);
         int resultNumber = boardService.noticeWrite(board);
@@ -85,7 +83,7 @@ class BoardServiceImplTest {
 
     @Test
     void contentsDelete() {
-        Board board = new Board(1, 1, "testname", "testcontent", "11", 0);
+        Board board = new Board(1L, 1, "testname", "testcontent", "11", 0);
         testDao.insertBoard(board);
         int resultnumber = boardService.contentsDelete(board);
         assertThat(resultnumber).isEqualTo(1);
@@ -94,9 +92,9 @@ class BoardServiceImplTest {
 
     @Test
     void contentsUpdate() {
-        Board board = new Board(1, 1, "testname", "testcontent", "11", 0);
+        Board board = new Board(1L, 1, "testname", "testcontent", "11", 0);
         testDao.insertBoard(board);
-        Board changeBoard = new Board(1, 1, "changeName", "testcontent", "11", 0);
+        Board changeBoard = new Board(1L, 1, "changeName", "testcontent", "11", 0);
         int resultnumber = boardService.contentsUpdate(changeBoard);
         assertThat(resultnumber).isEqualTo(1);
         Board findBoard = boardService.noticeContents(changeBoard);

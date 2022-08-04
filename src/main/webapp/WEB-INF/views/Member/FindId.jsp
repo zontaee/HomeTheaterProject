@@ -16,9 +16,9 @@
  			<form action="forward:/checkNum" name="emailCert">
  				<br><br>
  				<b id="inputTag">핸드폰 번호</b><br>
- 				<input type="text" id="m_phonenumber" placeholder="ex) 010-1234-5678" required><br><br>
+ 				<input type="text" id="memberPhonenumber" placeholder="ex) 010-1234-5678" required><br><br>
  				<b id="inputTag">이메일 주소</b><br>
- 				<input type="text" id="m_email" onchange="checkEmail()" required>
+ 				<input type="text" id="memberEmail" onchange="checkEmail()" required>
  				<b class="emailFind">가입하신 이메일과 같습니다. 발급버튼을 눌러주세요.<br>(시간이 조금 걸릴수도 있습니다. 잠시만 기다려주세요.)</b>
 		    	<b class="emailNotFind">가입하신 이메일과 다릅니다. 다시 입력해주세요.</b><br>
  				<input type="button" id="sendEmail" value="인증번호 발급"><br>
@@ -31,6 +31,6 @@
  	<%@ include file="../footer.jsp"%>
  </div>
 </div>
-<script type="text/javascript" src="js/member/FindId.js"></script>
+<script type="text/javascript" src="js/memberJpa/FindId.js"></script>
 </body>
 </html>

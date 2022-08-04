@@ -1,4 +1,4 @@
-DROP TABLE member CASCADE CONSTRAINTS ;
+DROP TABLE memberJpa CASCADE CONSTRAINTS ;
 DROP TABLE movie CASCADE CONSTRAINTS ;
 DROP TABLE seatandtime CASCADE CONSTRAINTS ;
 DROP TABLE BBS CASCADE CONSTRAINTS ;
@@ -14,7 +14,7 @@ DROP SEQUENCE RESERVATION_SEQ;
 DROP SEQUENCE ACTOR_SEQ;
 ----------------------------------------------------
 --회원테이블--
-CREATE TABLE member( 
+CREATE TABLE memberJpa(
 m_id          VARCHAR2(15) PRIMARY key,  --회원 아이디 기본키
 m_password    VARCHAR2(15) NOT NULL ,    --회원 패스워드
 m_name        VARCHAR2(15) NOT NULL ,    --회원 이름
@@ -36,7 +36,7 @@ bbs_hit      NUMBER(4)     DEFAULT '0', -- 조회수
 m_id         VARCHAR2(15)          , -- id 외래키
 
  FOREIGN KEY(m_id)
-REFERENCES member(m_id),
+REFERENCES memberJpa(m_id),
 CONSTRAINT BBS_PK PRIMARY KEY(bbs_No  , bbs_category )
 );
 ----------------------------------------------------
@@ -60,7 +60,7 @@ m_id  VARCHAR2(15),     --회원아이디
 mo_number NUMBER(4),    --영화번호
 m_selected    VARCHAR2(1) DEFAULT 'F' ,    --찜한 영화
  FOREIGN KEY(m_id)
-REFERENCES member(m_id),
+REFERENCES memberJpa(m_id),
 FOREIGN KEY(mo_number)
 REFERENCES movie(mo_number),
 CONSTRAINT CHOICE_PK PRIMARY KEY(m_id , mo_number )
@@ -93,7 +93,7 @@ mo_number NUMBER(4),                --영화번호
 FOREIGN KEY(se_number,se_time,mo_number,se_date)
 REFERENCES seatandtime(se_number,se_time,mo_number,se_date),
 FOREIGN KEY(m_id )
-REFERENCES member(m_id),
+REFERENCES memberJpa(m_id),
 CONSTRAINT RESERVATION_PK PRIMARY KEY(se_number  , se_time ,se_date,mo_number )
 );
 ----------------------------------------------------
@@ -338,7 +338,7 @@ INSERT INTO "ACTOR" (MO_NUMBER, AC_NUMBER, AC_NAME, AC_BIRTHDAY, AC_FILE) VALUES
 COMMIT;
  
  --ver1.6 좌석정보 추가(한타임 좌석 30개)\
- --ver1.7 결제(payment 테이블 resesrvation table과 병합 포인트 사용 여부 칼럼 삭제, 결제 포인트 member 테이블로 이동  ) 
+ --ver1.7 결제(payment 테이블 resesrvation table과 병합 포인트 사용 여부 칼럼 삭제, 결제 포인트 memberJpa 테이블로 이동  )
  --ver1.8 reservation 테이블 기본키 변경 예약번호는 유니크로 제약.
  --ver1.9 맴버 테이블 주소 50 ->200으로 변경
  --ver2.0 회원정보, 영화정보, 게시판정보 삽입 수정

@@ -1,9 +1,9 @@
 @CHARSET "UTF-8";
-.m_id{
+.memberId{
 	background-color: #EAEAEA;
 	width: 100px;
 }
-.m_address{
+.memberAddress{
 	width: 250px;
 }
 .m_point{

@@ -12,4 +12,8 @@ public class ExceptionController {
     public String doubleBooking() {
         return "reservation/doubleBooking";
     }
+    @ExceptionHandler(NullPointerException.class)
+    public String nullPointerException() {
+        return "reservation/doubleBooking";
+    }
 }

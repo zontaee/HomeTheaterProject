@@ -32,7 +32,7 @@
 						<b>좌석번호</b> : ${reservation.se_number}<br>
 						<b>예매날짜</b> : ${reservation.se_date}일<br>
 						<b>예매시간</b> : ${reservation.se_time}시<br>
-						<b>회원아이디</b> :  ${reservation.m_id}<br><br>
+						<b>회원아이디</b> :  ${reservation.memberId}<br><br>
 						<input type="hidden" value=${reservation.mo_number}>
 						<input class="btn" type="button" value="예매취소" 
 						onclick="cancel('${reservation.re_number}','${reservation.se_date}','${reservation.se_number }','${reservation.se_time }','${reservation.mo_number}')" style="font-weight: bold;">

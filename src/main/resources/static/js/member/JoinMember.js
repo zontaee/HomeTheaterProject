@@ -9,11 +9,11 @@ $(function(){
 	$("input[type=submit]").click(function(){
 		var result = $.trim($("input[type=text]").val());
 		if(result!=null){
-			if(document.newMember.m_password.value!=document.newMember.m_passwordConfirm.value){
+			if(document.newMember.memberPassword.value!=document.newMember.memberPasswordConfirm.value){
 				alert("비밀번호와 비밀번호 확인 값이 다릅니다!");
-				document.newMember.m_password.value="";
-				document.newMember.m_passwordConfirm.value="";
-				document.newMember.m_password.focus();
+				document.newMember.memberPassword.value="";
+				document.newMember.memberPasswordConfirm.value="";
+				document.newMember.memberPassword.focus();
 				return false;
 			}
 		 	var regId = /^[a-z]+[a-z0-9]{3,19}$/g; // 영문소문자로 시작하고, 영문소문자 + 4~20자 
@@ -21,26 +21,26 @@ $(function(){
 			var regName = /^[가-힣]*$/; // 한글만 사용
 			var regPhone = /^\d{3}-\d{3,4}-\d{4}$/; // 숫자3자리 + 숫자 3~4자리 + 숫자 4자리
 			var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-			var id = $("#m_id").val();
-			var pw = $("#m_password").val();
-			var name = $("#m_name").val();
+			var id = $("#memberId").val();
+			var pw = $("#memberPassword").val();
+			var name = $("#memberName").val();
 			var phone = $("#phone1").val() + "-" + $("#phone2").val() + "-" + $("#phone3").val();
 			var email = $("#mail1").val() + "@" + $("#mail2").val();
 			
 			if(!regId.test(id)){
 				alert("아이디는 영문 소문자로 시작하고 4~20자, 영문 소문자 또는 숫자만 입력가능합니다.");
-				$("#m_id").focus();
-				$("#m_id").value="";
+				$("#memberId").focus();
+				$("#memberId").value="";
 				event.preventDefault();
 			}else if(!regPw.test(pw)){		
 				alert("비밀번호는 8~16자, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.");
-				$("#m_password").focus();
-				$("#m_password").value="";
+				$("#memberPassword").focus();
+				$("#memberPassword").value="";
 				event.preventDefault();
 			}else if(!regName.test(name)){
 				alert("이름은 한글만 입력가능합니다.");
-				$("#m_name").focus();
-				$("#m_name").value="";
+				$("#memberName").focus();
+				$("#memberName").value="";
 				event.preventDefault();
 			}else if(!regPhone.test(phone)){
 				alert("전화번호는 숫자만 입력가능합니다.");
@@ -61,11 +61,11 @@ $(function(){
 
 // id중복체크 ajax
 function checkId(){
-    var m_id = $("#m_id").val();
+    var memberId = $("#memberId").val();
 	$.ajax({
 	    url: "idCheck",
 	    type: "POST",
-	    data: {"m_id": m_id},
+	    data: {"memberId": memberId},
 	    success: function(cnt){ //컨트롤러에서 넘어온 cnt값을 받는다 
 	        if(cnt != 1){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
 	        	 $(".id_already").css("display", "none");
@@ -73,8 +73,8 @@ function checkId(){
 	        } else { // cnt가 1일 경우 -> 이미 존재하는 아이디
 	        	$(".id_already").css("display","inline-block");
 	            $(".id_available").css("display", "none");
-	        	document.newMember.m_id.focus();
-	            document.newMember.m_id.value="";
+	        	document.newMember.memberId.focus();
+	            document.newMember.memberId.value="";
 	        }
 	    },
 	    error:function(){

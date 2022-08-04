@@ -17,9 +17,9 @@
     		<form action="loginForm" name="emailCert">
 		    	<br><br>
 		    	<b id="inputTag">아이디</b><br>
-		    	<input type="text" id="m_id" name="m_id" required><br><br>
+		    	<input type="text" id="memberId" name="memberId" required><br><br>
 		    	<b id="inputTag">이메일 주소</b><br> 
-		    	<input type="text" id="m_email" name="m_email" onchange="checkEmail()" required><br>
+		    	<input type="text" id="memberEmail" name="memberEmail" onchange="checkEmail()" required><br>
 		    	<b class="emailFind">가입하신 이메일과 같습니다. 발급버튼을 눌러주세요.<br>(시간이 조금 걸릴수도 있습니다. 잠시만 기다려주세요.)</b>
 		     	<b class="emailNotFind">가입하신 이메일과 다릅니다. 다시 입력해주세요.</b>
 		    	<input type="button" id="sendEmail" value="임시 비밀번호 발급"><br><br>
@@ -30,6 +30,6 @@
  	<%@ include file="../footer.jsp"%>
  </div>
 </div>
-<script type="text/javascript" src="js/member/FindPw.js"></script>
+<script type="text/javascript" src="js/memberJpa/FindPw.js"></script>
 </body>
 </html>

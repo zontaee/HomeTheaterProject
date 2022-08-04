@@ -1,32 +1,32 @@
 function checkEmail(){
-	var m_id = $("#m_id").val();
-	var m_email = $("#m_email").val();
+	var memberId = $("#memberId").val();
+	var memberEmail = $("#memberEmail").val();
 	$.ajax({
 		url: "checkEmail_Pw",
 		type: "POST",
 		data: {
-			"m_id": m_id,
-			"m_email": m_email
+			"memberId": memberId,
+			"memberEmail": memberEmail
 		},
 		success: function(result){
-			if(result != m_email){
+			if(result != memberEmail){
 				$(".emailFind").css("display", "none");
 				$(".emailNotFind").css("display", "inline-block");
-				document.emailCert.m_email.focus();
-				document.emailCert.m_email.value="";
+				document.emailCert.memberEmail.focus();
+				document.emailCert.memberEmail.value="";
 			}else{
 				$(".emailFind").css("display", "inline-block");
 				$(".emailNotFind").css("display", "none");
 				// 버튼 클릭시 실행
 				$("#sendEmail").click(function(){
-					var m_id = $("#m_id").val();
-					var m_email = $("#m_email").val();
+					var memberId = $("#memberId").val();
+					var memberEmail = $("#memberEmail").val();
 					$.ajax({
 						url: "sendTempPw",
 						type: "GET",
 						data: {
-							"m_id": m_id,
-							"m_email": m_email		
+							"memberId": memberId,
+							"memberEmail": memberEmail		
 						},
 						success: function(){
 							alert("임시 비밀번호를 발송했습니다. 메일을 확인해주세요.");

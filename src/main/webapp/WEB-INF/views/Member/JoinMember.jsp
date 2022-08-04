@@ -20,7 +20,7 @@
 	 		<div class="form-grou row">
 		 		<label class="col-sm-2"><b>아이디</b></label>
 		 		<div class="col-sm-5">
-			 		<input type="text" id="m_id" name="m_id" placeholder="id" required onchange="checkId()"><br><br>
+			 		<input type="text" id="memberId" name="memberId" placeholder="id" required onchange="checkId()"><br><br>
 		 		</div>
 		 		<span class="id_already">*이미 존재하는 아이디입니다.</span>
 		 		<span class="id_available">*영문 소문자 또는 영문 소문자,숫자 조합 (4~20자)</span>
@@ -28,7 +28,7 @@
 	 		<div class="form-grou row">
 		 		<label class="col-sm-2"><b>비밀번호</b></label>
 		 		<div class="col-sm-5">
-			 		<input type="password" id="m_password" name="m_password" placeholder="password" required><br><br>
+			 		<input type="password" id="memberPassword" name="memberPassword" placeholder="password" required><br><br>
 		 		</div>
 		 		<span class="validation">*숫자,대문자,소문자,특수문자를 모두 조합 (8~16자)</span>
 	 		</div>
@@ -36,14 +36,14 @@
 	 		<div class="form-grou row">
 		 		<label class="col-sm-2"><b>비밀번호 확인</b></label>
 		 		<div class="col-sm-5">
-			 		<input type="password" name="m_passwordConfirm" placeholder="passwordConfirm" required><br><br>
+			 		<input type="password" name="memberPasswordConfirm" placeholder="passwordConfirm" required><br><br>
 		 		</div>
 	 		</div>
 	 		
 	 		<div class="form-grou row">
 		 		<label class="col-sm-2"><b>이름</b></label>
 		 		<div class="col-sm-5">
-			 		<input type="text" id="m_name" name="m_name" placeholder="name" required><br><br>
+			 		<input type="text" id="memberName" name="memberName" placeholder="name" required><br><br>
 		 		</div>
 	 		</div>
 	 		
@@ -119,6 +119,6 @@
   <%@ include file="../footer.jsp"%>	
  </div>
 </div>
-<script type="text/javascript" src="js/member/JoinMember.js"></script>
+<script type="text/javascript" src="js/memberJpa/JoinMember.js"></script>
 </body>
 </html>

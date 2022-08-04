@@ -7,7 +7,7 @@ function checkPassword(){
 		document.changePassword.m_newPassword.focus();
 		return false;
 	}
-	if(document.memberUpdate.m_password.value!=document.changePassword.m_currentPassword.value){
+	if(document.memberUpdate.memberPassword.value!=document.changePassword.m_currentPassword.value){
 		alert("현재 비밀번호가 다릅니다!");
 		document.changePassword.m_currentPassword.value="";
 		document.changePassword.m_currentPassword.focus();
@@ -27,12 +27,12 @@ function checkPassword(){
 function checkForm(){
 	var regName = /^[가-힣]*$/;
 	var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-	var name = $("#m_name").val();
-	var email = $("#m_email").val();
+	var name = $("#memberName").val();
+	var email = $("#memberEmail").val();
  	if(false === regName.test(name)) {
 		alert('이름은 한글만 입력가능합니다.');
-		$("#m_name").focus();
-		$("#m_name").value="";
+		$("#memberName").focus();
+		$("#memberName").value="";
 		event.preventDefault();
 	}
  	if(false === regEmail.test(email)) {

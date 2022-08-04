@@ -1,34 +1,34 @@
 function checkEmail(){
-	var m_phonenumber = $("#m_phonenumber").val();
-	var m_email = $("#m_email").val();
+	var memberPhonenumber = $("#memberPhonenumber").val();
+	var memberEmail = $("#memberEmail").val();
 	$.ajax({
 		url: "checkEmail_Id",
 		type: "POST",
 		data: {
-			"m_phonenumber": m_phonenumber,
-			"m_email": m_email
+			"memberPhonenumber": memberPhonenumber,
+			"memberEmail": memberEmail
 		},
 		success: function(result){
-			if(result != m_email){
+			if(result != memberEmail){
 				$(".emailFind").css("display", "none");
 				$(".emailNotFind").css("display", "inline-block");
-				document.emailCert.m_email.focus();
-				document.emailCert.m_email.value="";
+				document.emailCert.memberEmail.focus();
+				document.emailCert.memberEmail.value="";
 			}else{
 				$(".emailFind").css("display", "inline-block");
 				$(".emailNotFind").css("display", "none");
 				// 버튼 클릭시 실행
 				$("#sendEmail").click(function(){
-					var m_phonenumber = $("#m_phonenumber").val();
-					var m_email = $("#m_email").val();
-					var m_name = $("#m_name").val();
+					var memberPhonenumber = $("#memberPhonenumber").val();
+					var memberEmail = $("#memberEmail").val();
+					var memberName = $("#memberName").val();
 					$.ajax({
 						url: "sendAuthenticationNum",
 						type: "GET",
 						data: {
-							"m_phonenumber": m_phonenumber,
-							"m_email": m_email,
-							"m_name": m_name
+							"memberPhonenumber": memberPhonenumber,
+							"memberEmail": memberEmail,
+							"memberName": memberName
 						},
 						success: function(randomPw){
 							alert("인증번호를 발송했습니다. 메일을 확인해주세요.");
@@ -48,14 +48,14 @@ function checkEmail(){
 function checkNum(){
 	var inputNum = $("#inputNum").val();
 	var num = $("#num").val();
-	var m_phonenumber = $("#m_phonenumber").val();
+	var memberPhonenumber = $("#memberPhonenumber").val();
 	$.ajax({
 		url: "checkNum",
 		type: "GET",
 		data: {
 			"inputNum": inputNum,
 			"num": num,
-			"m_phonenumber": m_phonenumber
+			"memberPhonenumber": memberPhonenumber
 		},
 		success: function(id){
 			if(id!=""){

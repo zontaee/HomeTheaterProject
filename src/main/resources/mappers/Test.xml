@@ -44,7 +44,7 @@
     <insert id="insertBoard" parameterType="Board">
         INSERT into Board (Board_no,
                            Board_category, Board_title, Board_content, Board_date, m_id)
-        VALUES (1,
+        VALUES (#{board_no},
                 #{board_category}, #{board_title}, #{board_content}, #{board_date}, 'admin')
     </insert>
 

@@ -25,14 +25,14 @@
 			<th>잔여포인트</th>	
 			<th colspan="2">수정/삭제</th>
 		</tr>
-		<c:forEach var="member" items="${memberList}" varStatus="status">
+		<c:forEach var="memberJpa" items="${memberList}" varStatus="status">
 			<tr><td>${status.index+1}</td>
-				<td><input type="text" id="m_id${status.index}" class="m_id" value="${member.m_id}" readonly></td>
-				<td><input type="text" id="m_name${status.index}" value="${member.m_name}"></td>
-				<td><input type="text" id="m_phonenumber${status.index}" value="${member.m_phonenumber}"></td>
-				<td><input type="text" id="m_address${status.index}" class="m_address" value="${member.m_address}"></td>
-				<td><input type="text" id="m_email${status.index}" value="${member.m_email}"></td>
-				<td><input type="text" id="m_point${status.index}" class="m_point" value="${member.m_point}"></td>
+				<td><input type="text" id="memberId${status.index}" class="memberId" value="${memberJpa.memberId}" readonly></td>
+				<td><input type="text" id="memberName${status.index}" value="${memberJpa.memberName}"></td>
+				<td><input type="text" id="memberPhonenumber${status.index}" value="${memberJpa.memberPhonenumber}"></td>
+				<td><input type="text" id="memberAddress${status.index}" class="memberAddress" value="${memberJpa.memberAddress}"></td>
+				<td><input type="text" id="memberEmail${status.index}" value="${memberJpa.memberEmail}"></td>
+				<td><input type="text" id="m_point${status.index}" class="m_point" value="${memberJpa.m_point}"></td>
 				<td><input type="button" class="button" value="수정" onclick="updateMember(${status.index})"></td>
 				<td><input type="button" class="button" value="삭제" onclick="deleteMember(${status.index})"></td>
 			</tr>
@@ -43,6 +43,6 @@
  	<%@ include file="../footer.jsp"%>
  </div>
 </div>
-<script type="text/javascript" src="js/member/MemberManagement.js"></script>
+<script type="text/javascript" src="js/memberJpa/MemberManagement.js"></script>
 </body>
 </html>

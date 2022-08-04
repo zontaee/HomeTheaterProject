@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="css/member_css/MemberReservationList.css">
 <script>
 function updateReservation(Vindex){
-	var m_id = $("#m_id" + Vindex).val();
+	var memberId = $("#memberId" + Vindex).val();
 	var mo_number = $("#mo_number" + Vindex).val();
 	var re_number = $("#re_number" + Vindex).val();
 	var se_number = $("#se_number" + Vindex).val();
@@ -15,7 +15,7 @@ function updateReservation(Vindex){
 		url: "adminUpdateReservation",
 		type: "POST",
 		data: {
-			"m_id": m_id,
+			"memberId": memberId,
 			"mo_number": mo_number,
 			"re_number": re_number,
 			"se_number": se_number,
@@ -59,7 +59,7 @@ function updateReservation(Vindex){
 		</tr>
 		<c:forEach var="reservation" items="${reservationList}" varStatus="status">
 		<tr><td>${status.index+1}</td>
-			<td><input class="inputValue" type="text" id="m_id${status.index}" class="m_id" value="${reservation.m_id}" readonly></td>
+			<td><input class="inputValue" type="text" id="memberId${status.index}" class="memberId" value="${reservation.memberId}" readonly></td>
 			<td><input class="inputValue" type="text" id="mo_number${status.index}" value="${reservation.mo_number}"></td>
 			<td><input class="inputValue" type="text" id="re_number${status.index}" value="${reservation.re_number}"></td>
 			<td><input class="inputValue" type="text" id="se_number${status.index}" value="${reservation.se_number}"></td>

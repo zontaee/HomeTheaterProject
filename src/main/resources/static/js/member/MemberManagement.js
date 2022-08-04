@@ -1,19 +1,19 @@
 function updateMember(Vindex){
-	var m_id = $("#m_id" + Vindex).val();
-	var m_name = $("#m_name" + Vindex).val();
-	var m_phonenumber = $("#m_phonenumber" + Vindex).val();
-	var m_address = $("#m_address" + Vindex).val();
-	var m_email = $("#m_email" + Vindex).val();
+	var memberId = $("#memberId" + Vindex).val();
+	var memberName = $("#memberName" + Vindex).val();
+	var memberPhonenumber = $("#memberPhonenumber" + Vindex).val();
+	var memberAddress = $("#memberAddress" + Vindex).val();
+	var memberEmail = $("#memberEmail" + Vindex).val();
 	var m_point = $("#m_point" + Vindex).val();
 	$.ajax({
 		url: "adminUpdateMember",
 		type: "POST",
 		data: {
-			"m_id": m_id,
-			"m_name": m_name,
-			"m_phonenumber": m_phonenumber,
-			"m_address": m_address,
-			"m_email": m_email,
+			"memberId": memberId,
+			"memberName": memberName,
+			"memberPhonenumber": memberPhonenumber,
+			"memberAddress": memberAddress,
+			"memberEmail": memberEmail,
 			"m_point": m_point
 		},
 		success: function(update){
@@ -23,12 +23,12 @@ function updateMember(Vindex){
 	})
 }
 function deleteMember(Vindex){
-	var m_id = $("#m_id" + Vindex).val();
+	var memberId = $("#memberId" + Vindex).val();
 	$.ajax({
 		url: "adminDeleteMember",
 		type: "GET",
 		data: {
-			"m_id": m_id
+			"memberId": memberId
 		},
 		success: function(){
 			alert("회원삭제가 완료되었습니다.");

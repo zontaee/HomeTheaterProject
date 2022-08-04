@@ -20,7 +20,7 @@ spring:
   # ORM JPA
   jpa:
     hibernate:
-      ddl-auto: none  #  create
+      ddl-auto: create  #  create
     properties:
       hibernate:
         show_sql: true

@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 @SpringBootTest
-class IT_Member_DaoImplTest {
+class IT_Member_DaoImplTestJpa {
 @Autowired
 ReservationDao reservation_dao;
     @Test
