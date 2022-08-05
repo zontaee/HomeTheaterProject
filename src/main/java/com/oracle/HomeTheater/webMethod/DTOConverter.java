@@ -5,6 +5,7 @@ import com.oracle.HomeTheater.domain.MemberJpa;
 import com.oracle.HomeTheater.model.Board;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -25,5 +26,11 @@ public class DTOConverter {
         Board board = new Board(boardJpa.getBoardNo(), boardJpa.getBoardCategory(), boardJpa.getBoardTitle(),
                 boardJpa.getBoardContent(), boardJpa.getBoardDate(), boardJpa.getBoardHit(),boardJpa.getMemberJpa().getMemberId());
         return board;
+    }
+
+    public Page<Board> pageBoardJpaListToPageBoardList(Page<BoardJpa> boardJpaList) {
+        Page<Board> BoardList = boardJpaList.map(m -> new Board(m.getBoardNo(),m.getBoardCategory(),m.getBoardTitle(),m.getBoardContent(),
+                m.getBoardDate(),m.getBoardHit(),m.getMemberJpa().getMemberId()));
+        return BoardList;
     }
 }

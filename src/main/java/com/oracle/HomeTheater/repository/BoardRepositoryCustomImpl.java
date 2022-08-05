@@ -2,8 +2,12 @@ package com.oracle.HomeTheater.repository;
 
 import com.oracle.HomeTheater.domain.BoardJpa;
 import com.oracle.HomeTheater.domain.QBoard;
+import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -112,6 +116,20 @@ public class BoardRepositoryCustomImpl implements BoardRepositoryCustom {
         }
 
         return resultNumber;
+    }
+
+    @Override
+    public Page<BoardJpa> findBoardListOfCategory(Pageable pageable, BoardJpa boardJpa) {
+        QueryResults<BoardJpa> results = queryFactory
+                .select(this.board)
+                .from(this.board)
+                .where(this.board.boardCategory.eq(boardJpa.getBoardCategory()))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetchResults();
+        List<BoardJpa> resultList = results.getResults();
+        long total = results.getTotal();
+        return new PageImpl<>(resultList, pageable, total);
     }
 
 

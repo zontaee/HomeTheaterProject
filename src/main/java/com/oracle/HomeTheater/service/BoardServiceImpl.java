@@ -4,15 +4,22 @@ import java.util.List;
 
 import com.oracle.HomeTheater.dao.BoardDao;
 import com.oracle.HomeTheater.model.Board;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 
 @Service
+@Slf4j
 public class BoardServiceImpl implements BoardService {
 
-	@Qualifier("boardMyBatisDao")
+
+	@Qualifier("boardJpaDao")
 	@Autowired
 	private BoardDao boardDao;
 	
@@ -75,9 +82,19 @@ public class BoardServiceImpl implements BoardService {
 		return boardContentsUpdate;
 	}
 
-		
-	
+	@Override
+	public Page<Board> listboardJpa(Pageable pageable, Board board) {
+		log.info("listboardJpa(Service start)");
+		pageable = getPageableBoard(pageable);
+		return boardDao.listBoardJpa(pageable,board);
 
+	}
+
+	public Pageable getPageableBoard(Pageable pageable) {
+		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
+		pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "boardNo"));
+		return pageable;
+	}
 
 
 }

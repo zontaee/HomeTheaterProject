@@ -5,21 +5,24 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.oracle.HomeTheater.model.Board;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.oracle.HomeTheater.service.MemberService;
 import com.oracle.HomeTheater.service.Paging;
 import com.oracle.HomeTheater.service.BoardService;
+import org.springframework.web.bind.annotation.RequestParam;
 
-
-
-
-
+@Slf4j
 @Controller
 public class BoardController {
 	@Autowired
@@ -28,7 +31,7 @@ public class BoardController {
 	private MemberService memberService;
 
 	
-//메인페이지 -> 공지사항클릭
+//메인페이지 -> 공지사항클릭(MY BATIS)
 	@RequestMapping(value="Board/mainNotice")
 	public String mainNotice(Model model, Board board, String currentPage, HttpServletRequest request) {
 		System.out.println("BoardContorller mainNotice Start...");
@@ -96,6 +99,24 @@ public class BoardController {
 		
 		return "Board/mainNotice";
 	}
+	@GetMapping("Board/boardList")
+	public String boardList(@PageableDefault() Pageable pageable,Board board,
+						  Model model) {
+		log.info("Boardcontroller boardList start");
+		if(board.getBoard_category()==2){
+			board.setBoard_category(2);
+		}else {
+			board.setBoard_category(1);
+		}
+    	Page<Board> boardList =  boardService.listboardJpa(pageable,board);
+		model.addAttribute("boardList",boardList);
+		log.info("-----------------------------");
+
+		return "thymeleaf/Board/mainNoticeJpa";
+	}
+
+
+
 	
 //BoardnoticeContents 공지사항 내용확인 페이지
 	@RequestMapping(value = "Board/noticeContents")

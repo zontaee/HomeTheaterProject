@@ -6,6 +6,8 @@ import java.util.List;
 
 
 import com.oracle.HomeTheater.model.Board;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 
 public interface BoardService {
@@ -15,7 +17,7 @@ public interface BoardService {
 	 int 		   noticeWrite(Board board);
 	 int           contentsDelete(Board board);
 	 int           contentsUpdate(Board board);
-	 
-	
 
+
+    Page<Board> listboardJpa(Pageable pageable, Board board);
 }

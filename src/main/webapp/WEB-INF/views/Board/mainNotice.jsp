@@ -17,7 +17,7 @@
 	 		justify-content: space-around;
 	 		flex-direction: column;
 		}
-		
+
 	.hidden{
 		 display: none;
 	}
@@ -27,21 +27,21 @@
 		weight: 1200px;
 		overflow: hidden;
 		background-color: #f5fcab;
-		
+
 		display:flex;
 		flex-direction: row;
 		--align-content: flex-end;
 		border-bottom: 1px solid;
 	}
-	
+
 		#BoardsiteLocationL{
 			width: 130px; --background-color: red;
-			
+
 		}
 			#BoardsiteLocationL>h3{
 				font-size: 30px;
 			}
-		
+
 		#BoardsiteLocationR{
 			--background-color: green;
 			font-size: 20px;
@@ -53,19 +53,19 @@
 		flex-direction: row;
 		align-content: center;
 		justify-content: space-around;
-		
+
 	}
 		 #BoardmainContentFooter>div:nth-child(1){
 			background: white;
-			
+
 		}
 		#BoardmainContentFooter>div:nth-child(2){
 			background: green;
-			
+
 		}
-/* ------------------------------------------------------ */	
-	
-	
+/* ------------------------------------------------------ */
+
+
 </style>
 <script>
 function searchboard(){
@@ -73,7 +73,7 @@ function searchboard(){
 	var selectValue = $("#selectBox option:selected").text();
 	var board_title = $("#searchValue").val();
 	alert("카테고리="+board_category);
-	
+
 	if(selectValue==="전체"){
 		alert("전체이다.");
 		$.ajax({
@@ -110,45 +110,45 @@ function searchboard(){
 		<!-- board_category값을 이용하여 if문으로 제목 바꾸기 -->
 		<div id="BoardsiteLocationL">
 			<h3 id="BoardtextChangeL"></h3>
-			
-				<script type="text/javascript">	
-					if(${board.board_category}==2){
+
+				<script type="text/javascript">
+					if(${board.board_category}== 2 ){
 						document.getElementById("BoardtextChangeL").innerHTML = "QnA";
 					}else{
 						document.getElementById("BoardtextChangeL").innerHTML = "공지사항";
 					}
-				</script>			
+				</script>
 		</div>
 		<div id="BoardsiteLocationR">
                <a href="../main"><img src="<%=context%>/img/BoardImg/b_home.png" alt="home" style="width: 20px; height: 20px;" /></a> > 게시판 ><strong id="BoardtextChangeR"></strong>
-               
-               	<script type="text/javascript">	
+
+               	<script type="text/javascript">
 					if(${board.board_category}==2){
 						document.getElementById("BoardtextChangeR").innerHTML = "QnA";
 					}else{
 						document.getElementById("BoardtextChangeR").innerHTML = "공지사항";
 					}
-				</script>	
-               
-		</div>		
+				</script>
+
+		</div>
 </div>
 <div id="BoardnoticeMainBox" class="wrapper">
 
 	<!--본문 -->
 	<main id="BoardmainContent">
 		<h2 class="hidden">본문내용</h2>
-		
+
 		<!--공지사항 Qna 전환 selectBox -->
  		<form action="mainNotice">
 			 <select name="board_category">
-				<option value=1>공지사항</option>	
-				<option value=2>QNA</option>	
-			</select> 
+				<option value=1>공지사항</option>
+				<option value=2>QNA</option>
+			</select>
 		    <input type="submit" value="확인"  >
 		</form>
-	
-		
-		
+
+
+
 		<c:if test="${fn:length(listboard)==0}">
 			<h3>Total : ${total}</h3>
 			<h2>검색한 결과가 없습니다.</h2>
@@ -156,7 +156,7 @@ function searchboard(){
 		<!-- 전체 테이블 -->
 		<c:if test="${fn:length(listboard)!=0}">
 			<h3>Total : ${total}</h3>
-			<table border="1">		
+			<table border="1">
 				<thead>
 					<tr>
 						<th>번호</th>
@@ -166,7 +166,7 @@ function searchboard(){
 						<th>작성일</th>
 					</tr>
 				</thead>
-				<tbody>	
+				<tbody>
 					<!-- DB 연결 js부분 -->
 					<c:forEach var="board" items="${listboard}" varStatus="status">
 						<!-- 전체 레코드 수 - ( (현재 페이지 번호 - 1) * 한 페이지당 보여지는 레코드 수 + 현재 게시물 출력 순서 ) -->
@@ -176,11 +176,11 @@ function searchboard(){
 							<td>${board.m_id}</td>
 							<td colspan="2">${board.board_date}</td>
 						</tr>
-					</c:forEach> 
+					</c:forEach>
 				</tbody>
 			</table>
 		</c:if>
-		
+
 		<!-- paging -->
 		<c:if test="${pg.startPage > pg.pageBlock }">
 			<a href="mainNotice?currentPage=${pg.startPage-pg.pageBlock}">[이전]</a>
@@ -190,8 +190,42 @@ function searchboard(){
 		</c:forEach>
 		<c:if test="${pg.endPage < pg.totalPage }">
 			<a href="mainNotice?currentPage=${pg.startPage+pg.pageBlock}">[다음]</a>
-		</c:if>		 
-			
+		</c:if>
+
+		<nav style="text-align: center;">
+			<ul class="pagination"
+				th:with="start=${T(Math).floor(bbsDTO.number/10)*10 + 1},
+                    last=(${start + 9 < bbsDTO.totalPages ? start + 9 : bbsDTO.totalPages})">
+				<li>
+					<a th:href="@{/bbsLists(page=1)}" aria-label="First">
+						<span aria-hidden="true">First</span>
+					</a>
+				</li>
+
+				<li th:class="${bbsDTO.first} ? 'disabled'">
+					<a th:href="${bbsDTO.first} ? '#' :@{/bbsLists(page=${bbsDTO.number})}" aria-label="Previous">
+						<span aria-hidden="true">&lt;</span>
+					</a>
+				</li>
+
+				<li th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == bbsDTO.number + 1} ? 'active'">
+					<a th:text="${page}" th:href="@{/bbsLists(page=${page})}"></a>
+				</li>
+
+				<li th:class="${bbsDTO.last} ? 'disabled'">
+					<a th:href="${bbsDTO.last} ? '#' : @{/bbsLists(page=${bbsDTO.number + 2})}" aria-label="Next">
+						<span aria-hidden="true">&gt;</span>
+					</a>
+				</li>
+
+				<li>
+					<a th:href="@{/bbsLists(page=${bbsDTO.totalPages})}" aria-label="Last">
+						<span aria-hidden="true">Last</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+
 		<div id="BoardmainContentFooter" >
 			<form action="<%=context%>/Boardviews/mainNotice" method="GET">
 			<div>
@@ -212,16 +246,16 @@ function searchboard(){
 				</div>
 			</c:if>
 		</div>
-		
+
 	</main>
 </div>
-	
+
 <!-- main footer-->
 <div id="BoardnoticeFooterBox">
 	<%@ include file="../footer.jsp"%>
 </div>
-	
-	
+
+
 
 
 </body>

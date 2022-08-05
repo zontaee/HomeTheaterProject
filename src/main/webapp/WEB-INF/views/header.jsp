@@ -112,20 +112,20 @@ a:hover{
 </c:otherwise>	
 </c:choose>
 
- 
+
 <nav class="top_menu">
 	<form name="searchInfo" action="<%=context%>/SearchTotalList" method="get">
 	<ul>	
 		<c:if test="${sessionScope.sessionId != 'admin'}">
 			<li><a class="menuLink" href="<%=context%>/movieList">영화</a></li>
 			<li><a class="menuLink" href="<%=context%>/movieRecommendList">추천영화</a></li>
-			<li><a class="menuLink" href="<%=context%>/Board/mainNotice">공지사항</a></li>
+			<li><a class="menuLink" href="<%=context%>/Board/boardList">공지사항</a></li>
 			<li><a class="menuLink" href="<%=context%>/myPage">마이페이지</a></li>
 		</c:if>
 		<c:if test="${sessionScope.sessionId == 'admin'}">
 			<li><a class="menuLink" href="<%=context%>/movieList">영화관리</a></li>
 			<li><a class="menuLink" href="<%=context%>/movieRecommendList">추천영화관리</a></li>
-			<li><a class="menuLink" href="<%=context%>/Board/mainNotice">공지사항관리</a></li>
+			<li><a class="menuLink" href="<%=context%>/Board/mainNoticeJpa">공지사항관리</a></li>
 			<li><a class="menuLink" href="<%=context%>/myPage">관리자페이지</a></li>
 		</c:if>
 		<li><i class="fas fa-search" style="font-size: 15px;"></i>&nbsp;

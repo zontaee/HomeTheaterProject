@@ -5,6 +5,8 @@ import java.util.List;
 import com.oracle.HomeTheater.model.Board;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -119,14 +121,11 @@ public class BoardMyBatisDao implements BoardDao {
 		}
 		return BoardContentsUpdate;
 	}
-	
 
-
-
-
-	
-
-	
+	@Override
+	public Page<Board> listBoardJpa(Pageable pageable, Board board) {
+		return null;
+	}
 
 
 }

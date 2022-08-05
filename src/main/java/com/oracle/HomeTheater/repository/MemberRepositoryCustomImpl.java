@@ -11,10 +11,14 @@ import java.util.List;
 
 @Slf4j
 public class MemberRepositoryCustomImpl implements MemberRepositoryCustom {
-    @PersistenceContext
-    EntityManager em;
+    private final EntityManager em;
+    private final JPAQueryFactory queryFactory;
+
+    public MemberRepositoryCustomImpl(EntityManager em, JPAQueryFactory queryFactory) {
+        this.em = em;
+        this.queryFactory = queryFactory;
+    }
     QMember member = QMember.member;
-    JPAQueryFactory queryFactory = new JPAQueryFactory(em);
 
     @Override
     public MemberJpa selectUserInfo(String m_id, String m_password) {

@@ -3,6 +3,7 @@ server:
   port: 8500
 
 spring:
+
   # File Size
   servlet:
     multipart:
@@ -25,7 +26,7 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
- 
+
   # gmail Transfer 
   mail:
     host: smtp.gmail.com
@@ -36,13 +37,17 @@ spring:
       mail:
         smtp:
           auth: true
-          starttls.enable: true      
+          starttls.enable: true
   #view resolver(Templete ->JSP Use)
   mvc:
     view:
       prefix: /WEB-INF/views/
-      suffix: .jsp    
- 
+      suffix: .jsp
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    view-names: thymeleaf/*     # Thymeleaf 에 연결될 viewname 범위 설정
+
 # Mybatis 
 mybatis:
   # dto Location
@@ -50,8 +55,8 @@ mybatis:
   # xml Location
   config-location: classpath:configuration.xml
   mapper-locations: classpath:mappers/*.xml
-      
-#logging.level:
-#  org.hibernate.SQL: debug
+
+  #logging.level:
+  #  org.hibernate.SQL: debug
   # org.hibernate.type: trace
   

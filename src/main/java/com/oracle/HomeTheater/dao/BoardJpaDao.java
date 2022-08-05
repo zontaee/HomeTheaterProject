@@ -7,6 +7,8 @@ import com.oracle.HomeTheater.webMethod.BoardMethod;
 import com.oracle.HomeTheater.webMethod.DTOConverter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -36,7 +38,7 @@ public class BoardJpaDao implements BoardDao {
         log.info("BoardJpaDao listBoard start");
         boardMethod.boardNullCheck(board);
         BoardJpa boardJpa = dtoConverter.convertorDtoToEntityBoard(board);
-        List<BoardJpa> boardJpaList = boardRepository.findBoardList(boardJpa);
+        Page<BoardJpa> boardJpaList = (Page<BoardJpa>) boardRepository.findBoardList(boardJpa);
 
         return null;
     }
@@ -78,5 +80,18 @@ public class BoardJpaDao implements BoardDao {
         BoardJpa boardJpa = dtoConverter.convertorDtoToEntityBoard(board);
         int updateCheckNumber = boardRepository.updateBoard(boardJpa);
         return updateCheckNumber;
+    }
+
+    @Override
+    public Page<Board> listBoardJpa(Pageable pageable, Board board) {
+        log.info("noticeContents contentsDelete start");
+        boardMethod.boardNullCheck(board);
+        BoardJpa boardJpa = dtoConverter.convertorDtoToEntityBoard(board);
+        Page<BoardJpa> boardJpaList =boardRepository.findBoardListOfCategory(pageable,boardJpa);
+        log.info("1111111111111111111111111111"+ String.valueOf(boardJpaList.getNumber()));
+        Page<Board> boardList = dtoConverter.pageBoardJpaListToPageBoardList(boardJpaList);
+        log.info("222222222222222222222222222"+ String.valueOf(boardList.getNumber()));
+        return boardList;
+
     }
 }

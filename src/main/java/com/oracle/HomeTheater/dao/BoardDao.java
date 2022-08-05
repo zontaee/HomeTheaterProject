@@ -3,6 +3,8 @@ package com.oracle.HomeTheater.dao;
 import java.util.List;
 
 import com.oracle.HomeTheater.model.Board;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface BoardDao {
 	
@@ -12,5 +14,6 @@ public interface BoardDao {
 	int 			noticeWrite(Board Board);
 	int 			contentsDelete(Board Board);
 	int             contentsUpdate(Board Board);
-	
+
+	Page<Board> listBoardJpa(Pageable pageable, Board board);
 }
