@@ -11,7 +11,7 @@ public interface BoardDao {
 	int 			total(Board Board);
 	List<Board>       listBoard(Board Board);
 	Board noticeContents(Board Board);
-	int 			noticeWrite(Board Board);
+	int 			noticeWrite(Board Board, String loginMember);
 	int 			contentsDelete(Board Board);
 	int             contentsUpdate(Board Board);
 

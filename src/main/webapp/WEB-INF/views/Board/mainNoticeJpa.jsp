@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="board/layout/basic">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<!DOCTYPE html><html><head><meta charset="UTF-8">
 <head>
     <meta charset="UTF-8">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
 
     <title>공지사항 목록 페이지야~~~</title>
 
@@ -50,6 +53,7 @@
             text-decoration: underline;
         }
 
+        /*--------------------------------------------------------------  */
         #boardmainContentFooter {
             display: flex;
             flex-direction: row;
@@ -101,6 +105,7 @@
     <div id="boardsiteLocationR">
         <a href="../main"><img src="<%=context%>/img/boardImg/b_home.png" alt="home"
                                style="width: 20px; height: 20px;"/></a> > 게시판 ><strong id="boardtextChangeR"></strong>
+
         <script type="text/javascript">
             if (${board.board_category}==2
             )
@@ -122,7 +127,7 @@
         <h2 class="hidden">본문내용</h2>
 
         <!--공지사항 Qna 전환 selectBox -->
-        <form action="boardList" method="get">
+        <form action="mainNotice">
             <select name="board_category">
                 <option value=1>공지사항</option>
                 <option value=2>QNA</option>
@@ -131,12 +136,12 @@
         </form>
 
 
-        <th:if test="${fn:length(listboard)==0}">
+        <c:if test="${fn:length(listboard)==0}">
         <h3>Total : ${total}</h3>
         <h2>검색한 결과가 없습니다.</h2>
-        </th:if>
+        </c:if>
         <!-- 전체 테이블 -->
-
+        <c:if test="${fn:length(listboard)!=0}">
         <h3>Total : ${total}</h3>
         <div>
             <table class="table table-striped">
@@ -150,10 +155,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="board : ${boardList}">
+                <tr th:each="board : ${board}">
                     <td class="col-1 text-center" th:text="${board.board_no}"></td>
                     <td class="col-5 text-center"><a th:text="${board.board_title}"
-                                                     th:href="@{/Board/noticeContents/{boardNo}(boardNo=${board.board_no})}"></a></td>
+                                                     th:href="@{/content/{boardNo}(boardNo=${board.board_no})}"></a></td>
                     <td class="col-2 text-center" th:text="${board.board_date}"></td>
                     <td class="col-2 text-center" th:text="${board.m_id}"></td>
                     <td class="col-2 text-center" th:text="${board.board_hit}"></td>
@@ -165,50 +170,50 @@
 
         <nav style="text-align: center;">
             <ul class="pagination"
-                th:with="start=${T(Math).floor(boardList.number/10)*10 + 1},
-                    last=(${start + 9 < boardList.totalPages ? start + 9 : boardList.totalPages})">
+                th:with="start=${T(Math).floor(board.number/10)*10 + 1},
+                    last=(${start + 9 < board.totalPages ? start + 9 : board.totalPages})">
                 <li>
-                    <a th:href="@{/Board/boardList(page=1)}" aria-label="First">
+                    <a th:href="@{/boardLists(page=1)}" aria-label="First">
                         <span aria-hidden="true">First</span>
                     </a>
                 </li>
 
-                <li th:class="${boardList.first} ? 'disabled'">
-                    <a th:href="${boardList.first} ? '#' :@{/Board/boardList(page=${/Board/boardList.number})}" aria-label="Previous">
+                <li th:class="${board.first} ? 'disabled'">
+                    <a th:href="${board.first} ? '#' :@{/boardLists(page=${board.number})}" aria-label="Previous">
                         <span aria-hidden="true">&lt;</span>
                     </a>
                 </li>
 
-                <li th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == boardList.number + 1} ? 'active'">
-                    <a th:text="${page}" th:href="@{/Board/boardList(page=${page})}"></a>
+                <li th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == board.number + 1} ? 'active'">
+                    <a th:text="${page}" th:href="@{/boardLists(page=${page})}"></a>
                 </li>
 
-                <li th:class="${boardList.last} ? 'disabled'">
-                    <a th:href="${boardList.last} ? '#' : @{/Board/boardList(page=${boardList.number + 2})}" aria-label="Next">
+                <li th:class="${board.last} ? 'disabled'">
+                    <a th:href="${board.last} ? '#' : @{/boardLists(page=${board.number + 2})}" aria-label="Next">
                         <span aria-hidden="true">&gt;</span>
                     </a>
                 </li>
 
                 <li>
-                    <a th:href="@{/Board/boardList(page=${boardList.totalPages})}" aria-label="Last">
+                    <a th:href="@{/boardLists(page=${board.totalPages})}" aria-label="Last">
                         <span aria-hidden="true">Last</span>
                     </a>
                 </li>
             </ul>
         </nav>
-        <th:if test="${sessionScope.sessionId == 'admin'}">    <!-- 관리자로 로그인 했을때만 새글 쓰기 버튼 보여줌. -->
+        <c:if test="${sessionScope.sessionId == 'admin'}">    <!-- 관리자로 로그인 했을때만 새글 쓰기 버튼 보여줌. -->
         <div>
-            <button  th:onclick="|location.href='@{/Board/noticeWriteForm(board_category=${board.board_category})}'|">글쓰기</button>
-
+            <button onclick="location.href='noticeWriteForm?board_category=${board.board_category}'">글쓰기</button>
         </div>
-        </th:if>
-
+        </c:if>
+</div>
 
 </main>
 </div>
 
 <!-- main footer-->
 <div id="boardnoticeFooterBox">
+    <%@ include file="../footer.jsp" %>
 </div>
 
 

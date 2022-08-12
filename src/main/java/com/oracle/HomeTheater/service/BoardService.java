@@ -14,7 +14,7 @@ public interface BoardService {
 	 int           total(Board board);
 	 List<Board>     listboard(Board board);
 	 Board noticeContents(Board board);
-	 int 		   noticeWrite(Board board);
+	 int 		   noticeWrite(Board board, String loginMember);
 	 int           contentsDelete(Board board);
 	 int           contentsUpdate(Board board);
 

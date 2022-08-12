@@ -12,8 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Transactional
@@ -71,7 +69,7 @@ class BoardJpaServiceImplTest {
         em.clear();
         Board board = new Board(1, "testname", "testcontent", "11", 0,memberJpa.getMemberId());
         testDao.insertBoard(board);
-        int resultNumber = boardService.noticeWrite(board);
+        int resultNumber = boardService.noticeWrite(board, memberJpa.getMemberId());
         assertThat(resultNumber).isEqualTo(1);
 
 

@@ -4,9 +4,6 @@ import com.oracle.HomeTheater.domain.BoardJpa;
 import com.oracle.HomeTheater.domain.MemberJpa;
 import com.oracle.HomeTheater.model.Board;
 import com.oracle.HomeTheater.repository.BoardRepository;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,7 +83,7 @@ class BoardJpaJpaDaoTest {
         em.flush();
         em.clear();
         Board board = new Board( 1,"testname", "testcontent", "11", 0,memberJpa.getMemberId());
-        int insertCheckNumber = boardJpaDao.noticeWrite(board);
+        int insertCheckNumber = boardJpaDao.noticeWrite(board, memberJpa.getMemberId());
         assertThat(insertCheckNumber).isEqualTo(1);
 
     }

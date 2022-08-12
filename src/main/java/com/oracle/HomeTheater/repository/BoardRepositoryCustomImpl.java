@@ -48,8 +48,7 @@ public class BoardRepositoryCustomImpl implements BoardRepositoryCustom {
     public BoardJpa findBoard(BoardJpa boardJpa) {
         BoardJpa findBoardJpa = queryFactory.
                 selectFrom(this.board).
-                where(this.board.boardNo.eq(boardJpa.getBoardNo()).
-                        and(this.board.boardCategory.eq(boardJpa.getBoardCategory()))).
+                where(this.board.boardNo.eq(boardJpa.getBoardNo())).
                 fetchOne();
         return findBoardJpa;
     }
@@ -86,8 +85,7 @@ public class BoardRepositoryCustomImpl implements BoardRepositoryCustom {
         try {
             queryFactory.
                     delete(this.board).
-                    where(this.board.boardNo.eq(boardJpa.getBoardNo()).
-                            and(this.board.boardCategory.eq(boardJpa.getBoardCategory()))).
+                    where(this.board.boardNo.eq(boardJpa.getBoardNo())).
                     execute();
             resultNumber = 1;
         } catch (Exception e) {
@@ -106,8 +104,7 @@ public class BoardRepositoryCustomImpl implements BoardRepositoryCustom {
                     update(this.board).
                     set(this.board.boardTitle, boardJpa.getBoardTitle()).
                     set(this.board.boardContent, boardJpa.getBoardContent()).
-                    where(this.board.boardNo.eq(boardJpa.getBoardNo()).
-                            and(this.board.boardCategory.eq(boardJpa.getBoardCategory()))).
+                    where(this.board.boardNo.eq(boardJpa.getBoardNo())).
                     execute();
             resultNumber = 1;
         } catch (Exception e) {

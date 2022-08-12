@@ -12,8 +12,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-
+@Transactional
 @Service
 @Slf4j
 public class BoardServiceImpl implements BoardService {
@@ -57,10 +58,10 @@ public class BoardServiceImpl implements BoardService {
 
 
 	@Override
-	public int noticeWrite(Board board) {
+	public int noticeWrite(Board board, String loginMember) {
 		int result = 0;
 		System.out.println("YM_ServiceImpl noticeWrite start......");
-		result= boardDao.noticeWrite(board);
+		result= boardDao.noticeWrite(board,loginMember);
 		
 		return result;
 	}

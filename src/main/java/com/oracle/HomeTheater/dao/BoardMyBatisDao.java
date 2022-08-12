@@ -76,7 +76,7 @@ public class BoardMyBatisDao implements BoardDao {
 
 //YM_noticeWrite 글 내용 작성하기
 	@Override
-	public int noticeWrite(Board Board) {
+	public int noticeWrite(Board Board, String loginMember) {
 		int result = 0;
 		System.out.println("YM_DaoImpl noticeWrite  start.......->");	
 		try {

@@ -53,10 +53,10 @@
 		<div id="BoardMainfooter">
 			<div>
 				<button onclick="location.href='mainNotice'" >목록</button>
-				<c:if test="${sessionScope.sessionId == 'admin'}">			<!-- 관리자로 로그인 했을때만 수정, 삭제 버튼 보여줌. -->
-					<button value="수정" onclick="location.href='contentsUpdateForm?board_no=${boardContents.board_no}&board_category=${boardContents.board_category}'">수정</button>
-					<button value="삭제" onclick="location.href='contentsDelete?board_no=${boardContents.board_no}&board_category=${boardContents.board_category}'">삭제</button>
-				</c:if>
+				<%--<c:if test="${sessionScope.sessionId == 'admin'}">	--%>		<!-- 관리자로 로그인 했을때만 수정, 삭제 버튼 보여줌. -->
+					<button value="수정" onclick="location.href='<%=context%>/contentsUpdateForm?board_no=${boardContents.board_no}'">수정</button>
+					<button value="삭제" onclick="location.href='<%=context%>/contentsDelete?board_no=${boardContents.board_no}'">삭제</button>
+			<%--	</c:if>--%>
 			</div>
 		</div>
 	</main>
