@@ -1,7 +1,6 @@
 package com.oracle.HomeTheater.dao;
 
 import com.oracle.HomeTheater.domain.BoardJpa;
-import com.oracle.HomeTheater.domain.MemberJpa;
 import com.oracle.HomeTheater.model.Board;
 import com.oracle.HomeTheater.repository.BoardRepository;
 import com.oracle.HomeTheater.repository.MemberRepository;
@@ -15,7 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -32,21 +30,14 @@ public class BoardJpaDao implements BoardDao {
         log.info("BoardJpaDao total start");
         boardMethod.boardNullCheck(board);
         BoardJpa boardJpa = dtoConverter.convertorDtoToEntityBoard(board);
-        int total = boardRepository.totalBoard(boardJpa);
-
-        return total;
+        return boardRepository.totalBoard(boardJpa);
     }
 
 
     //paging다시 만들기
     @Override
     public List<Board> listBoard(Board board) {
-        log.info("BoardJpaDao listBoard start");
-        boardMethod.boardNullCheck(board);
-        BoardJpa boardJpa = dtoConverter.convertorDtoToEntityBoard(board);
-        Page<BoardJpa> boardJpaList = (Page<BoardJpa>) boardRepository.findBoardList(boardJpa);
-
-        return null;
+      return null;
     }
 
     @Override
@@ -54,11 +45,9 @@ public class BoardJpaDao implements BoardDao {
         log.info("noticeContents listBoard start");
         boardMethod.boardNullCheck(board);
         BoardJpa boardJpa = dtoConverter.convertorDtoToEntityBoard(board);
-
         boardRepository.updateHit(boardJpa);//조회수 증가
         BoardJpa findBoardJpa = boardRepository.findBoard(boardJpa);
-        Board findBoard = dtoConverter.convertorEntityToDtoBoard(findBoardJpa);
-        return findBoard;
+        return dtoConverter.convertorEntityToDtoBoard(findBoardJpa);
     }
 
     @Override
@@ -68,16 +57,14 @@ public class BoardJpaDao implements BoardDao {
         memberMethod.MemberNullCheck(loginMember);
         BoardJpa boardJpa = dtoConverter.convertorDtoToEntityBoard(board);
         boardMethod.BoardMemberSetting(loginMember, boardJpa);
-        int insertCheckNumber = boardRepository.insertBoard(boardJpa);
-        return insertCheckNumber;
+        return boardRepository.insertBoard(boardJpa);
     }
     @Override
     public int contentsDelete(Board board) {
         log.info("noticeContents contentsDelete start");
         boardMethod.boardNullCheck(board);
         BoardJpa boardJpa = dtoConverter.convertorDtoToEntityBoard(board);
-        int deleteCheckNumber = boardRepository.deleteBoard(boardJpa);
-        return deleteCheckNumber;
+        return boardRepository.deleteBoard(boardJpa);
     }
 
     @Override
@@ -85,8 +72,7 @@ public class BoardJpaDao implements BoardDao {
         log.info("noticeContents contentsDelete start");
         boardMethod.boardNullCheck(board);
         BoardJpa boardJpa = dtoConverter.convertorDtoToEntityBoard(board);
-        int updateCheckNumber = boardRepository.updateBoard(boardJpa);
-        return updateCheckNumber;
+        return boardRepository.updateBoard(boardJpa);
     }
 
     @Override
@@ -95,8 +81,7 @@ public class BoardJpaDao implements BoardDao {
         boardMethod.boardNullCheck(board);
         BoardJpa boardJpa = dtoConverter.convertorDtoToEntityBoard(board);
         Page<BoardJpa> boardJpaList =boardRepository.findBoardListOfCategory(pageable,boardJpa);
-        Page<Board> boardList = dtoConverter.pageBoardJpaListToPageBoardList(boardJpaList);
-        return boardList;
+        return dtoConverter.pageBoardJpaListToPageBoardList(boardJpaList);
 
     }
 }

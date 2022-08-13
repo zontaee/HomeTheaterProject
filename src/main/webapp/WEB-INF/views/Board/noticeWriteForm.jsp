@@ -41,7 +41,7 @@
 		</div>
 		<div id="BoardnoticeContentBox">
 			<div id="Boardboard_write">
-				<h3 class="hidden">글을 작성하는 공간입니다.</ h3>
+				<h3 class="hidden">글을 작성하는 공간입니다.</h3>
 				<!-- <form action="mainNotice"> -->
 				<form action="noticeWrite"  method="post">
 					 <input type="hidden" name="board_category" value="${board.board_category}">

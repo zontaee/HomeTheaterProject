@@ -17,7 +17,7 @@ public class MemberJpaService {
 
     // 회원가입
     public void joinUser(MemberJpa memberJpa) {
-        System.out.println("CH_MemberJpaRepository joinUser Start...");
+        log.info("CH_MemberJpaRepository joinUser Start...");
         memberRepository.save(memberJpa);
     }
 
@@ -25,12 +25,12 @@ public class MemberJpaService {
 /*	public Member loginUser(String m_id, String m_password) {
         log.info("memberid = "+ m_id);
         log.info("memberPassword= "+ m_password);
-		System.out.println("CH_MemberJpaRepository loginUser Start...");
+		log.info("CH_MemberJpaRepository loginUser Start...");
 		Member memberVO = memberJpaRepository.selectUserInfo(m_id,m_password);
 		return memberVO;
 	}*/
     public MemberJpa loginUser(String m_id, String m_password) {
-        System.out.println("MemberJpaRepository loginUser Start...");
+        log.info("MemberJpaRepository loginUser Start...");
         log.info("memberid = "+ m_id);
         log.info("memberPassword= "+ m_password);
         MemberJpa memberJpaVO = memberRepository.selectUserInfo(m_id, m_password);

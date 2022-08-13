@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.oracle.HomeTheater.model.Board;
+import com.oracle.HomeTheater.webMethod.BoardMethod;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,12 +23,12 @@ import com.oracle.HomeTheater.service.BoardService;
 
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 public class BoardController {
-    @Autowired
-    private BoardService boardService;
-    @Autowired
-    private MemberService memberService;
 
+    private final BoardService boardService;
+    private final MemberService memberService;
+    private final BoardMethod boardMethod;
 
     //메인페이지 -> 공지사항클릭(MY BATIS)
     @RequestMapping(value = "Board/mainNotice")
@@ -40,8 +42,6 @@ public class BoardController {
         } else {
             board.setBoard_category(1);
         }
-
-
         System.out.println("BoardContorller mainNotice 연산을 거친  board.getboard_category()->" + board.getBoard_category());
 
         System.out.println("BoardContorller mainNotice Start list...");
@@ -97,88 +97,99 @@ public class BoardController {
         return "Board/mainNotice";
     }
 
+    /**
+     * 게시글 리스트 표시 및 페이징
+     * @param pageable
+     * @param board
+     * @param model
+     * @return
+     */
     @GetMapping("Board/boardList")
     public String boardList(@PageableDefault() Pageable pageable, Board board,
                             Model model) {
         log.info("Boardcontroller boardList start");
-        if (board.getBoard_category() == 2) {
-            board.setBoard_category(2);
-        } else {
-            board.setBoard_category(1);
-        }
+        boardMethod.BoardCategorySetting(board);
         Page<Board> boardList = boardService.listboardJpa(pageable, board);
         model.addAttribute("boardList", boardList);
-        log.info("-----------------------------");
-
         return "thymeleaf/Board/mainNoticeJpa";
     }
 
 
-    //BoardnoticeContents 공지사항 내용확인 페이지
+    /**
+     * 게시글 상세보기
+     * @param boardNo
+     * @param model
+     * @return
+     */
     @GetMapping(value = "Board/noticeContents/{boardNo}")
     public String noticeContents(@PathVariable Long boardNo, Model model) {
-        System.out.println("BoardContorller noticeContents Start...");
-        Board board = new Board();
-        board.setBoard_no(boardNo);
-
+        log.info("BoardContorller noticeContents Start...");
+        Board board = boardMethod.boardNoSetting(boardNo);
         Board boardContents = boardService.noticeContents(board);
-
-        System.out.println("BoardContorller noticeContents finsh...");
-
         model.addAttribute("boardContents", boardContents);
-
         return "Board/noticeContents";
     }
 
-
-    //BoardnoticeWriteForm 공지사항 글쓰기 페이지폼 호출 컨트롤러
-    @RequestMapping(value = "Board/noticeWriteForm")
-    public String noticeWriteForm(Board board) {
-        System.out.println("BoardContorller noticeWriteForm Start...");
-        System.out.println("BoardContorller noticeWriteForm board.getboard_category() ->" + board.getBoard_category());
-        System.out.println("BoardContorller noticeWriteForm finsh...");
+    /**
+     * 게시글 생성  get controller
+     * @return
+     */
+    @GetMapping(value = "Board/noticeWriteForm")
+    public String noticeWriteForm(Board board, Model model) {
+        log.info("BoardContorller noticeWriteForm Start...");
+        model.addAttribute("board",board);
         return "Board/noticeWriteForm";
     }
 
-    //BoardnoticeWriteForm에서 입력받은 데이터 처리 컨트롤러
+    /**
+     * 게시글 생성  post contorller
+     * @param board
+     * @param loginMember
+     * @return
+     */
     @PostMapping(value = "Board/noticeWrite")
-    public String noticeWrite(Board board, Model model,
+    public String noticeWrite(Board board,
                               @SessionAttribute(name = "sessionId", required = false)
                                       String loginMember) {
-        System.out.println("BoardContorller noticeWrite start...");
-        int result = boardService.noticeWrite(board, loginMember);
-        System.out.println("BoardContorller noticeWrite db data input...");
-
+        log.info("BoardContorller noticeWrite start...");
+        boardService.noticeWrite(board, loginMember);
         return "redirect:/Board/boardList";
     }
 
-    //BoardcontentsDelete 글삭제
+    /**
+     * 기세글 삭제
+     * @param board
+     * @return
+     */
     @RequestMapping(value = "contentsDelete")
-    public String contentsDelete(Board board, Model model) {
-
-        System.out.println("BoardContorller contentsDelete start...");
+    public String contentsDelete(Board board) {
+        log.info("BoardContorller contentsDelete start...");
         boardService.contentsDelete(board);
-        System.out.println("BoardContorller contentsDelete finsh");
         return "redirect:Board/boardList";
     }
 
-    //BoardcontentsUpdateForm 글 수정하기위해 수정폼 호출 컨트롤러 및 글내용 입력받기 위한 페이지
-// Board/mainNotice.jsp -> noticeContents.jsp 수정버튼 클릭 -> contentsUpdateForm.jsp
-    @RequestMapping(value = "contentsUpdateForm")
+    /**
+     * 게시글 수정 Get contorller
+     * @param board
+     * @param model
+     * @return
+     */
+    @GetMapping(value = "contentsUpdateForm")
     public String contentsUpdateForm(Board board, Model model) {
-        System.out.println("BoardContorller contentsUpdateForm Start...");
-        //noticeContents.jsp 와 동일한 메소드 사용
+        log.info("BoardContorller contentsUpdateForm Start...");
         Board boardContents = boardService.noticeContents(board);
         model.addAttribute("boardContents", boardContents);
-        System.out.println("BoardContorller contentsUpdateForm finish...");
         return "Board/contentsUpdateForm";
     }
 
-    //Board/contentsUpdateForm.jsp -> 에서 글쓰기 버튼 클릭시 이동
-    //BoardcontentsUpdate 글 수정
+    /**
+     * 게시글 수정  post contorller
+     * @param board
+     * @return
+     */
     @RequestMapping(value = "contentsUpdate", method = RequestMethod.POST)
     public String contentsUpdate(Board board) {
-        System.out.println("BoardContorller contentsUpdate start...");
+        log.info("BoardContorller contentsUpdate start...");
         boardService.contentsUpdate(board);
         return "redirect:Board/boardList";
     }
