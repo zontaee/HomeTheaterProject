@@ -1,6 +1,9 @@
 package com.oracle.HomeTheater.dao;
 
 import com.oracle.HomeTheater.model.Board;
+import com.oracle.HomeTheater.model.Movie;
+import com.oracle.HomeTheater.model.Reservation;
+import com.oracle.HomeTheater.model.SeatandTime;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +35,31 @@ public class TestDao {
              log.info(e.getMessage());
          }
      }
+    public void insertMovie(Movie movie){
+        try{
+            session.insert("insertMovie",movie);
 
+        }catch (Exception e){
+            log.info(e.getMessage());
+        }
+    }
+    public void insertReservation(Reservation reservation){
+        try{
+            session.insert("insertReservation",reservation);
+
+        }catch (Exception e){
+            log.info(e.getMessage());
+        }
+    }
+
+
+    public void insertSeatAndTime(SeatandTime seatandTime) {
+        try{
+            session.insert("insertSeatAndTime",seatandTime);
+
+        }catch (Exception e){
+            log.info(e.getMessage());
+        }
+
+    }
 }

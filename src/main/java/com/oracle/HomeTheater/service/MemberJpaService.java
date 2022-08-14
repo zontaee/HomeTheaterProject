@@ -20,15 +20,7 @@ public class MemberJpaService {
         log.info("CH_MemberJpaRepository joinUser Start...");
         memberRepository.save(memberJpa);
     }
-
-    // 로그인
-/*	public Member loginUser(String m_id, String m_password) {
-        log.info("memberid = "+ m_id);
-        log.info("memberPassword= "+ m_password);
-		log.info("CH_MemberJpaRepository loginUser Start...");
-		Member memberVO = memberJpaRepository.selectUserInfo(m_id,m_password);
-		return memberVO;
-	}*/
+    //로그인
     public MemberJpa loginUser(String m_id, String m_password) {
         log.info("MemberJpaRepository loginUser Start...");
         log.info("memberid = "+ m_id);

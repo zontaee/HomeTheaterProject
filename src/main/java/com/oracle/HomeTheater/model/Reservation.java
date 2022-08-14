@@ -26,5 +26,19 @@ public class Reservation {
     private String mo_title;
     private String mo_fileName;
 
+    public Reservation() {
+    }
 
+    public Reservation(String re_number, String se_time, String se_date, String se_number, String se_identify, String pay_how, String pay_totalprice, String re_date, String m_id, int mo_number) {
+        this.re_number = re_number;
+        this.se_time = se_time;
+        this.se_date = se_date;
+        this.se_number = se_number;
+        this.se_identify = se_identify;
+        this.pay_how = pay_how;
+        this.pay_totalprice = pay_totalprice;
+        this.re_date = re_date;
+        this.m_id = m_id;
+        this.mo_number = mo_number;
+    }
 }

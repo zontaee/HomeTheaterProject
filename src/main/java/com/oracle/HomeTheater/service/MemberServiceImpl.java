@@ -16,13 +16,13 @@ import com.oracle.HomeTheater.model.Board;
 @Slf4j
 public class MemberServiceImpl implements MemberService {
 	@Autowired
-	private MemberDao cd;
+	private MemberDao memberDao;
 	
 	@Override
 	public List<Movie> SearchMovieList(Movie movie) {
 		log.info("CH_ServiceImpl SearchMovieList Start...");
 		List<Movie> SearchMovieList = null;
-		SearchMovieList = cd.SearchMovieList(movie);
+		SearchMovieList = memberDao.SearchMovieList(movie);
 		return SearchMovieList;
 	}
 
@@ -30,7 +30,7 @@ public class MemberServiceImpl implements MemberService {
 	public List<Board> SearchboardList(Board board) {
 		log.info("CH_ServiceImpl SearchboardList Start...");
 		List<Board> searchBoardList = null;
-		searchBoardList = cd.SearchBoardList(board);
+		searchBoardList = memberDao.SearchBoardList(board);
 		return searchBoardList;
 	}
 
@@ -38,7 +38,7 @@ public class MemberServiceImpl implements MemberService {
 	public Member searchUserInfo(String m_id) {
 		Member member = null;
 		log.info("CH_ServiceImpl searchUserInfo Start...");
-		member = cd.searchUserInfo(m_id);
+		member = memberDao.searchUserInfo(m_id);
 		return member;
 	}
 
@@ -46,7 +46,7 @@ public class MemberServiceImpl implements MemberService {
 	public int memberUpdate(Member member) {
 		int update = 0;
 		log.info("CH_ServiceImpl memberUpdate Start...");
-		update = cd.memberUpdate(member);
+		update = memberDao.memberUpdate(member);
 		return update;
 	}
 
@@ -54,21 +54,21 @@ public class MemberServiceImpl implements MemberService {
 	public int memberDelete(String m_id) {
 		int result = 0;
 		log.info("CH_ServiceImpl memberDelete Start...");
-		result = cd.memberDelete(m_id);
+		result = memberDao.memberDelete(m_id);
 		return result;
 	}
 
 	@Override
 	public int idCheck(String m_id) {
 		log.info("CH_ServiceImpl idCheck Start...");
-		int cnt = cd.idCheck(m_id);
+		int cnt = memberDao.idCheck(m_id);
 		return cnt;
 	}
 
 	@Override
 	public String checkEmail_Pw(String m_id) {
 		log.info("CH_ServiceImpl checkEmail_Pw Start...");
-		String result = cd.checkEmail_Pw(m_id);
+		String result = memberDao.checkEmail_Pw(m_id);
 		return result;
 	}
 
@@ -76,35 +76,35 @@ public class MemberServiceImpl implements MemberService {
 	public int tempPasswrodUpdate(Member member) {
 		int update = 0;
 		log.info("CH_ServiceImpl tempPasswrodUpdate Start...");
-		update = cd.tempPasswrodUpdate(member);
+		update = memberDao.tempPasswrodUpdate(member);
 		return update;
 	}
 
 	@Override
 	public int phoneCheck(String m_phonenumber) {
 		log.info("CH_ServiceImpl phoneCheck Start...");
-		int cnt = cd.phoneCheck(m_phonenumber);
+		int cnt = memberDao.phoneCheck(m_phonenumber);
 		return cnt;
 	}
 
 	@Override
 	public String checkEmail_Id(String m_phonenumber) {
 		log.info("CH_ServiceImpl checkEmail_Id Start...");
-		String result = cd.checkEmail_Id(m_phonenumber);
+		String result = memberDao.checkEmail_Id(m_phonenumber);
 		return result;
 	}
 
 	@Override
 	public String findName(String m_phonenumber) {
 		log.info("CH_ServiceImpl checkEmail_Id Start...");
-		String result = cd.findName(m_phonenumber);
+		String result = memberDao.findName(m_phonenumber);
 		return result;
 	}
 
 	@Override
 	public String findId(String m_phonenumber) {
 		log.info("CH_ServiceImpl findId Start...");
-		String id = cd.findId(m_phonenumber);
+		String id = memberDao.findId(m_phonenumber);
 		return id;
 	}
 
@@ -112,7 +112,7 @@ public class MemberServiceImpl implements MemberService {
 	public int memberPwUpdate(Member member) {
 		int update = 0;
 		log.info("CH_ServiceImpl memberPwUpdate Start...");
-		update = cd.memberPwUpdate(member);
+		update = memberDao.memberPwUpdate(member);
 		return update;
 	}
 
@@ -120,7 +120,7 @@ public class MemberServiceImpl implements MemberService {
 	public List<ChoiceMovie> getMoNumList(ChoiceMovie choice) {
 		log.info("CH_ServiceImpl getMoNumList Start...");
 		List<ChoiceMovie> GetMoNumList = null;
-		GetMoNumList = cd.getMoNumList(choice);
+		GetMoNumList = memberDao.getMoNumList(choice);
 		return GetMoNumList;
 	}
 
@@ -128,7 +128,7 @@ public class MemberServiceImpl implements MemberService {
 	public List<Movie> InterestMovieList(Movie movie) {
 		log.info("CH_ServiceImpl InterestMovieList Start...");
 		List<Movie> InterestMovieList = null;
-		InterestMovieList = cd.InterestMovieList(movie);
+		InterestMovieList = memberDao.InterestMovieList(movie);
 		return InterestMovieList;
 	}
 
@@ -136,7 +136,7 @@ public class MemberServiceImpl implements MemberService {
 	public List<Reservation> checkReservationInfo(Reservation reservation) {
 		log.info("CH_ServiceImpl checkReservationInfo Start...");
 		List<Reservation> checkReservationInfo = null;
-		checkReservationInfo = cd.checkReservationInfo(reservation);
+		checkReservationInfo = memberDao.checkReservationInfo(reservation);
 		return checkReservationInfo;
 	}
 
@@ -144,7 +144,7 @@ public class MemberServiceImpl implements MemberService {
 	public List<SeatandTime> searchSeatInfo(SeatandTime seatTime) {
 		log.info("CH_ServiceImpl searchSeatInfo Start...");
 		List<SeatandTime> searchSeatInfo = null;
-		searchSeatInfo = cd.searchSeatInfo(seatTime);
+		searchSeatInfo = memberDao.searchSeatInfo(seatTime);
 		return searchSeatInfo;
 	}
 
@@ -152,7 +152,7 @@ public class MemberServiceImpl implements MemberService {
 	public List<Member> memberList(Member member) {
 		log.info("CH_ServiceImpl memberList Start...");
 		List<Member> memberList = null;
-		memberList = cd.memberList(member);
+		memberList = memberDao.memberList(member);
 		return memberList;
 	}
 
@@ -160,7 +160,7 @@ public class MemberServiceImpl implements MemberService {
 	public int adminUpdateMember(Member member) {
 		int update = 0;
 		log.info("CH_ServiceImpl adminUpdateMember Start...");
-		update = cd.adminUpdateMember(member);
+		update = memberDao.adminUpdateMember(member);
 		return update;
 	}
 
@@ -168,7 +168,7 @@ public class MemberServiceImpl implements MemberService {
 	public List<Reservation> reservationList(Reservation reservation) {
 		log.info("CH_ServiceImpl reservationList Start...");
 		List<Reservation> reservationList = null;
-		reservationList = cd.reservationList(reservation);
+		reservationList = memberDao.reservationList(reservation);
 		return reservationList;
 	}
 
@@ -176,7 +176,7 @@ public class MemberServiceImpl implements MemberService {
 	public int adminUpdateReservation(Reservation reservation) {
 		int update = 0;
 		log.info("CH_ServiceImpl adminUpdateReservation Start...");
-		update = cd.adminUpdateReservation(reservation);
+		update = memberDao.adminUpdateReservation(reservation);
 		return update;
 	}
 
@@ -184,7 +184,7 @@ public class MemberServiceImpl implements MemberService {
 	public List<Board> mainboardList(Board board) {
 		log.info("CH_ServiceImpl mainboardList Start...");
 		List<Board> mainBoardList = null;
-		mainBoardList = cd.mainBoardList(board);
+		mainBoardList = memberDao.mainBoardList(board);
 		return mainBoardList;
 	}
 
@@ -192,7 +192,7 @@ public class MemberServiceImpl implements MemberService {
 	public List<Board> boardSearchTotal(Board board) {
 		log.info("CH_ServiceImpl boardSearchTotal Start...");
 		List<Board> boardSearchTotal = null;
-		boardSearchTotal = cd.BoardSearchTotal(board);
+		boardSearchTotal = memberDao.BoardSearchTotal(board);
 		return boardSearchTotal;
 	}
 
@@ -200,7 +200,7 @@ public class MemberServiceImpl implements MemberService {
 	public List<Board> boardSearchTitle(Board board) {
 		log.info("CH_ServiceImpl boardSearchTitle Start...");
 		List<Board> boardSearchTitle = null;
-		boardSearchTitle = cd.BoardSearchTitle(board);
+		boardSearchTitle = memberDao.BoardSearchTitle(board);
 		return boardSearchTitle;
 	}
 
@@ -208,7 +208,7 @@ public class MemberServiceImpl implements MemberService {
 	public List<Board> boardSearchContent(Board board) {
 		log.info("CH_ServiceImpl boardSearchContent Start...");
 		List<Board> boardSearchContent = null;
-		boardSearchContent = cd.BoardSearchContent(board);
+		boardSearchContent = memberDao.BoardSearchContent(board);
 		return boardSearchContent;
 	}
 
@@ -216,7 +216,7 @@ public class MemberServiceImpl implements MemberService {
 	public List<Board> boardSearchId(Board board) {
 		log.info("CH_ServiceImpl boardSearchId Start...");
 		List<Board> boardSearchId = null;
-		boardSearchId = cd.BoardSearchId(board);
+		boardSearchId = memberDao.BoardSearchId(board);
 		return boardSearchId;
 	}
 

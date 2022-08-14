@@ -48,5 +48,26 @@
                 #{board_category}, #{board_title}, #{board_content}, #{board_date},#{board_hit} ,'admin')
     </insert>
 
+    <insert id="insertMovie" parameterType="Movie" useGeneratedKeys="false">
+
+        insert into Movie(mo_number, mo_title, mo_director, mo_actor, mo_genre, mo_age, mo_playTime, mo_openDate,
+                          mo_recommendation, mo_fileName)
+        values (movie_seq.nextval, #{mo_title}, #{mo_director}, #{mo_actor}, #{mo_genre}, #{mo_age}, #{mo_playTime},
+                #{mo_openDate}, #{mo_recommendation}, #{mo_fileName})
+    </insert>
+    <insert id="insertReservation" parameterType="Reservation">
+        INSERT INTO "RESERVATION"
+        (re_number, SE_TIME, SE_NUMBER, SE_DATE, RE_DATE, SE_IDENTIFY, M_ID, MO_NUMBER, PAY_TOTALPRICE, PAY_HOW)
+        VALUES (#{re_number}, #{se_time}, #{se_number}, #{se_date}, Sysdate, #{se_identify}, #{m_id}, #{mo_number},
+                #{pay_totalprice}, #{pay_how})
+
+    </insert>
+    <insert id="insertSeatAndTime" parameterType="SeatandTime">
+        INSERT into SeatandTime (se_number,
+                                 se_time, se_date, mo_number, se_identify)
+        VALUES (#{se_number},
+                #{se_time}, #{se_date}, #{mo_number}, #{se_identify})
+    </insert>
+
 
 </mapper>

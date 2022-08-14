@@ -3,6 +3,7 @@ package com.oracle.HomeTheater.webMethod;
 import com.oracle.HomeTheater.domain.BoardJpa;
 import com.oracle.HomeTheater.domain.MemberJpa;
 import com.oracle.HomeTheater.model.Board;
+import com.oracle.HomeTheater.model.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -32,5 +33,10 @@ public class DTOConverter {
         Page<Board> BoardList = boardJpaList.map(m -> new Board(m.getBoardNo(),m.getBoardCategory(),m.getBoardTitle(),m.getBoardContent(),
                 m.getBoardDate(),m.getBoardHit(),m.getMemberJpa().getMemberId()));
         return BoardList;
+    }
+    public Member convertorMemberJpaToMember(MemberJpa memberJpa){
+        Member member = new Member(memberJpa.getMemberId(), memberJpa.getMemberPassword(), memberJpa.getMemberName(), memberJpa.getMemberPhonenumber(),
+                memberJpa.getMemberAddress(), memberJpa.getMemberEmail(), memberJpa.getMemberPoint(), memberJpa.getMemberDelchk());
+        return member;
     }
 }
