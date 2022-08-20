@@ -20,6 +20,9 @@ public class SeatandTime {
     private String m_point;
     private String re_number;
 
+    public SeatandTime() {
+    }
+
     public SeatandTime(String se_number, String se_time, String se_date, int mo_number, String se_identify) {
         this.se_number = se_number;
         this.se_time = se_time;

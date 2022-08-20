@@ -22,8 +22,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ReservationRestController {
 
-    private final ReservationService ITService;
-    private final ReservationDao reservation_dao;
+    private final ReservationService reservationService;
+    private final ReservationDao reservationdao;
 
     @PostMapping("Cancel")
     public String finalReservation(SeatandTime seatandTime) {
@@ -32,10 +32,10 @@ public class ReservationRestController {
         String re_number = seatandTime.getRe_number();
         seatandTime.setSe_identify("F");
         //예약정보 삭제
-        int deleteReservation = ITService.deleteReservation(re_number);
+        int deleteReservation = reservationService.deleteReservation(re_number);
 
         //좌석정보 업데이트
-        int resultUpdateSeat = ITService.SeatandTimeUpdate(seatandTime);
+        int resultUpdateSeat = reservationService.SeatandTimeUpdate(seatandTime);
         log.info("updatenumber" + resultUpdateSeat);
         //좌석정보와 예약정보 둘다 성공시 result 반환
         if (deleteReservation == 1 && resultUpdateSeat == 1) {
@@ -52,7 +52,7 @@ public class ReservationRestController {
     @PostMapping("findTime")
     public List<SeatandTime> findTime(SeatandTime seatandTime) {
         log.info("findTime(controller) start");
-        List<SeatandTime> findTime = ITService.serchTime(seatandTime);
+        List<SeatandTime> findTime = reservationService.serchTime(seatandTime);
         return findTime;
     }
 
@@ -65,28 +65,29 @@ public class ReservationRestController {
         seatandTime.setRe_number(uuid);
 
         //좌석 정보 업데이트
-        int resultUpdateSeat = ITService.SeatandTimeUpdate(seatandTime);
+        int resultUpdateSeat = reservationService.SeatandTimeUpdate(seatandTime);
         log.info("updatenumber" + resultUpdateSeat);
 
         //예약정보 삽입
-        int resultSave = ITService.reservationSave(seatandTime);
+        int resultSave = reservationService.reservationSave(seatandTime);
         if (resultSave == 1) {
             log.info("reservation insert 성공");
         } else {
             log.info("insert 실패");
         }
         //맴버 포인트 업데이트
-        int resultUpdatePoint = ITService.memberPointUpdate(seatandTime);
+        int resultUpdatePoint = reservationService.memberPointUpdate(seatandTime);
         return re_number;
     }
     /**
-     * 영화의 정보 좌성정보 API
-     * @param monumber
+     * 영화의 정보 좌석정보 API
+     * @param moNumber
      * @return
      */
-    @GetMapping("identify")
-    public List<Movie> asd(int monumber) {
-        List<Movie> movieInfoDate = reservation_dao.findMovieInfoDate(monumber);
+    @GetMapping("movieSeatAndTimeInfo")
+    public List<Movie> movieSeatAndTimeInfo(int moNumber) {
+        List<Movie> movieInfoDate = reservationService.findMovieInfoDate(moNumber);
+
         return movieInfoDate;
     }
 
